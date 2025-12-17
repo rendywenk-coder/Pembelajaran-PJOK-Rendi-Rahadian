@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PJOK Kelas 1 - Modul Lengkap & Ujian</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        /* --- 2. CSS TAMPILAN (UI) --- */
+        body { font-family: 'Comic Sans MS', 'Segoe UI', sans-serif; background-color: #e3f2fd; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        
+        /* HEADER & DASHBOARD BUTTON */
+        .header-top { background: #fff; padding: 15px; text-align: center; border-bottom: 4px solid #2196f3; position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 100; }
+        .header-top h1 { margin: 0; color: #1565c0; font-size: 26px; font-weight: bold; text-shadow: 1px 1px 2px #bbdefb; }
+        
+        .btn-dashboard { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px; box-shadow: 0 4px 6px rgba(0,0,0,0.15); border: 2px solid white; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .btn-dashboard:hover { transform: translateY(-55%) scale(1.05); box-shadow: 0 6px 12px rgba(0,0,0,0.2); }
+        
+        #status-indikator { position: absolute; top: 15px; right: 15px; font-size: 12px; font-weight: bold; padding: 6px 12px; border-radius: 20px; background: #eee; border: 1px solid #ccc; }
+
+        /* LAYOUT UTAMA */
+        .main-container { width: 100%; max-width: 1200px; margin: 20px auto; padding: 0 15px; display: flex; gap: 20px; box-sizing: border-box; flex: 1; }
+        .sidebar { width: 260px; flex-shrink: 0; background: #fff; padding: 20px; border-radius: 15px; border: 1px solid #90caf9; height: fit-content; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        
+        .menu-label { font-weight: bold; color: #e65100; margin: 20px 0 8px 0; font-size: 0.95em; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #ffe0b2; display: inline-block; }
+        .nav-btn { display: block; width: 100%; padding: 12px 15px; margin-bottom: 8px; background: #f1f8e9; border: 1px solid #c5e1a5; text-align: left; cursor: pointer; color: #33691e; font-weight: bold; font-size: 0.95em; border-radius: 8px; transition: 0.2s; }
+        .nav-btn:hover { background: #dcedc8; padding-left: 20px; }
+        .nav-btn.active { background: #2196f3; color: white; border-color: #1976d2; box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3); }
+        .btn-ujian { background: #fff3e0 !important; border-color: #ffb74d !important; color: #e65100 !important; }
+        .btn-ujian:hover { background: #ffe0b2 !important; }
+
+        .content-area { flex-grow: 1; background: #fff; padding: 30px; border-radius: 15px; border: 1px solid #90caf9; min-height: 600px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .section { display: none; animation: fadeIn 0.5s; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2 { border-bottom: 4px solid #ffca28; display: inline-block; padding-bottom: 8px; color: #333; margin-top: 0; }
+        
+        /* VIDEO PEMBELAJARAN */
+        .video-container { width: 100%; height: 400px; background: #000; margin-bottom: 30px; border-radius: 12px; border: 4px solid #2196f3; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        iframe { width: 100%; height: 100%; border: none; }
+        
+        /* RANGKUMAN DETAIL */
+        .summary-box { background: #f0f4c3; padding: 25px; border-left: 8px solid #afb42b; border-radius: 8px; margin-bottom: 30px; color: #333; line-height: 1.8; font-size: 16px; text-align: justify; }
+        .summary-box h3 { margin-top: 0; color: #827717; border-bottom: 2px solid #afb42b; padding-bottom: 10px; }
+        .summary-box h4 { margin: 20px 0 10px 0; color: #33691e; font-weight: bold; background: #dcedc8; padding: 5px 10px; border-radius: 5px; display: inline-block; }
+        .summary-box ul { margin-top: 5px; padding-left: 25px; }
+        .summary-box li { margin-bottom: 10px; }
+        .highlight { background-color: #ffeb3b; padding: 0 5px; border-radius: 3px; font-weight: bold; }
+
+        /* KISI-KISI TABLE */
+        .kisi-box { display: none; background: #fff; border: 2px solid #ccc; padding: 20px; margin-bottom: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); overflow-x: auto; }
+        .kisi-title { text-align: center; font-weight: bold; font-size: 18px; margin-bottom: 15px; color: #1565c0; text-decoration: underline; }
+        table.kisi-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        table.kisi-table th, table.kisi-table td { border: 1px solid #999; padding: 10px; vertical-align: top; }
+        table.kisi-table th { background: #2196f3; color: white; text-align: center; }
+        table.kisi-table tr:nth-child(even) { background-color: #f5f5f5; }
+
+        /* TOMBOL AKSI */
+        .action-btn { border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-weight: bold; color: white; width: 100%; margin-top: 15px; display: block; font-size: 16px; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+        .btn-start { background: linear-gradient(to right, #ff9800, #f57c00); }
+        .btn-start:hover { transform: scale(1.02); }
+        .btn-dl { background: linear-gradient(to right, #43a047, #2e7d32); }
+        .btn-kisi { background: #0097a7; width: auto; display: inline-block; margin-bottom: 15px; font-size: 14px; padding: 10px 20px; }
+
+        /* INPUT DATA SISWA */
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #555; }
+        .input-isian { width: 100%; padding: 12px; border: 2px solid #90caf9; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        .input-isian:focus { border-color: #1565c0; outline: none; background: #e3f2fd; }
+
+        /* LOGIC KONTROL DARI ADMIN */
+        .target-kontrol { display: none; } /* Default sembunyi */
+        .status-show { display: block !important; animation: popIn 0.5s; }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        @media (max-width: 768px) {
+            .header-top h1 { font-size: 18px; margin-top: 40px; }
+            .btn-dashboard { left: 10px; top: 10px; transform: none; padding: 6px 15px; font-size: 12px; }
+            .main-container { flex-direction: column; }
+            .sidebar { width: 100%; }
+            .video-container { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-top">
+        <a href="dashboard.html" class="btn-dashboard">🏠 Menu Utama</a>
+        <h1>PJOK KELAS 1 SD</h1>
+        <div id="status-indikator">⚪ Menghubungkan...</div>
+    </div>
+
+    <div class="main-container">
+        
+        <aside class="sidebar">
+            <div class="menu-label">SEMESTER 1 (GANJIL)</div>
+            <button class="nav-btn active" onclick="buka('a', this)">A. Gerak Jalan & Lari</button>
+            <button class="nav-btn" onclick="buka('b', this)">B. Gerak Lompat</button>
+            <button class="nav-btn" onclick="buka('c', this)">C. Memutar & Menekuk</button>
+            <button class="nav-btn" onclick="buka('d', this)">D. Lempar Tangkap</button>
+            <button class="nav-btn btn-ujian target-kontrol target-sts" onclick="buka('sts', this)">📝 UJIAN STS (GANJIL)</button>
+
+            <div class="menu-label">SEMESTER 2 (GENAP)</div>
+            <button class="nav-btn" onclick="buka('e', this)">E. Sikap Tubuh</button>
+            <button class="nav-btn" onclick="buka('f', this)">F. Gerak Berirama</button>
+            <button class="nav-btn" onclick="buka('g', this)">G. Aktivitas Air</button>
+            <button class="nav-btn" onclick="buka('h', this)">H. Kebersihan Diri</button>
+            <button class="nav-btn btn-ujian target-kontrol target-sas" onclick="buka('sas', this)">🏅 UJIAN SAS (GENAP)</button>
+        </aside>
+
+        <main class="content-area">
+
+            <div id="view-a" class="section active">
+                <h2>A. Gerak Dasar Jalan & Lari</h2>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/5L1t52Repag" allowfullscreen></iframe></div>
+                
+                <div class="summary-box">
+                    <h3>📚 Rangkuman Detail: Gerak Lokomotor</h3>
+                    <p><strong>Pengertian:</strong> Gerak Lokomotor adalah gerakan yang ditandai dengan perpindahan tempat dari satu titik ke titik lain. Artinya, tubuh kita bergerak meninggalkan tempat semula.</p>
+                    <h4>1. Gerak Berjalan</h4>
+                    <ul>
+                        <li><strong>Posisi Tubuh:</strong> Badan harus tegap, dada dibuka, pandangan lurus ke depan.</li>
+                        <li><strong>Gerakan Tangan:</strong> Tangan diayun bersilangan dengan kaki (Kaki kiri maju, tangan kanan mengayun ke depan).</li>
+                        <li><strong>Kaki:</strong> Menapak dengan tumit terlebih dahulu, baru ujung kaki.</li>
+                        <li><strong>Macam-macam:</strong> Jalan ke depan, jalan mundur, jalan ke samping, dan jalan jinjit (bertumpu pada ujung kaki).</li>
+                    </ul>
+                    <h4>2. Gerak Berlari</h4>
+                    <ul>
+                        <li>Gerakannya lebih cepat daripada berjalan.</li>
+                        <li>Saat berlari, ada fase di mana <span class="highlight">kedua kaki melayang di udara</span> (tidak menyentuh tanah).</li>
+                        <li>Badan agak condong ke depan, tangan ditekuk di samping badan.</li>
+                    </ul>
+                </div>
+                
+                <div class="target-kontrol target-a">
+                    <button class="action-btn btn-start" onclick="tampilSoal('a')">🧠 MULAI KUIS A (20 SOAL)</button>
+                    <button class="action-btn btn-dl" onclick="downloadSoal('a')">📄 DOWNLOAD PDF</button>
+                </div>
+                <div id="quiz-a" style="display:none; margin-top:20px;"></div>
+            </div>
+
+            <div id="view-b" class="section">
+                <h2>B. Gerak Lompat & Loncat</h2>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/xtucZtii40E" allowfullscreen></iframe></div>
+                <div class="summary-box">
+                    <h3>📚 Rangkuman Detail: Melompat</h3>
+                    <h4>1. Perbedaan Utama</h4>
+                    <ul>
+                        <li><strong>Melompat (Jump):</strong> Menolak tubuh ke atas menggunakan tumpuan <span class="highlight">SATU KAKI</span>. Contoh: Lompat jauh, engklek.</li>
+                        <li><strong>Meloncat (Hop):</strong> Menolak tubuh ke atas menggunakan tumpuan <span class="highlight">DUA KAKI</span> secara bersamaan. Contoh: Kelinci, Katak, Pocong.</li>
+                    </ul>
+                    <h4>2. Teknik Mendarat yang Benar</h4>
+                    <ul>
+                        <li>Mendaratlah selalu dengan <strong>dua kaki</strong> secara bersamaan.</li>
+                        <li>Lutut harus <strong>ditekuk (mengeper)</strong>, tidak boleh kaku lurus agar tidak cedera.</li>
+                        <li>Pandangan ke depan dan tangan menjaga keseimbangan.</li>
+                    </ul>
+                </div>
+                <div class="target-kontrol target-b"><button class="action-btn btn-start" onclick="tampilSoal('b')">🧠 MULAI KUIS B (20 SOAL)</button><button class="action-btn btn-dl" onclick="downloadSoal('b')">📄 DOWNLOAD PDF</button></div>
+                <div id="quiz-b" style="display:none; margin-top:20px;"></div>
+            </div>
+
+            <div id="view-c" class="section">
+                <h2>C. Memutar & Menekuk</h2>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/FwHrAfIE4nw" allowfullscreen></iframe></div>
+                <div class="summary-box">
+                    <h3>📚 Rangkuman Detail: Gerak Non-Lokomotor</h3>
+                    <p><strong>Pengertian:</strong> Gerak yang dilakukan di tempat (tubuh tidak berpindah posisi). Sering dilakukan saat pemanasan.</p>
+                    <h4>1. Gerakan Menekuk</h4>
+                    <ul>
+                        <li><strong>Mencium Lutut:</strong> Duduk selonjor, pegang ujung kaki, cium lutut. Kaki harus lurus rata tanah.</li>
+                        <li><strong>Membungkuk:</strong> Berdiri tegak, bungkukkan badan ke bawah menyentuh jari kaki.</li>
+                    </ul>
+                    <h4>2. Gerakan Memutar & Meliuk</h4>
+                    <ul>
+                        <li><strong>Memutar:</strong> Bisa memutar kepala (leher), lengan (bahu), atau pinggang.</li>
+                        <li><strong>Meliuk:</strong> Menggerakkan tubuh ke samping kanan/kiri. Contoh: Menirukan <span class="highlight">pohon ditiup angin</span>.</li>
+                    </ul>
+                </div>
+                <div class="target-kontrol target-c"><button class="action-btn btn-start" onclick="tampilSoal('c')">🧠 MULAI KUIS C (20 SOAL)</button><button class="action-btn btn-dl" onclick="downloadSoal('c')">📄 DOWNLOAD PDF</button></div>
+                <div id="quiz-c" style="display:none; margin-top:20px;"></div>
+            </div>
+
+            <div id="view-d" class="section">
+                <h2>D. Lempar Tangkap Bola</h2>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/hDKsPXIrIw0" allowfullscreen></iframe></div>
+                <div class="summary-box">
+                    <h3>📚 Rangkuman Detail: Gerak Manipulatif</h3>
+                    <p><strong>Pengertian:</strong> Gerakan yang terampil menggunakan alat bantu (bola, raket, tongkat).</p>
+                    <h4>1. Melempar Bola (Kasti)</h4>
+                    <ul>
+                        <li><strong>Melambung:</strong> Arah bola ke atas melengkung. Untuk operan jauh.</li>
+                        <li><strong>Mendatar:</strong> Arah bola lurus setinggi dada. Untuk operan cepat.</li>
+                        <li><strong>Menyusur Tanah:</strong> Bola digelindingkan di tanah.</li>
+                    </ul>
+                    <h4>2. Menangkap & Menendang</h4>
+                    <ul>
+                        <li><strong>Menangkap:</strong> Mata harus FOKUS ke bola. Tangan membentuk corong. Jari menutup saat bola masuk.</li>
+                        <li><strong>Menendang:</strong> Menggunakan kaki bagian dalam atau punggung kaki (kura-kura kaki).</li>
+                    </ul>
+                </div>
+                <div class="target-kontrol target-d"><button class="action-btn btn-start" onclick="tampilSoal('d')">🧠 MULAI KUIS D (20 SOAL)</button><button class="action-btn btn-dl" onclick="downloadSoal('d')">📄 DOWNLOAD PDF</button></div>
+                <div id="quiz-d" style="display:none; margin-top:20px;"></div>
+            </div>
+
+            <div id="view-sts" class="section">
+                <div class="summary-box" style="background:#fff3e0; border-color:#ef6c00;">
+                    <h2 style="color:#e65100; border:none;">📝 UJIAN STS (Tengah Semester)</h2>
+                    <p>Mencakup materi Bab A, B, C, dan D.</p>
+                    <p><strong>Jumlah Soal:</strong> 30 Nomor (20 PG + 5 Isian + 5 Essay).</p>
+                    
+                    <button class="action-btn btn-kisi" onclick="document.getElementById('kisi-sts').style.display='block'">👁️ LIHAT KISI-KISI SOAL (30 NO)</button>
+                    
+                    <div id="kisi-sts" class="kisi-box">
+                        <h4 style="text-align:center;">KISI-KISI SUMATIF TENGAH SEMESTER (STS)</h4>
+                        <table class="kisi-table">
+                            <tr><th>MATERI</th><th>INDIKATOR SOAL</th><th>BENTUK</th><th>NO</th></tr>
+                            <tr><td>A. Lokomotor</td><td>Menjelaskan gerak jalan & lari.</td><td>PG</td><td>1-5</td></tr>
+                            <tr><td>B. Lompat</td><td>Membedakan lompat & loncat.</td><td>PG</td><td>6-10</td></tr>
+                            <tr><td>C. Non-Loko</td><td>Identifikasi gerak diam/memutar.</td><td>PG</td><td>11-15</td></tr>
+                            <tr><td>D. Manipulatif</td><td>Teknik dasar bola kasti/sepak bola.</td><td>PG</td><td>16-20</td></tr>
+                            <tr><td>Gabungan</td><td>Melengkapi kalimat rumpang.</td><td>Isian</td><td>21-25</td></tr>
+                            <tr><td>Gabungan</td><td>Menjelaskan prosedur gerak.</td><td>Essay</td><td>26-30</td></tr>
+                        </table>
+                        <button onclick="document.getElementById('kisi-sts').style.display='none'" style="margin-top:10px; background:red; color:white; border:none; padding:5px;">Tutup</button>
+                    </div>
+
+                    <div class="target-kontrol target-sts">
+                        <button class="action-btn btn-start" onclick="tampilSoal('sts')">🚀 MULAI UJIAN STS</button>
+                        <button class="action-btn btn-dl" onclick="downloadSoal('sts')">📄 DOWNLOAD PDF LENGKAP</button>
+                    </div>
+                </div>
+                <div id="quiz-sts" style="display:none; margin-top:20px;"></div>
+            </div>
+
+            <div id="view-e" class="section">
+                <h2>E. Sikap Tubuh</h2>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/zk-cQo-jFnc"></iframe></div>
+                <div class="summary-box">
+                    <h3>📚 Rangkuman Detail: Keseimbangan</h3>
+                    <h4>1. Keseimbangan Statis (Diam)</h4>
+                    <ul>
+                        <li><strong>Kapal Terbang:</strong> Berdiri satu kaki, badan condong depan, tangan rentang. Melatih keseimbangan & kaki.</li>
+                        <li><strong>Sikap Lilin:</strong> Tidur telentang, kaki lurus ke atas.</li>
+                    </ul>
+                    <h4>2. Keseimbangan Dinamis (Bergerak)</h4>
+                    <ul>
+                        <li><strong>Meniti Balok:</strong> Berjalan di kayu sempit, pandangan lurus, tangan rentang.</li>
+                        <li><strong>Jalan Garis Lurus:</strong> Tumit kaki depan menyentuh ujung jari kaki belakang.</li>
+                    </ul>
+                </div>
+                <div class="target-kontrol target-e"><button class="action-btn btn-start" onclick="tampilSoal('e')">🧠 MULAI KUIS E (20 SOAL)</button><button class="action-btn btn-dl" onclick="downloadSoal('e')">📄 DOWNLOAD PDF</button></div>
+                <div id="quiz-e" style="display:none; margin-top:20px;"></div>
+            </div>
+
+            <div id="view-f" class="section">
+                <h2>F. Gerak Berirama</h2>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/Bu4N_knO4AQ"></iframe></div>
+                <div class="summary-box">
+                    <h3>📚 Rangkuman Detail: Senam Irama</h3>
+                    <p>Gerak senam yang diiringi musik/ketukan. Melatih keluwesan dan keindahan.</p>
+                    <h4>1. Unsur Utama</h4>
+                    <ul>
+                        <li><strong>Keluwesan:</strong> Gerakan tidak kaku.</li>
+                        <li><strong>Ketepatan Irama:</strong> Gerak kaki/tangan pas dengan musik.</li>
+                        <li><strong>Kekompakan:</strong> Gerak sama dengan teman.</li>
+                    </ul>
+                    <h4>2. Gerak Menirukan</h4>
+                    <ul>
+                        <li><strong>Hewan:</strong> Kelinci lompat, Bebek jalan, Kupu-kupu terbang.</li>
+                        <li><strong>Tumbuhan:</strong> Bunga mekar, Pohon ditiup angin.</li>
+                    </ul>
+                </div>
+                <div class="target-kontrol target-f"><button class="action-btn btn-start" onclick="tampilSoal('f')">🧠 MULAI KUIS F (20 SOAL)</button><button class="action-btn btn-dl" onclick="downloadSoal('f')">📄 DOWNLOAD PDF</button></div>
+                <div id="quiz-f" style="display:none; margin-top:20px;"></div>
+            </div>
+
+            <div id="view-g" class="section">
+                <h2>G. Aktivitas Air</h2>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/PxyGTQrMCDI"></iframe></div>
+                <div class="summary-box">
+                    <h3>📚 Rangkuman Detail: Renang</h3>
+                    <h4>1. Keselamatan (PENTING)</h4>
+                    <ul>
+                        <li><span class="highlight">DILARANG LARI</span> di tepi kolam (licin).</li>
+                        <li>Wajib pemanasan untuk cegah kram.</li>
+                        <li>Pakai baju renang, bukan kaos.</li>
+                    </ul>
+                    <h4>2. Teknik Dasar</h4>
+                    <ul>
+                        <li><strong>Napas:</strong> Ambil via mulut (atas air), buang via hidung (dalam air).</li>
+                        <li><strong>Mengapung:</strong> Pakai pelampung, ban, atau papan luncur.</li>
+                    </ul>
+                </div>
+                <div class="target-kontrol target-g"><button class="action-btn btn-start" onclick="tampilSoal('g')">🧠 MULAI KUIS G (20 SOAL)</button><button class="action-btn btn-dl" onclick="downloadSoal('g')">📄 DOWNLOAD PDF</button></div>
+                <div id="quiz-g" style="display:none; margin-top:20px;"></div>
+            </div>
+
+            <div id="view-h" class="section">
+                <h2>H. Kebersihan Diri</h2>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/cnYeTAmaymM"></iframe></div>
+                <div class="summary-box">
+                    <h3>📚 Rangkuman Detail: Hidup Sehat</h3>
+                    <h4>1. Kebersihan Badan</h4>
+                    <ul>
+                        <li><strong>Mandi:</strong> 2x sehari (pagi & sore) pakai sabun.</li>
+                        <li><strong>Keramas:</strong> Pakai sampo.</li>
+                        <li><strong>Handuk:</strong> Pakai sendiri, jangan gantian (cegah penyakit kulit).</li>
+                    </ul>
+                    <h4>2. Gigi & Kuku</h4>
+                    <ul>
+                        <li><strong>Gosok Gigi:</strong> Minimal 2x (Sesudah makan & Sebelum tidur).</li>
+                        <li><strong>Potong Kuku:</strong> Seminggu sekali agar tidak jadi sarang kuman.</li>
+                        <li><strong>Cuci Tangan:</strong> Pakai sabun di air mengalir sebelum makan.</li>
+                    </ul>
+                </div>
+                <div class="target-kontrol target-h"><button class="action-btn btn-start" onclick="tampilSoal('h')">🧠 MULAI KUIS H (20 SOAL)</button><button class="action-btn btn-dl" onclick="downloadSoal('h')">📄 DOWNLOAD PDF</button></div>
+                <div id="quiz-h" style="display:none; margin-top:20px;"></div>
+            </div>
+            
+            <div id="view-sas" class="section">
+                <div class="summary-box" style="background:#ffebee; border-color:#c62828;">
+                    <h2 style="color:#c62828;">🏅 UJIAN SAS (Akhir Semester)</h2>
+                    <p>Mencakup materi Semester 2 (Bab E, F, G, H).</p>
+                    <p><strong>Jumlah Soal:</strong> 30 Nomor (20 PG + 5 Isian + 5 Essay).</p>
+
+                    <button class="action-btn btn-kisi" onclick="document.getElementById('kisi-sas').style.display='block'">👁️ LIHAT KISI-KISI SOAL (30 NO)</button>
+                    
+                    <div id="kisi-sas" class="kisi-box">
+                        <h4 style="text-align:center;">KISI-KISI SUMATIF AKHIR SEMESTER (SAS)</h4>
+                        <table class="kisi-table">
+                            <tr><th>NO</th><th>MATERI</th><th>INDIKATOR SOAL</th><th>BENTUK</th></tr>
+                            <tr><td>1-5</td><td>Sikap Tubuh</td><td>Keseimbangan statis & dinamis.</td><td>PG</td></tr>
+                            <tr><td>6-10</td><td>Senam Irama</td><td>Unsur gerak & alat musik.</td><td>PG</td></tr>
+                            <tr><td>11-15</td><td>Renang</td><td>Keselamatan & teknik napas.</td><td>PG</td></tr>
+                            <tr><td>16-20</td><td>Kebersihan</td><td>Cara menjaga kebersihan diri.</td><td>PG</td></tr>
+                            <tr><td>21-25</td><td>Campuran</td><td>Melengkapi kalimat kesehatan.</td><td>Isian</td></tr>
+                            <tr><td>26-30</td><td>Campuran</td><td>Prosedur kebersihan & gerak.</td><td>Essay</td></tr>
+                        </table>
+                        <button onclick="document.getElementById('kisi-sas').style.display='none'" style="margin-top:10px; background:red; color:white; border:none; padding:5px;">Tutup</button>
+                    </div>
+
+                    <div class="target-kontrol target-sas">
+                        <button class="action-btn btn-start" style="background:#d32f2f;" onclick="tampilSoal('sas')">MULAI UJIAN SAS</button>
+                        <button class="action-btn btn-dl" onclick="downloadSoal('sas')">📄 DOWNLOAD PDF LENGKAP</button>
+                    </div>
+                </div>
+                <div id="quiz-sas" style="display:none; margin-top:20px;"></div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyD7FsbgyUF1jvDvcrb6wrWlEiQJUFZG3kE",
+            authDomain: "pjok-sekolah-bapak-rendi.firebaseapp.com",
+            projectId: "pjok-sekolah-bapak-rendi",
+            storageBucket: "pjok-sekolah-bapak-rendi.firebasestorage.app",
+            messagingSenderId: "337016584526",
+            appId: "1:337016584526:web:8534c7cf4012a35427861f",
+            databaseURL: "https://pjok-sekolah-bapak-rendi-default-rtdb.asia-southeast1.firebasedatabase.app"
+        };
+
+        let db;
+        
+        // --- DATABASE SOAL LENGKAP (FULL TEKS - TIDAK DISINGKAT) ---
+        const dbSoal = {
+            // MATERI A (20 Soal: 15 PG + 5 Essay)
+            'a': [
+                {t:'pg', q:"Gerakan yang membuat tubuh kita berpindah dari satu tempat ke tempat lain disebut gerak...", o:["Lokomotor","Non-lokomotor","Manipulatif"], a:"Lokomotor"},
+                {t:'pg', q:"Contoh gerakan lokomotor yang paling mudah kita lakukan setiap hari adalah...", o:["Duduk diam","Berjalan","Memutar tangan"], a:"Berjalan"},
+                {t:'pg', q:"Saat kita berjalan lurus ke depan, pandangan mata sebaiknya mengarah ke...", o:["Bawah","Samping","Depan"], a:"Depan"},
+                {t:'pg', q:"Agar tubuh kita seimbang saat berjalan, posisi badan harus...", o:["Membungkuk","Tegap","Miring"], a:"Tegap"},
+                {t:'pg', q:"Gerakan berlari itu lebih ... kecepatannya dibandingkan dengan gerakan berjalan.", o:["Lambat","Cepat","Santai"], a:"Cepat"},
+                {t:'pg', q:"Saat melakukan lari, ada saat dimana kedua kaki kita...", o:["Menapak tanah","Melayang di udara","Diam"], a:"Melayang di udara"},
+                {t:'pg', q:"Hewan yang bergerak dengan cara berjalan menggunakan empat kaki adalah...", o:["Ayam","Kucing","Bebek"], a:"Kucing"},
+                {t:'pg', q:"Berjalan mundur dilakukan dengan melangkahkan kaki ke arah...", o:["Depan","Samping","Belakang"], a:"Belakang"},
+                {t:'pg', q:"Dalam perlombaan lari, kita harus berlari di...", o:["Lintasan sendiri","Lintasan lawan","Lapangan rumput"], a:"Lintasan sendiri"},
+                {t:'pg', q:"Gerakan lokomotor menirukan kuda berlari disebut...", o:["Merayap","Berderap/Congklang","Melompat"], a:"Berderap/Congklang"},
+                {t:'pg', q:"Saat berjalan jinjit, bagian kaki yang menyentuh tanah adalah...", o:["Tumit","Ujung jari kaki","Lutut"], a:"Ujung jari kaki"},
+                {t:'pg', q:"Berjalan ke samping dilakukan dengan melangkahkan kaki ke...", o:["Kanan atau kiri","Depan atau belakang","Atas atau bawah"], a:"Kanan atau kiri"},
+                {t:'pg', q:"Sikap tangan saat berlari sebaiknya...", o:["Lurus ke bawah","Diayun siku ditekuk","Diam di pinggang"], a:"Diayun siku ditekuk"},
+                {t:'pg', q:"Gerakan berjalan menirukan gajah dilakukan dengan posisi badan...", o:["Tegak","Membungkuk","Tidur"], a:"Membungkuk"},
+                {t:'pg', q:"Sebelum melakukan olahraga lari, kita wajib melakukan...", o:["Pemanasan","Makan","Tidur"], a:"Pemanasan"},
+                {t:'es', q:"Jelaskan apa yang dimaksud dengan gerak lokomotor!"},
+                {t:'es', q:"Sebutkan 3 contoh hewan yang bergerak dengan cara berjalan!"},
+                {t:'es', q:"Bagaimana posisi pandangan mata yang benar saat berjalan lurus?"},
+                {t:'es', q:"Apa perbedaan utama antara berjalan dan berlari?"},
+                {t:'es', q:"Mengapa kita harus berhati-hati saat melakukan gerak lari?"}
+            ],
+            // MATERI B (20 Soal)
+            'b': [
+                {t:'pg', q:"Gerakan menolak tubuh ke atas menggunakan tumpuan satu kaki disebut...", o:["Meloncat","Melompat","Berjalan"], a:"Melompat"},
+                {t:'pg', q:"Gerakan menolak tubuh ke atas menggunakan tumpuan dua kaki disebut...", o:["Meloncat","Melompat","Berlari"], a:"Meloncat"},
+                {t:'pg', q:"Hewan yang bergerak dengan cara meloncat adalah...", o:["Ular","Katak","Cacing"], a:"Katak"},
+                {t:'pg', q:"Agar kaki tidak sakit saat mendarat, lutut harus...", o:["Lurus kaku","Mengeper/Ditekuk","Dibuka lebar"], a:"Mengeper/Ditekuk"},
+                {t:'pg', q:"Permainan tradisional yang banyak melakukan gerakan melompat satu kaki adalah...", o:["Engklek","Petak umpet","Kelereng"], a:"Engklek"},
+                {t:'pg', q:"Kanguru adalah hewan yang bergerak dengan cara...", o:["Meloncat","Terbang","Merayap"], a:"Meloncat"},
+                {t:'pg', q:"Saat melakukan lompat jauh, tujuannya adalah melompat sejauh...", o:["Mungkin","Sedikit","Dekat"], a:"Mungkin"},
+                {t:'pg', q:"Posisi awal saat akan melakukan loncat katak adalah...", o:["Berdiri tegak","Jongkok","Tidur"], a:"Jongkok"},
+                {t:'pg', q:"Melompat tali (skipping) berguna untuk melatih kekuatan otot...", o:["Tangan","Kaki","Leher"], a:"Kaki"},
+                {t:'pg', q:"Saat badan melayang di udara, tangan berfungsi untuk menjaga...", o:["Keseimbangan","Keindahan","Kekuatan"], a:"Keseimbangan"},
+                {t:'pg', q:"Tempat mendarat yang aman untuk lompat jauh adalah...", o:["Lantai keras","Bak pasir","Aspal"], a:"Bak pasir"},
+                {t:'pg', q:"Kelinci bergerak dengan cara...", o:["Meloncat","Berjalan","Berenang"], a:"Meloncat"},
+                {t:'pg', q:"Melompat melewati rintangan kardus melatih...", o:["Keberanian","Rasa takut","Kemalasan"], a:"Keberanian"},
+                {t:'pg', q:"Gerakan melompat dan meloncat termasuk gerak...", o:["Lokomotor","Non-lokomotor","Manipulatif"], a:"Lokomotor"},
+                {t:'pg', q:"Lompat katak menirukan gerakan hewan...", o:["Katak","Burung","Ular"], a:"Katak"},
+                {t:'es', q:"Apa perbedaan tumpuan kaki pada gerakan melompat dan meloncat?"},
+                {t:'es', q:"Sebutkan 2 contoh hewan yang bergerak dengan cara meloncat!"},
+                {t:'es', q:"Bagaimana cara mendarat yang benar agar kaki tidak cedera?"},
+                {t:'es', q:"Sebutkan satu permainan yang menggunakan gerakan melompat!"},
+                {t:'es', q:"Mengapa saat melompat tangan kita harus menjaga keseimbangan?"}
+            ],
+            // MATERI C (20 Soal)
+            'c': [
+                {t:'pg', q:"Gerakan yang dilakukan tanpa berpindah tempat disebut gerak...", o:["Lokomotor","Non-lokomotor","Manipulatif"], a:"Non-lokomotor"},
+                {t:'pg', q:"Contoh gerakan non-lokomotor adalah...", o:["Berlari","Membungkuk","Melompat"], a:"Membungkuk"},
+                {t:'pg', q:"Gerakan memutar lengan berguna untuk melatih kelenturan otot...", o:["Kaki","Bahu","Perut"], a:"Bahu"},
+                {t:'pg', q:"Saat mencium lutut, posisi kaki harus...", o:["Lurus rapat","Ditekuk","Dibuka lebar"], a:"Lurus rapat"},
+                {t:'pg', q:"Gerakan meliukkan badan ke kanan dan kiri menirukan gerakan...", o:["Pohon ditiup angin","Mobil berjalan","Pesawat terbang"], a:"Pohon ditiup angin"},
+                {t:'pg', q:"Menekuk lutut dilakukan dengan posisi awal...", o:["Berdiri tegak","Jongkok","Tidur"], a:"Berdiri tegak"},
+                {t:'pg', q:"Gerakan memutar kepala berguna untuk melemaskan otot...", o:["Leher","Pinggang","Tangan"], a:"Leher"},
+                {t:'pg', q:"Sikap menirukan pesawat terbang berguna untuk melatih...", o:["Keseimbangan","Kecepatan","Kekuatan"], a:"Keseimbangan"},
+                {t:'pg', q:"Gerakan jinjit dilakukan untuk melatih kekuatan otot...", o:["Betis","Paha","Lengan"], a:"Betis"},
+                {t:'pg', q:"Gerakan saling mendorong dengan teman melatih kekuatan...", o:["Otot tangan","Otot kaki","Otot leher"], a:"Otot tangan"},
+                {t:'pg', q:"Gerakan menarik teman dilakukan dengan cara saling...", o:["Berpegangan tangan","Mendorong bahu","Memeluk"], a:"Berpegangan tangan"},
+                {t:'pg', q:"Pemanasan sebelum olahraga banyak menggunakan gerakan...", o:["Lokomotor","Non-lokomotor","Manipulatif"], a:"Non-lokomotor"},
+                {t:'pg', q:"Posisi badan saat siap gerak adalah...", o:["Tegak","Membungkuk","Miring"], a:"Tegak"},
+                {t:'pg', q:"Mengayun lengan dapat dilakukan ke arah...", o:["Depan dan belakang","Atas dan bawah","Semua benar"], a:"Semua benar"},
+                {t:'pg', q:"Gerakan non-lokomotor biasanya dilakukan saat...", o:["Pemanasan","Makan","Tidur"], a:"Pemanasan"},
+                {t:'es', q:"Jelaskan apa yang dimaksud dengan gerak non-lokomotor!"},
+                {t:'es', q:"Sebutkan 3 contoh gerakan non-lokomotor yang kamu ketahui!"},
+                {t:'es', q:"Gerakan pohon ditiup angin melatih kelenturan otot bagian apa?"},
+                {t:'es', q:"Bagaimana posisi kaki saat melakukan gerakan mencium lutut?"},
+                {t:'es', q:"Mengapa kita perlu melakukan gerakan pemanasan sebelum olahraga inti?"}
+            ],
+            // MATERI D (20 Soal)
+            'd': [
+                {t:'pg', q:"Gerakan yang dilakukan dengan menggunakan alat bantu disebut gerak...", o:["Manipulatif","Lokomotor","Non-lokomotor"], a:"Manipulatif"},
+                {t:'pg', q:"Contoh alat yang sering digunakan dalam gerak manipulatif adalah...", o:["Bola","Batu besar","Meja"], a:"Bola"},
+                {t:'pg', q:"Saat akan menangkap bola, pandangan mata harus tertuju pada...", o:["Bola","Teman","Tanah"], a:"Bola"},
+                {t:'pg', q:"Posisi jari-jari tangan saat menangkap bola harus...", o:["Terbuka seperti corong","Mengepal","Menunjuk"], a:"Terbuka seperti corong"},
+                {t:'pg', q:"Menendang bola dalam permainan sepak bola menggunakan...", o:["Kaki","Tangan","Kepala"], a:"Kaki"},
+                {t:'pg', q:"Lemparan bola yang arahnya ke atas disebut lemparan...", o:["Melambung","Mendatar","Menyusur tanah"], a:"Melambung"},
+                {t:'pg', q:"Bola kasti adalah contoh bola yang berukuran...", o:["Kecil","Besar","Sangat besar"], a:"Kecil"},
+                {t:'pg', q:"Permainan sepak bola dimainkan oleh ... tim.", o:["Dua","Satu","Tiga"], a:"Dua"},
+                {t:'pg', q:"Alat pemukul digunakan dalam permainan bola...", o:["Kasti","Sepak bola","Basket"], a:"Kasti"},
+                {t:'pg', q:"Memantul-mantulkan bola ke lantai disebut gerakan...", o:["Dribble","Shooting","Passing"], a:"Dribble"},
+                {t:'pg', q:"Saat menangkap bola lambung, posisi tangan berada di...", o:["Atas kepala","Depan dada","Bawah lutut"], a:"Atas kepala"},
+                {t:'pg', q:"Lemparan menyusur tanah arah bolanya adalah...", o:["Menggelinding di tanah","Terbang di udara","Lurus setinggi dada"], a:"Menggelinding di tanah"},
+                {t:'pg', q:"Bermain bola dengan teman harus dilakukan dengan sikap...", o:["Sportif","Curang","Marah-marah"], a:"Sportif"},
+                {t:'pg', q:"Permainan bola basket menggunakan bola berukuran...", o:["Besar","Kecil","Sedang"], a:"Besar"},
+                {t:'pg', q:"Raket adalah alat pemukul untuk permainan...", o:["Bulutangkis","Kasti","Voli"], a:"Bulutangkis"},
+                {t:'es', q:"Jelaskan apa yang dimaksud dengan gerak manipulatif!"},
+                {t:'es', q:"Sebutkan 2 contoh alat yang digunakan dalam olahraga!"},
+                {t:'es', q:"Sebutkan 3 macam arah lemparan bola!"},
+                {t:'es', q:"Bagaimana posisi tangan yang benar saat menangkap bola?"},
+                {t:'es', q:"Mengapa saat bermain bola kita tidak boleh bermain curang?"}
+            ],
+            // MATERI E (20 Soal)
+            'e': [
+                {t:'pg', q:"Kemampuan tubuh untuk mempertahankan posisi agar tidak jatuh disebut...", o:["Keseimbangan","Kekuatan","Kelincahan"], a:"Keseimbangan"},
+                {t:'pg', q:"Sikap menirukan kapal terbang bertumpu pada...", o:["Satu kaki","Dua kaki","Dua tangan"], a:"Satu kaki"},
+                {t:'pg', q:"Saat melakukan sikap kapal terbang, posisi tangan harus...", o:["Direntangkan","Di pinggang","Lurus ke atas"], a:"Direntangkan"},
+                {t:'pg', q:"Berjalan di atas garis lurus berguna untuk melatih keseimbangan...", o:["Dinamis (bergerak)","Statis (diam)","Kekuatan"], a:"Dinamis (bergerak)"},
+                {t:'pg', q:"Sikap lilin dilakukan dengan mengangkat kedua kaki ke arah...", o:["Atas","Samping","Bawah"], a:"Atas"},
+                {t:'pg', q:"Berdiri jinjit bertumpu pada...", o:["Ujung kaki","Tumit","Telapak kaki"], a:"Ujung kaki"},
+                {t:'pg', q:"Saat meniti balok titian, pandangan mata harus ke...", o:["Depan","Bawah kaki","Atas langit"], a:"Depan"},
+                {t:'pg', q:"Posisi tubuh yang benar saat berdiri adalah...", o:["Tegak","Membungkuk","Miring"], a:"Tegak"},
+                {t:'pg', q:"Saat berjalan di balok titian, tangan direntangkan agar...", o:["Seimbang","Cepat","Terlihat gaya"], a:"Seimbang"},
+                {t:'pg', q:"Keseimbangan statis adalah keseimbangan dalam posisi...", o:["Diam","Bergerak","Berlari"], a:"Diam"},
+                {t:'pg', q:"Menirukan burung bangau berdiri dilakukan dengan mengangkat...", o:["Satu kaki","Dua kaki","Satu tangan"], a:"Satu kaki"},
+                {t:'pg', q:"Gerakan guling depan sebaiknya dilakukan di atas...", o:["Matras","Lantai keras","Aspal"], a:"Matras"},
+                {t:'pg', q:"Saat duduk belajar menulis, punggung harus...", o:["Tegak lurus","Membungkuk","Bersandar malas"], a:"Tegak lurus"},
+                {t:'pg', q:"Latihan keseimbangan berguna untuk mencegah kita...", o:["Jatuh","Sakit","Lapar"], a:"Jatuh"},
+                {t:'pg', q:"Posisi istirahat di tempat dilakukan dengan kaki...", o:["Dibuka selebar bahu","Dirapatkan","Diangkat satu"], a:"Dibuka selebar bahu"},
+                {t:'es', q:"Sebutkan 2 contoh latihan keseimbangan diam (statis)!"},
+                {t:'es', q:"Sebutkan 2 contoh latihan keseimbangan bergerak (dinamis)!"},
+                {t:'es', q:"Bagaimana posisi tangan saat melakukan sikap kapal terbang?"},
+                {t:'es', q:"Mengapa saat duduk belajar punggung kita harus tegak?"},
+                {t:'es', q:"Apa gunanya kita berlatih berjalan di atas garis lurus?"}
+            ],
+            // MATERI F (20 Soal)
+            'f': [
+                {t:'pg', q:"Senam yang diiringi oleh musik atau hitungan disebut senam...", o:["Irama/Ritmik","Lantai","Alat"], a:"Irama/Ritmik"},
+                {t:'pg', q:"Salah satu pengiring dalam senam irama adalah...", o:["Musik","Tangisan","Teriakan"], a:"Musik"},
+                {t:'pg', q:"Gerakan senam harus dilakukan sesuai dengan...", o:["Irama musik","Keinginan sendiri","Teriakan teman"], a:"Irama musik"},
+                {t:'pg', q:"Unsur utama dalam senam irama adalah keluwesan dan...", o:["Ketepatan irama","Kekuatan otot","Kecepatan lari"], a:"Ketepatan irama"},
+                {t:'pg', q:"Contoh bunyi irama yang berasal dari tubuh kita adalah...", o:["Tepuk tangan","Bunyi peluit","Suara gitar"], a:"Tepuk tangan"},
+                {t:'pg', q:"Gerakan menirukan kupu-kupu terbang dilakukan dengan menggerakkan tangan...", o:["Naik turun","Memutar","Diam"], a:"Naik turun"},
+                {t:'pg', q:"Lagu 'Kepala Pundak Lutut Kaki' biasa digunakan untuk mengiringi...", o:["Senam","Tidur","Makan"], a:"Senam"},
+                {t:'pg', q:"Jika senam dilakukan bersama teman-teman, gerakan kita harus...", o:["Kompak/Sama","Berbeda-beda","Saling mendahului"], a:"Kompak/Sama"},
+                {t:'pg', q:"Sikap awal yang baik sebelum memulai senam adalah...", o:["Berdiri tegak","Duduk santai","Tidur"], a:"Berdiri tegak"},
+                {t:'pg', q:"Gerakan menirukan pohon ditiup angin termasuk gerakan...", o:["Meliuk","Melompat","Berlari"], a:"Meliuk"},
+                {t:'pg', q:"Melakukan senam irama membuat perasaan kita menjadi...", o:["Gembira","Sedih","Takut"], a:"Gembira"},
+                {t:'pg', q:"Hitungan yang biasa digunakan dalam senam adalah hitungan...", o:["1 sampai 8","1 sampai 100","Huruf A sampai Z"], a:"1 sampai 8"},
+                {t:'pg', q:"Langkah kaki ke samping kanan dan kiri disebut...", o:["Langkah samping","Langkah maju","Langkah mundur"], a:"Langkah samping"},
+                {t:'pg', q:"Gerakan menirukan bebek berjalan dilakukan dengan posisi...", o:["Jongkok","Berdiri tegak","Berlari kencang"], a:"Jongkok"},
+                {t:'pg', q:"Senam irama bermanfaat untuk melatih keindahan gerak dan...", o:["Kesehatan tubuh","Kekayaan","Kepintaran"], a:"Kesehatan tubuh"},
+                {t:'es', q:"Apa yang dimaksud dengan senam irama?"},
+                {t:'es', q:"Sebutkan 3 hal yang bisa dijadikan pengiring senam irama!"},
+                {t:'es', q:"Sebutkan 2 contoh gerakan menirukan hewan dalam senam!"},
+                {t:'es', q:"Mengapa saat senam bersama teman gerakan kita harus kompak?"},
+                {t:'es', q:"Bagaimana perasaanmu setelah melakukan senam irama?"}
+            ],
+            // MATERI G (20 Soal)
+            'g': [
+                {t:'pg', q:"Aktivitas berenang dilakukan di dalam...", o:["Air","Pasir","Tanah"], a:"Air"},
+                {t:'pg', q:"Sebelum masuk ke kolam renang, kita wajib melakukan...", o:["Pemanasan","Makan besar","Tidur"], a:"Pemanasan"},
+                {t:'pg', q:"Tujuan pemanasan sebelum renang adalah mencegah...", o:["Kram otot","Rasa lapar","Rasa haus"], a:"Kram otot"},
+                {t:'pg', q:"Pakaian yang wajib digunakan saat berenang adalah...", o:["Baju renang","Seragam sekolah","Piyama"], a:"Baju renang"},
+                {t:'pg', q:"Demi keselamatan, kita dilarang ... di pinggir kolam renang.", o:["Berlari","Berjalan pelan","Duduk"], a:"Berlari"},
+                {t:'pg', q:"Alat bantu yang digunakan untuk belajar mengapung adalah...", o:["Pelampung/Ban","Batu","Kayu"], a:"Pelampung/Ban"},
+                {t:'pg', q:"Cara mengambil napas saat berenang adalah melalui...", o:["Mulut","Hidung","Telinga"], a:"Mulut"},
+                {t:'pg', q:"Saat berada di dalam air, kita membuang napas melalui...", o:["Hidung","Telinga","Mata"], a:"Hidung"},
+                {t:'pg', q:"Kacamata renang digunakan untuk melindungi mata dari...", o:["Air kolam","Sinar matahari","Debu"], a:"Air kolam"},
+                {t:'pg', q:"Pengenalan air dilakukan agar kita merasa ... saat di kolam.", o:["Tidak takut/Berani","Takut","Sakit"], a:"Tidak takut/Berani"},
+                {t:'pg', q:"Bagi pemula, latihan berjalan di air dilakukan di kolam yang...", o:["Dangkal","Sangat dalam","Berlumpur"], a:"Dangkal"},
+                {t:'pg', q:"Posisi tubuh saat meluncur di air adalah...", o:["Lurus sejajar air","Meringkuk","Berdiri tegak"], a:"Lurus sejajar air"},
+                {t:'pg', q:"Kita harus menjaga kebersihan air kolam dengan cara tidak...", o:["Membuang sampah","Berenang","Bermain air"], a:"Membuang sampah"},
+                {t:'pg', q:"Setelah selesai berenang, kita harus segera...", o:["Mandi bilas","Makan","Tidur"], a:"Mandi bilas"},
+                {t:'pg', q:"Olahraga renang sangat baik untuk melatih kekuatan...", o:["Seluruh otot tubuh","Hanya kaki","Hanya tangan"], a:"Seluruh otot tubuh"},
+                {t:'es', q:"Mengapa kita dilarang berlari-lari di pinggir kolam renang?"},
+                {t:'es', q:"Apa kegunaan pemanasan sebelum berenang?"},
+                {t:'es', q:"Sebutkan 2 alat bantu yang digunakan untuk belajar berenang!"},
+                {t:'es', q:"Bagaimana cara bernapas yang benar saat berenang?"},
+                {t:'es', q:"Apa yang harus kita lakukan setelah selesai berenang?"}
+            ],
+            // MATERI H (20 Soal)
+            'h': [
+                {t:'pg', q:"Mandi sebaiknya dilakukan sehari minimal...", o:["2 kali","1 kali","Seminggu sekali"], a:"2 kali"},
+                {t:'pg', q:"Saat mandi, kita membersihkan badan menggunakan...", o:["Sabun mandi","Sampo","Pasta gigi"], a:"Sabun mandi"},
+                {t:'pg', q:"Membersihkan rambut (keramas) menggunakan...", o:["Sampo","Sabun mandi","Sabun cuci"], a:"Sampo"},
+                {t:'pg', q:"Menggosok gigi dilakukan menggunakan sikat gigi dan...", o:["Pasta gigi (odol)","Sabun","Minyak"], a:"Pasta gigi (odol)"},
+                {t:'pg', q:"Kuku yang sudah panjang dan hitam harus segera...", o:["Dipotong","Dibiarkan","Diberi warna"], a:"Dipotong"},
+                {t:'pg', q:"Kuku yang kotor bisa menjadi sarang...", o:["Kuman/Telur cacing","Makanan","Kesehatan"], a:"Kuman/Telur cacing"},
+                {t:'pg', q:"Mencuci tangan yang benar harus menggunakan air mengalir dan...", o:["Sabun","Tisu","Kain"], a:"Sabun"},
+                {t:'pg', q:"Kita wajib mencuci tangan sebelum...", o:["Makan","Mandi","Tidur"], a:"Makan"},
+                {t:'pg', q:"Setelah buang air besar atau kecil, kita wajib...", o:["Membersihkannya (Cebok)","Langsung pergi","Diam saja"], a:"Membersihkannya (Cebok)"},
+                {t:'pg', q:"Pakaian yang kotor dan bau keringat harus segera...", o:["Dicuci","Dipakai lagi","Disimpan di lemari"], a:"Dicuci"},
+                {t:'pg', q:"Membersihkan telinga sebaiknya menggunakan benda yang...", o:["Lembut (kapas)","Keras","Tajam"], a:"Lembut (kapas)"},
+                {t:'pg', q:"Handuk mandi tidak boleh dipakai bergantian agar tidak tertular...", o:["Penyakit kulit","Penyakit perut","Sakit kepala"], a:"Penyakit kulit"},
+                {t:'pg', q:"Kebersihan adalah pangkal dari...", o:["Kesehatan","Kekayaan","Kesedihan"], a:"Kesehatan"},
+                {t:'pg', q:"Makanan yang sehat adalah makanan yang...", o:["Bergizi dan bersih","Mahal","Manis sekali"], a:"Bergizi dan bersih"},
+                {t:'pg', q:"Menggosok gigi sebaiknya dilakukan sesudah makan dan sebelum...", o:["Tidur malam","Mandi sore","Bermain"], a:"Tidur malam"},
+                {t:'es', q:"Sebutkan 3 alat yang digunakan untuk mandi!"},
+                {t:'es', q:"Kapan waktu yang tepat untuk menggosok gigi?"},
+                {t:'es', q:"Mengapa kuku yang panjang dan kotor harus dipotong?"},
+                {t:'es', q:"Jelaskan cara mencuci tangan yang benar!"},
+                {t:'es', q:"Apa akibatnya jika kita malas menjaga kebersihan diri?"}
+            ],
+
+            // STS (30 SOAL: 20 PG + 5 Isian + 5 Essay)
+            'sts': [
+                // 20 PG
+                {t:'pg', q:"Gerakan berpindah tempat dari satu titik ke titik lain disebut gerak...", o:["Lokomotor","Non-lokomotor","Manipulatif"], a:"Lokomotor"},
+                {t:'pg', q:"Contoh gerakan lokomotor yang benar adalah...", o:["Duduk diam","Berlari kencang","Memutar tangan"], a:"Berlari kencang"},
+                {t:'pg', q:"Saat kita berjalan lurus, pandangan mata sebaiknya mengarah ke...", o:["Bawah","Samping","Depan"], a:"Depan"},
+                {t:'pg', q:"Posisi badan yang benar saat berjalan adalah...", o:["Membungkuk","Tegap","Miring ke kiri"], a:"Tegap"},
+                {t:'pg', q:"Hewan yang bergerak dengan cara melompat adalah...", o:["Kucing","Kangguru","Ular"], a:"Kangguru"},
+                {t:'pg', q:"Saat melakukan gerakan melompat, tumpuan kaki yang digunakan adalah...", o:["Satu kaki","Dua kaki","Lutut"], a:"Satu kaki"},
+                {t:'pg', q:"Saat mendarat setelah melompat, lutut harus mengeper agar...", o:["Tidak cedera","Terlihat keren","Lompatan jauh"], a:"Tidak cedera"},
+                {t:'pg', q:"Gerakan yang dilakukan tanpa berpindah tempat disebut gerak...", o:["Lokomotor","Non-lokomotor","Manipulatif"], a:"Non-lokomotor"},
+                {t:'pg', q:"Contoh gerakan non-lokomotor adalah...", o:["Berlari kencang","Membungkukkan badan","Melompat jauh"], a:"Membungkukkan badan"},
+                {t:'pg', q:"Saat menirukan pohon ditiup angin, tubuh kita bergerak...", o:["Meliuk ke kanan kiri","Diam saja","Berlari berputar"], a:"Meliuk ke kanan kiri"},
+                {t:'pg', q:"Gerakan memutar lengan berguna untuk melatih otot...", o:["Kaki","Leher","Bahu"], a:"Bahu"},
+                {t:'pg', q:"Gerakan menggunakan alat bantu seperti bola disebut gerak...", o:["Manipulatif","Lokomotor","Non-lokomotor"], a:"Manipulatif"},
+                {t:'pg', q:"Saat menangkap bola, pandangan mata harus tertuju pada...", o:["Teman","Datangnya bola","Sepatu"], a:"Datangnya bola"},
+                {t:'pg', q:"Melempar bola ke arah atas disebut lemparan...", o:["Mendatar","Melambung","Menyusur tanah"], a:"Melambung"},
+                {t:'pg', q:"Dalam permainan sepak bola, kita menendang bola menggunakan...", o:["Tangan","Kepala","Kaki"], a:"Kaki"},
+                {t:'pg', q:"Sebelum melakukan olahraga inti, kita wajib melakukan...", o:["Pemanasan","Pendinginan","Makan kenyang"], a:"Pemanasan"},
+                {t:'pg', q:"Tujuan utama melakukan pemanasan adalah agar...", o:["Otot tidak kram/cedera","Cepat lelah","Badan sakit"], a:"Otot tidak kram/cedera"},
+                {t:'pg', q:"Setelah selesai berolahraga, sebaiknya kita melakukan...", o:["Lari lagi","Pendinginan","Tidur"], a:"Pendinginan"},
+                {t:'pg', q:"Sikap yang baik saat bermain bersama teman adalah...", o:["Curang","Mau menang sendiri","Sportif dan jujur"], a:"Sportif dan jujur"},
+                {t:'pg', q:"Berjalan jinjit dilakukan dengan bertumpu pada...", o:["Tumit","Ujung jari kaki","Telapak kaki"], a:"Ujung jari kaki"},
+                // 5 Isian
+                {t:'is', q:"Gerak lokomotor artinya gerak yang ... tempat."},
+                {t:'is', q:"Katak dan kelinci bergerak dengan cara ..."},
+                {t:'is', q:"Sikap kapal terbang dilakukan untuk melatih ... tubuh."},
+                {t:'is', q:"Menangkap bola besar sebaiknya menggunakan ... tangan."},
+                {t:'is', q:"Bunyi peluit Pak Guru saat memulai olahraga adalah ..."},
+                // 5 Essay
+                {t:'es', q:"Sebutkan 3 contoh gerakan lokomotor (berpindah tempat)!"},
+                {t:'es', q:"Apa perbedaan antara melompat dan meloncat? Jelaskan!"},
+                {t:'es', q:"Sebutkan 2 contoh gerakan non-lokomotor (diam di tempat)!"},
+                {t:'es', q:"Mengapa kita harus melakukan pemanasan sebelum olahraga?"},
+                {t:'es', q:"Bagaimana posisi tangan saat menangkap bola yang datang dari depan?"}
+            ],
+
+            // SAS (30 SOAL LENGKAP: 20 PG + 5 Isian + 5 Essay)
+            'sas': [
+                // 20 PG
+                {t:'pg', q:"Sikap menirukan kapal terbang berguna untuk melatih...", o:["Kekuatan otot","Keseimbangan tubuh","Kecepatan lari"], a:"Keseimbangan tubuh"},
+                {t:'pg', q:"Saat melakukan sikap kapal terbang, tumpuan menggunakan...", o:["Satu kaki","Dua kaki","Tangan"], a:"Satu kaki"},
+                {t:'pg', q:"Berjalan di atas balok titian harus merentangkan tangan agar...", o:["Terlihat gaya","Tidak jatuh","Bisa terbang"], a:"Tidak jatuh"},
+                {t:'pg', q:"Sikap lilin dilakukan dengan posisi awal...", o:["Berdiri tegak","Duduk sila","Tidur telentang"], a:"Tidur telentang"},
+                {t:'pg', q:"Senam yang diiringi dengan musik atau nyanyian disebut senam...", o:["Lantai","Irama","Ketangkasan"], a:"Irama"},
+                {t:'pg', q:"Gerakan dalam senam irama harus dilakukan dengan...", o:["Kaku","Cepat sekali","Luwes dan indah"], a:"Luwes dan indah"},
+                {t:'pg', q:"Contoh irama yang bisa mengiringi senam adalah...", o:["Suara petir","Tepuk tangan","Suara mobil"], a:"Tepuk tangan"},
+                {t:'pg', q:"Melakukan senam irama membuat hati kita merasa...", o:["Sedih","Takut","Gembira"], a:"Gembira"},
+                {t:'pg', q:"Gerakan menirukan kelinci melompat termasuk menirukan gerakan...", o:["Tumbuhan","Binatang","Benda mati"], a:"Binatang"},
+                {t:'pg', q:"Saat berada di kolam renang, kita dilarang berlari di pinggir kolam karena...", o:["Lantainya licin","Mengganggu orang","Airnya dingin"], a:"Lantainya licin"},
+                {t:'pg', q:"Alat bantu yang digunakan untuk belajar mengapung adalah...", o:["Batu","Pelampung/Ban","Kayu"], a:"Pelampung/Ban"},
+                {t:'pg', q:"Pakaian yang tepat digunakan saat berenang adalah...", o:["Kaos dan celana jeans","Baju renang","Seragam sekolah"], a:"Baju renang"},
+                {t:'pg', q:"Saat berenang, kita mengambil napas melalui...", o:["Hidung","Telinga","Mulut"], a:"Mulut"},
+                {t:'pg', q:"Kacamata renang digunakan untuk melindungi...", o:["Hidung","Mata dari air","Telinga"], a:"Mata dari air"},
+                {t:'pg', q:"Mandi sebaiknya dilakukan sehari minimal sebanyak...", o:["1 kali","2 kali","3 kali"], a:"2 kali"},
+                {t:'pg', q:"Agar gigi tetap sehat dan tidak berlubang, kita harus menggosok gigi sebelum...", o:["Makan","Tidur malam","Main"], a:"Tidur malam"},
+                {t:'pg', q:"Mencuci tangan yang benar harus menggunakan air mengalir dan...", o:["Sabun","Minyak","Tanah"], a:"Sabun"},
+                {t:'pg', q:"Kuku yang panjang dan hitam harus segera...", o:["Dibiarkan","Diberi warna","Dipotong"], a:"Dipotong"},
+                {t:'pg', q:"Membersihkan telinga sebaiknya menggunakan benda yang...", o:["Keras dan tajam","Lembut (kapas)","Kasar"], a:"Lembut (kapas)"},
+                {t:'pg', q:"Kebersihan adalah pangkal dari...", o:["Kekayaan","Kesehatan","Kepintaran"], a:"Kesehatan"},
+                // 5 Isian
+                {t:'is', q:"Sikap lilin dilakukan dengan mengangkat kedua kaki lurus ke ..."},
+                {t:'is', q:"Gerakan senam irama harus sesuai dengan ... musik."},
+                {t:'is', q:"Sebelum masuk ke kolam renang, kita wajib melakukan ... agar tidak kram."},
+                {t:'is', q:"Kita mencuci tangan agar terhindar dari ... penyakit."},
+                {t:'is', q:"Handuk yang basah setelah dipakai harus segera di ... agar kering."},
+                // 5 Essay
+                {t:'es', q:"Sebutkan 2 contoh latihan untuk melatih keseimbangan tubuh!"},
+                {t:'es', q:"Apa saja yang bisa dijadikan irama untuk senam? Sebutkan 2!"},
+                {t:'es', q:"Mengapa kita dilarang saling dorong saat berada di kolam renang?"},
+                {t:'es', q:"Sebutkan 3 alat yang digunakan untuk menjaga kebersihan diri!"},
+                {t:'es', q:"Kapan saja waktu yang tepat untuk mencuci tangan? Jelaskan!"}
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+                db = firebase.database();
+                document.getElementById('status-indikator').innerHTML = "🟢 Terhubung";
+                document.getElementById('status-indikator').style.color = "green";
+                listenControl(); 
+            } catch (e) {
+                document.getElementById('status-indikator').innerHTML = "🔴 Offline";
+                document.getElementById('status-indikator').style.color = "red";
+            }
+        });
+
+        function buka(id, btn) {
+            document.querySelectorAll('.section').forEach(e => e.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(e => e.classList.remove('active'));
+            document.getElementById('view-' + id).classList.add('active');
+            if(btn) btn.classList.add('active');
+        }
+
+        function listenControl() {
+            db.ref('kontrol_ujian_k1').on('value', snap => {
+                const d = snap.val() || {};
+                ['a','b','c','d','e','f','g','h','sts','sas'].forEach(k => {
+                    const el = document.querySelectorAll(`.target-${k}`);
+                    el.forEach(e => {
+                        if(d[k]) e.classList.add('status-show');
+                        else e.classList.remove('status-show');
+                    });
+                });
+            });
+        }
+
+        function tampilSoal(kode) {
+            const div = document.getElementById('quiz-' + kode);
+            if(div.style.display === 'block') { div.style.display = 'none'; return; }
+            
+            const soal = dbSoal[kode] || [];
+            if(soal.length === 0) { alert("Soal belum tersedia."); return; }
+
+            const pgs = soal.filter(x => x.t === 'pg');
+            const isians = soal.filter(x => x.t === 'is');
+            const essays = soal.filter(x => x.t === 'es');
+            const today = new Date().toISOString().split('T')[0];
+
+            let h = `<div style="padding:20px; border:1px solid #ccc; background:#fff; border-radius:10px;">
+                <h3 style="margin-top:0; text-align:center; color:#1565c0;">📝 Data Diri Siswa</h3>
+                <div class="input-group"><label>Nama Lengkap:</label><input type="text" id="nama-${kode}" class="input-isian" placeholder="Tulis Nama Lengkap"></div>
+                <div class="input-group"><label>Kelas:</label><select id="kelas-${kode}" class="input-isian"><option value="1A">Kelas 1 A</option><option value="1B">Kelas 1 B</option><option value="1C">Kelas 1 C</option><option value="1D">Kelas 1 D</option><option value="1E">Kelas 1 E</option></select></div>
+                <div class="input-group"><label>Nama Guru:</label><input type="text" id="guru-${kode}" class="input-isian" value="Pak Rendi"></div>
+                <div class="input-group"><label>Asal Sekolah:</label><input type="text" id="sekolah-${kode}" class="input-isian" placeholder="Contoh: SDN 01"></div>
+                <div class="input-group"><label>Tanggal:</label><input type="date" id="tanggal-${kode}" class="input-isian" value="${today}"></div>
+                <hr style="margin:20px 0; border-top:2px dashed #ccc;">`;
+            
+            if(pgs.length > 0) { h += `<h4 style="background:#e3f2fd; padding:10px; border-radius:5px;">I. PILIHAN GANDA</h4>`; pgs.forEach((s, i) => { const realIdx = soal.indexOf(s); h += `<div style="margin-bottom:15px;"><p><strong>${i+1}. ${s.q}</strong></p>`; s.o.forEach(opt => { h += `<label style="display:block; padding:5px; cursor:pointer;"><input type="radio" name="j-${kode}-${realIdx}" value="${opt}"> ${opt}</label>`; }); h += `</div>`; }); }
+            if(isians.length > 0) { h += `<h4 style="background:#fff3e0; padding:10px; border-radius:5px; margin-top:20px;">II. ISIAN SINGKAT</h4>`; isians.forEach((s, i) => { h += `<div style="margin-bottom:15px;"><p><strong>${i+1}. ${s.q}</strong></p><input type="text" class="input-isian" placeholder="Jawab disini..." style="width:80%"></div>`; }); }
+            if(essays.length > 0) { h += `<h4 style="background:#ffebee; padding:10px; border-radius:5px; margin-top:20px;">III. URAIAN (ESSAY)</h4>`; essays.forEach((s, i) => { h += `<div style="margin-bottom:15px;"><p><strong>${i+1}. ${s.q}</strong></p><textarea class="input-isian" rows="3" placeholder="Jelaskan disini..."></textarea></div>`; }); }
+
+            h += `<button class="action-btn btn-dl" onclick="kirimNilai('${kode}')" style="background:#2196f3;">✈️ KIRIM JAWABAN</button></div>`;
+            div.innerHTML = h; div.style.display = 'block'; div.scrollIntoView({behavior:'smooth'});
+        }
+
+        function kirimNilai(kode) {
+            const nama = document.getElementById(`nama-${kode}`).value;
+            const kelas = document.getElementById(`kelas-${kode}`).value;
+            const guru = document.getElementById(`guru-${kode}`).value;
+            const sekolah = document.getElementById(`sekolah-${kode}`).value;
+            const tanggal = document.getElementById(`tanggal-${kode}`).value;
+            if(!nama || !sekolah) { alert("Nama dan Sekolah wajib diisi!"); return; }
+            
+            let benar = 0, totalPG = 0;
+            const soal = dbSoal[kode];
+            soal.forEach((s, i) => { if(s.t === 'pg') { totalPG++; const el = document.querySelector(`input[name="j-${kode}-${i}"]:checked`); if(el && el.value === s.a) benar++; } });
+            const nilai = totalPG > 0 ? (benar/totalPG)*100 : 0;
+            
+            db.ref('rekap_nilai_k1').push({ nama: nama, kelas: kelas, guru: guru, sekolah: sekolah, tanggal: tanggal, ujian: kode.toUpperCase(), nilai: nilai.toFixed(0) });
+            alert(`Terima kasih ${nama}!\nNilai PG: ${nilai.toFixed(0)}\nJawaban sudah direkam.`);
+            document.getElementById('quiz-'+kode).style.display = 'none';
+        }
+
+        function downloadSoal(kode) {
+            const soal = dbSoal[kode] || [];
+            if(soal.length === 0) { alert("Soal belum tersedia."); return; }
+            const { jsPDF } = window.jspdf; const doc = new jsPDF();
+            const margin = 15; const pageWidth = 210; const contentWidth = pageWidth - (margin * 2); let y = 20;
+
+            doc.setFontSize(14); doc.setFont("helvetica", "bold"); doc.text("SOAL PENILAIAN PJOK KELAS 1 SD", 105, y, { align: "center" }); y += 7; doc.text(`MATERI: ${kode.toUpperCase()}`, 105, y, { align: "center" }); y += 15;
+            doc.setFontSize(11); doc.setFont("helvetica", "normal");
+            doc.text("Nama    : ...........................................", margin, y); doc.text("Kelas   : ....................", 140, y); y += 8;
+            doc.text("Sekolah : ...........................................", margin, y); doc.text("Tanggal : ....................", 140, y); y += 8;
+            doc.text("Guru    : Pak Rendi", margin, y); y += 5; doc.line(margin, y, pageWidth - margin, y); y += 10;
+
+            const pgs = soal.filter(x => x.t === 'pg'); const isians = soal.filter(x => x.t === 'is'); const essays = soal.filter(x => x.t === 'es');
+
+            if(pgs.length > 0) { doc.setFont("helvetica", "bold"); doc.text("I. Berilah tanda silang (x) pada jawaban yang benar!", margin, y); y += 8; doc.setFont("helvetica", "normal"); pgs.forEach((s, i) => { if(y>270){doc.addPage(); y=20;} const lines = doc.splitTextToSize(`${i+1}. ${s.q}`, contentWidth); doc.text(lines, margin, y); y += (lines.length * 6); const abjad = ['A.', 'B.', 'C.']; s.o.forEach((opt, idx) => { if (y > 280) { doc.addPage(); y = 20; } doc.text(`${abjad[idx]} ${opt}`, margin + 10, y); y += 6; }); y += 4; }); y += 5; }
+            if(isians.length > 0) { if(y>260){doc.addPage(); y=20;} doc.setFont("helvetica", "bold"); doc.text("II. Isilah titik-titik di bawah ini dengan benar!", margin, y); y += 8; doc.setFont("helvetica", "normal"); isians.forEach((s, i) => { if(y>270){doc.addPage(); y=20;} const lines = doc.splitTextToSize(`${i+1}. ${s.q}`, contentWidth); doc.text(lines, margin, y); y += (lines.length * 6) + 4; }); y += 5; }
+            if(essays.length > 0) { if(y>250){doc.addPage(); y=20;} doc.setFont("helvetica", "bold"); doc.text("III. Jawablah pertanyaan di bawah ini dengan jelas!", margin, y); y += 8; doc.setFont("helvetica", "normal"); essays.forEach((s, i) => { if(y>260){doc.addPage(); y=20;} const lines = doc.splitTextToSize(`${i+1}. ${s.q}`, contentWidth); doc.text(lines, margin, y); y += (lines.length * 6) + 15; }); }
+
+            if (y > 250) { doc.addPage(); y = 20; } y += 10; doc.text("Mengetahui, Guru PJOK", 140, y); y += 25; doc.text("( Pak Rendi )", 140, y);
+            doc.save(`Soal_PJOK_${kode.toUpperCase()}.pdf`);
+        }
+    </script>
+</body>
+</html>

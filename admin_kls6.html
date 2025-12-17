@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMINISTRASI PJOK - KELAS 6</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+    <style>
+        /* TEMA PURPLE (KHAS KELAS 6) */
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f3e5f5; margin: 0; padding: 20px; }
+        
+        /* 1. LAYAR LOGIN */
+        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #4a148c; display: flex; justify-content: center; align-items: center; z-index: 9999; }
+        .login-box { background: white; padding: 35px; border-radius: 10px; width: 320px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .login-box h2 { color: #6a1b9a; margin-top: 0; }
+        .login-box input { width: 100%; padding: 12px; margin: 15px 0; border: 2px solid #e1bee7; border-radius: 6px; box-sizing: border-box; text-align: center; font-size: 16px; }
+        .btn-masuk { width: 100%; padding: 12px; background: #6a1b9a; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-masuk:hover { background: #4a148c; }
+        .error-msg { color: red; font-size: 13px; margin-top: 10px; display: none; }
+
+        /* 2. DASHBOARD (Disembunyikan Awalnya) */
+        #dashboard-area { display: none; max-width: 1200px; margin: 0 auto; }
+        
+        .header { background: #6a1b9a; color: white; padding: 15px 20px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header h1 { margin: 0; font-size: 22px; }
+        .btn-logout { background: #d50000; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+
+        /* PANEL REMOTE (PENGENDALI) */
+        .panel-remote { background: white; padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 6px solid #ab47bc; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .panel-title { font-weight: bold; color: #333; display: block; margin-bottom: 15px; text-transform: uppercase; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        
+        .grid-remote { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+        .btn-remote { padding: 12px 5px; border: none; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; font-size: 12px; transition: 0.1s; }
+        .btn-remote:active { transform: scale(0.95); }
+        
+        .bg-smt1 { background: #7b1fa2; }
+        .bg-smt2 { background: #8e24aa; }
+        .bg-sts { background: #fbc02d; color: black; }
+        .bg-sas { background: #d50000; }
+
+        /* PANEL SAKLAR (ON/OFF) */
+        .grid-saklar { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; }
+        .card-saklar { background: white; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #ddd; border-top: 4px solid #6a1b9a; }
+        .switch-group { display: flex; margin-top: 8px; border-radius: 4px; overflow: hidden; }
+        .btn-on, .btn-off { flex: 1; padding: 6px; border: none; cursor: pointer; font-size: 11px; font-weight: bold; color: white; }
+        
+        .active-on { background: #4caf50; } 
+        .active-off { background: #f44336; } 
+        .inactive { background: #e0e0e0; color: #999; }
+
+        /* TABEL NILAI */
+        .panel-nilai { background: white; padding: 20px; border-radius: 8px; margin-top: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .action-bar { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+        .btn-act { padding: 10px 15px; border: none; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; }
+        
+        table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+        th { background: #6a1b9a; color: white; padding: 12px; text-align: center; border: 1px solid #4a148c; }
+        td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        tr:nth-child(even) { background: #f9f9f9; }
+
+        /* STATUS LOG */
+        #status-log { position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.8); color: white; padding: 8px 20px; border-radius: 50px; font-size: 12px; display: none; z-index: 1000; }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>🔐 ADMIN KELAS 6</h2>
+            <p>Masukkan Kode Guru</p>
+            <input type="password" id="passInput" placeholder="Password..." onkeypress="handleEnter(event)">
+            <button class="btn-masuk" onclick="cekLogin()">MASUK DASHBOARD</button>
+            <div id="msg-error" class="error-msg">❌ Password Salah!</div>
+        </div>
+    </div>
+
+    <div id="dashboard-area">
+        <div class="header">
+            <h1>🛠️ PANEL KONTROL PJOK KELAS 6</h1>
+            <button class="btn-logout" onclick="logout()">LOGOUT</button>
+        </div>
+
+        <div class="panel-remote">
+            <span class="panel-title">🎮 REMOTE LIVE (KENDALI MATERI KELAS 6)</span>
+            
+            <div style="margin-bottom:5px; font-weight:bold; color:#555;">SEMESTER 1 (GANJIL):</div>
+            <div class="grid-remote">
+                <button class="btn-remote bg-smt1" onclick="kirim('navigate', 'a')">A. BOLA BESAR</button>
+                <button class="btn-remote bg-smt1" onclick="kirim('navigate', 'b')">B. BOLA KECIL</button>
+                <button class="btn-remote bg-smt1" onclick="kirim('navigate', 'c')">C. ATLETIK</button>
+                <button class="btn-remote bg-smt1" onclick="kirim('navigate', 'd')">D. BELA DIRI</button>
+                <button class="btn-remote bg-sts" onclick="kirim('navigate', 'sts')">HALAMAN STS</button>
+                <button class="btn-remote bg-sts" onclick="kirim('scroll', 'kisi-sts')">👁️ KISI STS</button>
+                <button class="btn-remote bg-sts" onclick="kirim('quiz', 'sts')">📝 SOAL STS</button>
+            </div>
+
+            <div style="margin:15px 0 5px 0; font-weight:bold; color:#555;">SEMESTER 2 (GENAP):</div>
+            <div class="grid-remote">
+                <button class="btn-remote bg-smt2" onclick="kirim('navigate', 'e')">E. KEBUGARAN</button>
+                <button class="btn-remote bg-smt2" onclick="kirim('navigate', 'f')">F. SENAM LANTAI</button>
+                <button class="btn-remote bg-smt2" onclick="kirim('navigate', 'g')">G. SENAM IRAMA</button>
+                <button class="btn-remote bg-smt2" onclick="kirim('navigate', 'h')">H. RENANG</button>
+                <button class="btn-remote bg-sas" onclick="kirim('navigate', 'sas')">HALAMAN SAS</button>
+                <button class="btn-remote bg-sas" onclick="kirim('scroll', 'kisi-sas')">👁️ KISI SAS</button>
+                <button class="btn-remote bg-sas" onclick="kirim('quiz', 'sas')">📝 SOAL SAS</button>
+            </div>
+        </div>
+
+        <div class="panel-remote" style="border-color: #6a1b9a;">
+            <span class="panel-title">🎛️ BUKA/TUTUP AKSES KUIS (FIREBASE)</span>
+            <div class="grid-saklar" id="container-saklar">
+                </div>
+        </div>
+
+        <div class="panel-nilai">
+            <span class="panel-title">📊 REKAPITULASI NILAI SISWA</span>
+            <div class="action-bar">
+                <button class="btn-act" style="background:#2196f3" onclick="loadNilai()">🔄 Refresh Data</button>
+                <button class="btn-act" style="background:#4caf50" onclick="dlExcel('sem1')">📥 Excel Sem 1</button>
+                <button class="btn-act" style="background:#4caf50" onclick="dlExcel('sem2')">📥 Excel Sem 2</button>
+                <button class="btn-act" style="background:#f44336; margin-left:auto;" onclick="hapusData()">🗑️ Reset Nilai</button>
+            </div>
+
+            <h4>Semester 1 (Ganjil)</h4>
+            <div style="overflow-x:auto;">
+                <table id="tbl-sem1">
+                    <thead>
+                        <tr><th>No</th><th style="text-align:left;">Nama Siswa</th><th>Kelas</th><th>A</th><th>B</th><th>C</th><th>D</th><th style="background:#fbc02d; color:black;">STS</th><th>Rata2</th></tr>
+                    </thead>
+                    <tbody id="body-sem1"><tr><td colspan="9">Memuat...</td></tr></tbody>
+                </table>
+            </div>
+
+            <h4 style="margin-top:30px;">Semester 2 (Genap)</h4>
+            <div style="overflow-x:auto;">
+                <table id="tbl-sem2">
+                    <thead>
+                        <tr><th>No</th><th style="text-align:left;">Nama Siswa</th><th>Kelas</th><th>E</th><th>F</th><th>G</th><th>H</th><th style="background:#d50000; color:white;">SAS</th><th>Rata2</th></tr>
+                    </thead>
+                    <tbody id="body-sem2"><tr><td colspan="9">Memuat...</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="status-log">Perintah Terkirim!</div>
+
+    <script>
+        // 1. CONFIG FIREBASE
+        const firebaseConfig = {
+            apiKey: "AIzaSyD7FsbgyUF1jvDvcrb6wrWlEiQJUFZG3kE",
+            authDomain: "pjok-sekolah-bapak-rendi.firebaseapp.com",
+            projectId: "pjok-sekolah-bapak-rendi",
+            databaseURL: "https://pjok-sekolah-bapak-rendi-default-rtdb.asia-southeast1.firebasedatabase.app"
+        };
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // 2. PATH & CHANNEL (KHUSUS KELAS 6)
+        const DB_NILAI = 'rekap_nilai_k6';     // Laci Data Kelas 6
+        const DB_SAKLAR = 'kontrol_ujian_k6';  // Saklar Kelas 6
+        const CHANNEL_NAME = 'pjok_kelas_6';   // Saluran Remote Kelas 6
+        
+        const broadcast = new BroadcastChannel(CHANNEL_NAME);
+
+        // 3. LOGIKA LOGIN
+        function cekLogin() {
+            const p = document.getElementById('passInput').value;
+            if(p === 'PJOKRENDI123') {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('dashboard-area').style.display = 'block';
+                sessionStorage.setItem('login_k6', 'true');
+                initSaklar();
+                loadNilai();
+            } else {
+                document.getElementById('msg-error').style.display = 'block';
+            }
+        }
+        function handleEnter(e) { if(e.key==='Enter') cekLogin(); }
+        
+        if(sessionStorage.getItem('login_k6') === 'true') {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard-area').style.display = 'block';
+            initSaklar();
+            loadNilai();
+        }
+
+        function logout() { sessionStorage.removeItem('login_k6'); location.reload(); }
+
+        // 4. REMOTE FUNCTION
+        function kirim(aksi, target) {
+            broadcast.postMessage({ action: aksi, target: target });
+            showLog(`Mengirim: ${target.toUpperCase()}`);
+        }
+        function showLog(msg) {
+            const el = document.getElementById('status-log');
+            el.innerText = msg; el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 1500);
+        }
+
+        // 5. SAKLAR FUNCTION
+        function initSaklar() {
+            const list = ['a','b','c','d','sts','e','f','g','h','sas'];
+            const wrap = document.getElementById('container-saklar');
+            
+            db.ref(DB_SAKLAR).on('value', (snap) => {
+                const d = snap.val() || {};
+                let html = '';
+                list.forEach(k => {
+                    const isOn = d[k] === true;
+                    html += `
+                    <div class="card-saklar">
+                        <div style="font-weight:bold; margin-bottom:5px;">${k.toUpperCase()}</div>
+                        <div class="switch-group">
+                            <button class="btn-on ${isOn?'active-on':'inactive'}" onclick="setSaklar('${k}', true)">ON</button>
+                            <button class="btn-off ${!isOn?'active-off':'inactive'}" onclick="setSaklar('${k}', false)">OFF</button>
+                        </div>
+                    </div>`;
+                });
+                wrap.innerHTML = html;
+            });
+        }
+        function setSaklar(k, v) { db.ref(DB_SAKLAR).update({ [k]: v }); }
+
+        // 6. NILAI FUNCTION
+        function loadNilai() {
+            const b1 = document.getElementById('body-sem1');
+            const b2 = document.getElementById('body-sem2');
+            
+            db.ref(DB_NILAI).once('value', (snap) => {
+                const data = snap.val();
+                if(!data) { b1.innerHTML = b2.innerHTML = '<tr><td colspan="9">Belum ada data nilai.</td></tr>'; return; }
+
+                let siswa = {};
+                Object.values(data).forEach(d => {
+                    const id = d.nama + '_' + d.kelas;
+                    if(!siswa[id]) siswa[id] = { nama: d.nama, kelas: d.kelas, n: {} };
+                    siswa[id].n[d.ujian] = parseInt(d.nilai);
+                });
+
+                let row1 = '', row2 = '';
+                let no = 1;
+                
+                Object.values(siswa).sort((a,b) => a.kelas.localeCompare(b.kelas)).forEach(s => {
+                    const n = s.n;
+                    // Sem 1
+                    let sum1=0, c1=0; ['a','b','c','d','sts'].forEach(x=>{if(n[x]){sum1+=n[x];c1++}});
+                    const avg1 = c1? (sum1/c1).toFixed(0) : 0;
+                    row1 += `<tr><td>${no}</td><td style="text-align:left;">${s.nama}</td><td>${s.kelas}</td>
+                        <td>${n.a||'-'}</td><td>${n.b||'-'}</td><td>${n.c||'-'}</td><td>${n.d||'-'}</td>
+                        <td style="font-weight:bold;">${n.sts||'-'}</td><td style="color:blue;">${avg1}</td></tr>`;
+                    
+                    // Sem 2
+                    let sum2=0, c2=0; ['e','f','g','h','sas'].forEach(x=>{if(n[x]){sum2+=n[x];c2++}});
+                    const avg2 = c2? (sum2/c2).toFixed(0) : 0;
+                    row2 += `<tr><td>${no}</td><td style="text-align:left;">${s.nama}</td><td>${s.kelas}</td>
+                        <td>${n.e||'-'}</td><td>${n.f||'-'}</td><td>${n.g||'-'}</td><td>${n.h||'-'}</td>
+                        <td style="font-weight:bold;">${n.sas||'-'}</td><td style="color:red;">${avg2}</td></tr>`;
+                    no++;
+                });
+                b1.innerHTML = row1; b2.innerHTML = row2;
+            });
+        }
+
+        function dlExcel(sem) {
+            const tbl = document.getElementById(sem === 'sem1' ? 'tbl-sem1' : 'tbl-sem2');
+            const wb = XLSX.utils.table_to_book(tbl, {sheet: "Nilai_K6"});
+            XLSX.writeFile(wb, `Nilai_PJOK_K6_${sem}.xlsx`);
+        }
+
+        function hapusData() {
+            if(confirm('Hapus SEMUA data nilai Kelas 6? Data hilang permanen!')) {
+                db.ref(DB_NILAI).remove(); loadNilai();
+            }
+        }
+    </script>
+</body>
+</html>

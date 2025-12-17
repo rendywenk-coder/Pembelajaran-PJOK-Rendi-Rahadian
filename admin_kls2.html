@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMINISTRASI PJOK - KELAS 2</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+    <style>
+        /* --- STYLE DASHBOARD ADMIN --- */
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; }
+        
+        h2 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+
+        /* HEADER (Warna Merah untuk Pembeda Kelas 2) */
+        .header { background-color: #c62828; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 8px; margin-bottom: 20px; }
+        .header h2 { margin: 0; font-size: 20px; color: white; border: none; padding: 0; }
+        .btn-logout { background: #343a40; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        
+        /* LOGIN SCREEN */
+        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #343a40; display: flex; justify-content: center; align-items: center; z-index: 999; }
+        .login-box { background: white; padding: 30px; border-radius: 8px; text-align: center; width: 300px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .login-box input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .btn-login { background: #c62828; color: white; width: 100%; padding: 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+
+        /* PANEL KONTROL (KOTAK-KOTAK) */
+        .control-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); 
+            gap: 15px; 
+            margin-bottom: 30px; 
+        }
+        .control-card { 
+            background: white; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            padding: 10px; 
+            text-align: center; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-top: 4px solid #c62828; /* Garis Merah */
+        }
+        .control-title { 
+            font-weight: bold; 
+            font-size: 16px; 
+            display: block; 
+            margin-bottom: 5px; 
+        }
+        .status-text { 
+            font-size: 11px; 
+            font-weight: bold; 
+            color: green; 
+            display: block; 
+            margin-bottom: 8px; 
+        }
+        
+        .btn-group-toggle { 
+            display: flex; 
+            border-radius: 4px; 
+            overflow: hidden; 
+        }
+        .btn-toggle { 
+            flex: 1; 
+            padding: 8px 0; 
+            border: none; 
+            font-weight: bold; 
+            font-size: 12px; 
+            cursor: pointer; 
+            color: white; 
+        }
+        
+        /* Warna Tombol ON/OFF */
+        .bg-on-active { background-color: #00c853; } 
+        .bg-off-active { background-color: #ff5252; } 
+        .bg-inactive { background-color: #e0e0e0; color: #999; }
+
+        /* TOMBOL AKSI UTAMA */
+        .action-bar { display: flex; gap: 10px; margin-bottom: 15px; align-items: center; flex-wrap: wrap; }
+        .btn-blue { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-green { background: #27ae60; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-red { background: #c0392b; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-left: auto; }
+
+        /* HEADER SEMESTER */
+        .sem-header-1 { 
+            background-color: #e3f2fd; 
+            color: #0d47a1; 
+            padding: 12px; 
+            font-weight: bold; 
+            border-left: 5px solid #2196f3; 
+            margin-top: 30px; 
+            margin-bottom: 0;
+        }
+        .sem-header-2 { 
+            background-color: #fff3e0; 
+            color: #e65100; 
+            padding: 12px; 
+            font-weight: bold; 
+            border-left: 5px solid #ff9800; 
+            margin-top: 30px; 
+            margin-bottom: 0;
+        }
+
+        /* TABEL NILAI */
+        .table-container { overflow-x: auto; background: white; padding: 0; border: 1px solid #ddd; border-top: none; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { background-color: #2980b9; color: white; padding: 12px 8px; text-align: center; border: 1px solid #1f618d; text-transform: uppercase; }
+        td { padding: 8px; border: 1px solid #ddd; text-align: center; }
+        td.nama-siswa { text-align: left; font-weight: 500; }
+        td.sekolah-siswa { text-align: left; font-size: 12px; color: #555; }
+        
+        /* Warna Header Khusus */
+        th.th-sts { background-color: #f39c12; border-color: #d35400; }
+        th.th-sas { background-color: #e74c3c; border-color: #c0392b; }
+        th.th-rata { background-color: #2c3e50; border-color: #222; }
+
+        tr:nth-child(even) { background-color: #f8f9fa; }
+        tr:hover { background-color: #e8f4fd; }
+        
+        .loading { text-align: center; padding: 20px; color: #666; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <div class="login-box">
+            <h3 style="color:#c62828;">🔐 ADMIN KELAS 2</h3>
+            <p>Masukkan Kode Keamanan</p>
+            <input type="password" id="passwordInput" placeholder="Kode Akses...">
+            <button class="btn-login" onclick="cekLogin()">MASUK</button>
+        </div>
+    </div>
+
+    <div id="dashboard-area" style="display:none;">
+        
+        <div class="header">
+            <h2>DASHBOARD GURU - KELAS 2</h2>
+            <button class="btn-logout" onclick="logout()">KELUAR</button>
+        </div>
+
+        <h3 style="margin-bottom:10px;">🎛️ Kontrol Kuis Siswa Kelas 2 (ON/OFF)</h3>
+        <div class="control-grid" id="panel-saklar">
+            </div>
+
+        <hr style="margin: 30px 0;">
+
+        <h3>📊 Rekapitulasi Nilai (KELAS 2)</h3>
+
+        <div class="action-bar">
+            <button class="btn-blue" onclick="muatDataNilai()">🔄 Refresh Data</button>
+            <button class="btn-green" onclick="downloadExcel('sem1')">📥 Excel Sem 1 (RAPI)</button>
+            <button class="btn-green" onclick="downloadExcel('sem2')">📥 Excel Sem 2 (RAPI)</button>
+            <button class="btn-red" onclick="hapusSemuaData()">🗑️ HAPUS SEMUA DATA</button>
+        </div>
+
+        <div class="sem-header-1">Semester 1 (Ganjil)</div>
+        <div class="table-container">
+            <table id="tabel-sem1">
+                <thead>
+                    <tr>
+                        <th width="5%">NO</th>
+                        <th width="25%">NAMA SISWA</th>
+                        <th width="20%">ASAL SEKOLAH</th> <th width="10%">KELAS</th>
+                        <th>A</th> <th>B</th> <th>C</th> <th>D</th>
+                        <th class="th-sts">STS</th>
+                        <th class="th-rata">RATA2</th>
+                    </tr>
+                </thead>
+                <tbody id="body-sem1"><tr><td colspan="10" class="loading">Memuat data...</td></tr></tbody>
+            </table>
+        </div>
+
+        <div class="sem-header-2">Semester 2 (Genap)</div>
+        <div class="table-container">
+            <table id="tabel-sem2">
+                <thead>
+                    <tr>
+                        <th width="5%">NO</th>
+                        <th width="25%">NAMA SISWA</th>
+                        <th width="20%">ASAL SEKOLAH</th> <th width="10%">KELAS</th>
+                        <th>E</th> <th>F</th> <th>G</th> <th>H</th>
+                        <th class="th-sas">SAS</th>
+                        <th class="th-rata">RATA2</th>
+                    </tr>
+                </thead>
+                <tbody id="body-sem2"><tr><td colspan="10" class="loading">Memuat data...</td></tr></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // 1. KONEKSI FIREBASE
+        const firebaseConfig = {
+            apiKey: "AIzaSyD7FsbgyUF1jvDvcrb6wrWlEiQJUFZG3kE",
+            authDomain: "pjok-sekolah-bapak-rendi.firebaseapp.com",
+            projectId: "pjok-sekolah-bapak-rendi",
+            storageBucket: "pjok-sekolah-bapak-rendi.firebasestorage.app",
+            messagingSenderId: "337016584526",
+            appId: "1:337016584526:web:8534c7cf4012a35427861f",
+            databaseURL: "https://pjok-sekolah-bapak-rendi-default-rtdb.asia-southeast1.firebasedatabase.app"
+        };
+
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // --- KONFIGURASI KHUSUS KELAS 2 ---
+        const PATH_NILAI = 'rekap_nilai_k2';     // Data masuk ke laci K2
+        const PATH_KONTROL = 'kontrol_ujian_k2'; // Saklar K2
+
+        // 2. LOGIKA LOGIN
+        function cekLogin() {
+            const pass = document.getElementById('passwordInput').value;
+            if(pass === 'PJOKRENDI123') { 
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('dashboard-area').style.display = 'block';
+                initPanel();
+                muatDataNilai();
+            } else {
+                alert('Password Salah!');
+            }
+        }
+
+        function logout() { location.reload(); }
+
+        // 3. LOGIKA PANEL SAKLAR
+        function initPanel() {
+            const materi = ['a','b','c','d','sts','e','f','g','h','sas'];
+            const container = document.getElementById('panel-saklar');
+            
+            db.ref(PATH_KONTROL).on('value', (snap) => {
+                const data = snap.val() || {};
+                let html = '';
+                
+                materi.forEach(k => {
+                    const isOn = data[k] === true;
+                    const statusText = isOn ? 'TAMPIL' : 'SEMBUNYI';
+                    const colorText = isOn ? 'color:#28a745' : 'color:#999';
+                    
+                    const onClass = isOn ? 'bg-on-active' : 'bg-inactive';
+                    const offClass = !isOn ? 'bg-off-active' : 'bg-inactive';
+
+                    html += `
+                    <div class="control-card">
+                        <span class="control-title">${k.toUpperCase()}</span>
+                        <span class="status-text" style="${colorText}">${statusText}</span>
+                        <div class="btn-group-toggle">
+                            <button class="btn-toggle ${onClass}" onclick="ubahStatus('${k}', true)">ON</button>
+                            <button class="btn-toggle ${offClass}" onclick="ubahStatus('${k}', false)">OFF</button>
+                        </div>
+                    </div>`;
+                });
+                container.innerHTML = html;
+            });
+        }
+
+        function ubahStatus(kode, status) {
+            db.ref(PATH_KONTROL).update({ [kode]: status });
+        }
+
+        // 4. LOGIKA REKAP NILAI (DIPISAH 2 TABEL + SEKOLAH)
+        function muatDataNilai() {
+            const body1 = document.getElementById('body-sem1');
+            const body2 = document.getElementById('body-sem2');
+            
+            body1.innerHTML = '<tr><td colspan="10" class="loading">Mengambil data...</td></tr>';
+            body2.innerHTML = '<tr><td colspan="10" class="loading">Mengambil data...</td></tr>';
+
+            db.ref(PATH_NILAI).once('value').then((snap) => {
+                const raw = snap.val();
+                if (!raw) {
+                    body1.innerHTML = '<tr><td colspan="10" class="loading">Data Kosong.</td></tr>';
+                    body2.innerHTML = '<tr><td colspan="10" class="loading">Data Kosong.</td></tr>';
+                    return;
+                }
+
+                // Olah Data
+                let siswa = {};
+                Object.values(raw).forEach(d => {
+                    // ID Unik: Nama + Kelas
+                    const key = d.nama.trim().toUpperCase() + "_" + d.kelas;
+                    if (!siswa[key]) {
+                        siswa[key] = { 
+                            nama: d.nama.toUpperCase(), 
+                            kelas: d.kelas,
+                            sekolah: d.sekolah || '-', // Simpan sekolah
+                            n: {} 
+                        };
+                    }
+                    siswa[key].n[d.ujian] = parseInt(d.nilai);
+                });
+
+                // Urutkan (Kelas lalu Nama)
+                const urutan = Object.keys(siswa).sort((a,b) => siswa[a].kelas.localeCompare(siswa[b].kelas) || siswa[a].nama.localeCompare(siswa[b].nama));
+
+                let h1 = '', h2 = '';
+                let no = 1;
+
+                urutan.forEach(key => {
+                    const s = siswa[key];
+                    const n = s.n;
+
+                    // Hitung Rata-rata
+                    let sum1 = 0, count1 = 0;
+                    ['A','B','C','D','STS'].forEach(k => { if(n[k] !== undefined) { sum1 += n[k]; count1++; } });
+                    const avg1 = count1 > 0 ? (sum1/count1).toFixed(0) : 0;
+
+                    let sum2 = 0, count2 = 0;
+                    ['E','F','G','H','SAS'].forEach(k => { if(n[k] !== undefined) { sum2 += n[k]; count2++; } });
+                    const avg2 = count2 > 0 ? (sum2/count2).toFixed(0) : 0;
+
+                    // Baris Tabel Semester 1
+                    h1 += `<tr>
+                        <td>${no}</td>
+                        <td class="nama-siswa">${s.nama}</td>
+                        <td class="sekolah-siswa">${s.sekolah}</td>
+                        <td>${s.kelas}</td>
+                        <td>${n['A']||'-'}</td><td>${n['B']||'-'}</td><td>${n['C']||'-'}</td><td>${n['D']||'-'}</td>
+                        <td style="font-weight:bold; background:#fff9c4;">${n['STS']||'-'}</td>
+                        <td style="font-weight:bold; color:#0d47a1;">${avg1}</td>
+                    </tr>`;
+
+                    // Baris Tabel Semester 2
+                    h2 += `<tr>
+                        <td>${no}</td>
+                        <td class="nama-siswa">${s.nama}</td>
+                        <td class="sekolah-siswa">${s.sekolah}</td>
+                        <td>${s.kelas}</td>
+                        <td>${n['E']||'-'}</td><td>${n['F']||'-'}</td><td>${n['G']||'-'}</td><td>${n['H']||'-'}</td>
+                        <td style="font-weight:bold; background:#ffcdd2;">${n['SAS']||'-'}</td>
+                        <td style="font-weight:bold; color:#e65100;">${avg2}</td>
+                    </tr>`;
+                    
+                    no++;
+                });
+
+                body1.innerHTML = h1;
+                body2.innerHTML = h2;
+            });
+        }
+
+        // 5. HAPUS DATA
+        function hapusSemuaData() {
+            if(confirm("⚠️ PERINGATAN!\nAnda yakin ingin MENGHAPUS SEMUA DATA NILAI KELAS 2?\nData yang dihapus tidak dapat dikembalikan!")) {
+                db.ref(PATH_NILAI).remove();
+                muatDataNilai();
+            }
+        }
+
+        // 6. DOWNLOAD EXCEL RAPI
+        function downloadExcel(sem) {
+            let idTabel = sem === 'sem1' ? 'tabel-sem1' : 'tabel-sem2';
+            let table = document.getElementById(idTabel);
+            
+            // Konversi Tabel ke Sheet
+            let wb = XLSX.utils.table_to_book(table, {sheet: "Nilai_PJOK_K2"});
+            let ws = wb.Sheets["Nilai_PJOK_K2"];
+
+            // --- BIKIN KOLOM EXCEL JADI LEBAR (RAPI) ---
+            // Urutan Kolom: 0:No, 1:Nama, 2:Sekolah, 3:Kelas, 4-8:Nilai, 9:STS/SAS, 10:Rata2
+            ws['!cols'] = [
+                {wch: 5},  // No
+                {wch: 35}, // Nama Lengkap (Lebar)
+                {wch: 25}, // Asal Sekolah (Lebar)
+                {wch: 10}, // Kelas
+                {wch: 8}, {wch: 8}, {wch: 8}, {wch: 8}, // Nilai
+                {wch: 10}, // STS/SAS
+                {wch: 10}  // Rata2
+            ];
+
+            XLSX.writeFile(wb, `Rekap_Nilai_Kelas2_${sem}_${new Date().toISOString().slice(0,10)}.xlsx`);
+        }
+    </script>
+</body>
+</html>

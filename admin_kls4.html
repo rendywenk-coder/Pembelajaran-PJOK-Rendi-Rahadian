@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN KELAS 4 (FIX)</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; padding: 20px; }
+        .header { background: #c62828; color: white; padding: 15px; border-radius: 5px; display:flex; justify-content:space-between; margin-bottom:20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; }
+        .card { background: white; padding: 10px; border-radius: 5px; text-align: center; border-top: 4px solid #c62828; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .btn-group { display: flex; border: 1px solid #ccc; border-radius: 4px; overflow: hidden; margin-top:5px; }
+        .btn { flex: 1; padding: 5px; font-size: 11px; cursor: pointer; border: none; }
+        
+        .on { background: #eee; } .on.active { background: #2e7d32; color: white; }
+        .off { background: #eee; } .off.active { background: #c62828; color: white; }
+        
+        /* LOGIN */
+        #login { position: fixed; top:0; left:0; width:100%; height:100%; background:#f0f2f5; display:flex; justify-content:center; align-items:center; z-index:999; }
+        .box { background:white; padding:30px; width:300px; text-align:center; border-radius:10px; border-top:5px solid #c62828; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+        
+        /* TABLE */
+        table { width:100%; border-collapse:collapse; background:white; margin-top:20px; font-size:12px; }
+        th { background:#1976d2; color:white; padding:8px; } td { border:1px solid #ddd; padding:8px; text-align:center; }
+        .judul-sem { background:#e3f2fd; padding:10px; margin-top:20px; font-weight:bold; color:#1565c0; border-left:5px solid #1565c0; }
+        .judul-genap { background:#fff3e0; color:#e65100; border-left:5px solid #e65100; }
+        .th-genap { background:#ef6c00 !important; }
+    </style>
+</head>
+<body>
+
+    <div id="login">
+        <div class="box">
+            <h2 style="color:#c62828;">ADMIN KELAS 4</h2>
+            <input type="password" id="pass" placeholder="Password: PJOKRENDI123" style="width:90%; padding:10px; margin-bottom:10px;">
+            <button onclick="auth()" style="width:100%; padding:10px; background:#c62828; color:white; border:none; font-weight:bold; cursor:pointer;">MASUK</button>
+        </div>
+    </div>
+
+    <div id="dash" style="display:none;">
+        <div class="header">
+            <h3>DASHBOARD KELAS 4</h3>
+            <button onclick="location.href='index.html'" style="background:#333; color:white; border:none; padding:5px 15px; cursor:pointer;">KELUAR</button>
+        </div>
+
+        <h4>🎛️ KONTROL SISWA (DATABASE K4)</h4>
+        <div class="grid" id="panel"></div>
+
+        <h4>📊 REKAP NILAI</h4>
+        <button onclick="dlExcel(1)" style="background:#2e7d32; color:white; border:none; padding:8px;">Excel Sem 1</button>
+        <button onclick="dlExcel(2)" style="background:#ef6c00; color:white; border:none; padding:8px;">Excel Sem 2</button>
+        <button onclick="hapus()" style="background:#c62828; color:white; border:none; padding:8px; float:right;">Hapus Data</button>
+
+        <div class="judul-sem">SEMESTER 1 (GANJIL)</div>
+        <table id="t1"><thead><tr><th>No</th><th>Nama</th><th>Kelas</th><th>A</th><th>B</th><th>C</th><th>D</th><th style="background:#ffca28; color:black;">STS</th></tr></thead><tbody id="b1"></tbody></table>
+
+        <div class="judul-sem judul-genap">SEMESTER 2 (GENAP)</div>
+        <table id="t2"><thead><tr class="th-genap"><th>No</th><th>Nama</th><th>Kelas</th><th>E</th><th>F</th><th>G</th><th>H</th><th style="background:#d32f2f;">SAS</th></tr></thead><tbody id="b2"></tbody></table>
+    </div>
+
+    <script>
+        const config = { apiKey: "AIzaSyD7FsbgyUF1jvDvcrb6wrWlEiQJUFZG3kE", authDomain: "pjok-sekolah-bapak-rendi.firebaseapp.com", projectId: "pjok-sekolah-bapak-rendi", storageBucket: "pjok-sekolah-bapak-rendi.firebasestorage.app", messagingSenderId: "337016584526", appId: "1:337016584526:web:8534c7cf4012a35427861f", databaseURL: "https://pjok-sekolah-bapak-rendi-default-rtdb.asia-southeast1.firebasedatabase.app" };
+        firebase.initializeApp(config);
+        const db = firebase.database();
+        const mapel = [
+            {k:'a',l:'A'}, {k:'b',l:'B'}, {k:'c',l:'C'}, {k:'d',l:'D'}, {k:'sts',l:'STS',s:true},
+            {k:'e',l:'E'}, {k:'f',l:'F'}, {k:'g',l:'G'}, {k:'h',l:'H'}, {k:'sas',l:'SAS',s:true}
+        ];
+
+        function auth(){
+            if(document.getElementById('pass').value === 'PJOKRENDI123'){
+                document.getElementById('login').style.display='none';
+                document.getElementById('dash').style.display='block';
+                init();
+            } else alert('Password Salah!');
+        }
+
+        function init(){
+            let h = '';
+            mapel.forEach(m => {
+                let st = m.s ? 'background:#fff8e1; border-top-color:#ff9800;' : '';
+                h += `<div class="card" style="${st}"><b>${m.l}</b><br><br>
+                <div class="btn-group">
+                    <button id="on-${m.k}" class="btn on" onclick="set('${m.k}',true)">ON</button>
+                    <button id="off-${m.k}" class="btn off" onclick="set('${m.k}',false)">OFF</button>
+                </div></div>`;
+            });
+            document.getElementById('panel').innerHTML = h;
+
+            // KUNCI: TERHUBUNG KE 'kontrol_ujian_k4'
+            db.ref('kontrol_ujian_k4').on('value', snap => {
+                const d = snap.val() || {};
+                mapel.forEach(m => {
+                    let k = m.k;
+                    if(d[k]) {
+                        document.getElementById(`on-${k}`).className = 'btn on active';
+                        document.getElementById(`off-${k}`).className = 'btn off';
+                    } else {
+                        document.getElementById(`on-${k}`).className = 'btn on';
+                        document.getElementById(`off-${k}`).className = 'btn off active';
+                    }
+                });
+            });
+            loadData();
+        }
+
+        function set(k, v){ db.ref('kontrol_ujian_k4/'+k).set(v); }
+
+        function loadData(){
+            db.ref('rekap_nilai_k4').on('value', snap => {
+                let siswa = {};
+                snap.forEach(c => {
+                    let d = c.val();
+                    let id = d.nama.toUpperCase();
+                    if(!siswa[id]) siswa[id] = {nama:d.nama, kelas:d.kelas, n:{}};
+                    siswa[id].n[d.ujian.toLowerCase()] = d.nilai;
+                });
+                render('b1', siswa, ['a','b','c','d','sts']);
+                render('b2', siswa, ['e','f','g','h','sas']);
+            });
+        }
+
+        function render(id, data, keys){
+            let h = ''; let no=1;
+            Object.keys(data).sort().forEach(k => {
+                let s = data[k];
+                h += `<tr><td>${no++}</td><td style="text-align:left;">${s.nama}</td><td>${s.kelas}</td>`;
+                keys.forEach(ky => { h += `<td>${s.n[ky] || '-'}</td>`; });
+                h += `</tr>`;
+            });
+            document.getElementById(id).innerHTML = h;
+        }
+
+        function dlExcel(sem){ 
+            let t = sem==1 ? 't1' : 't2';
+            XLSX.writeFile(XLSX.utils.table_to_book(document.getElementById(t)), `Nilai_K4_Sem${sem}.xlsx`); 
+        }
+        function hapus(){ if(confirm('Hapus?')) db.ref('rekap_nilai_k4').remove(); }
+    </script>
+</body>
+</html>

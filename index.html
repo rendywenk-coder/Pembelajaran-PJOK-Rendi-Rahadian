@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PJOK SDN Rawabuntu 03</title>
+    
+    <link rel="stylesheet" href="assets/css/style.css?v=2">
+    
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh; margin: 0;">
+
+    <div class="container" style="flex: 1;"> 
+        <header class="login-header"> 
+            <img src="assets/img/logo.png" alt="Logo Sekolah" class="header-logo" style="
+                width: 150px !important; 
+                height: 150px !important; 
+                margin: 0 auto 10px auto !important;
+                border-radius: 50% !important; 
+                border: 5px solid #FF9800 !important; 
+                display: block;
+                object-fit: cover;
+            "> 
+            <h1 style="text-align: center; color: #004d40;">PJOK SDN Rawabuntu 03</h1>
+            <p style="text-align: center;">Media Pembelajaran Pendidikan Jasmani, Olahraga, dan Kesehatan</p>
+        </header>
+
+        <form id="loginForm">
+            <label for="namaSiswa">Nama Lengkap Siswa:</label>
+            <input type="text" id="namaSiswa" required placeholder="Contoh: Rendi Pratama">
+
+            <label for="asalSekolah">Nama Sekolah:</label>
+            <input type="text" id="asalSekolah" required placeholder="Contoh: SDN Rawabuntu 03">
+
+            <p id="pesanError" style="color: red; display: none;">Mohon lengkapi semua kolom!</p>
+
+            <button type="button" onclick="prosesLogin()">Masuk</button>
+        </form>
+        
+    </div>
+    
+    <footer class="footer" style="text-align: center !important; width: 100%; padding: 20px 0; margin-top: auto; color: #004d40; font-weight: bold;">
+        &copy; 2025 Copyright Rendi Rahadian, S.Pd.
+    </footer>
+    
+    <script src="assets/js/script.js?v=2"></script>
+</body>
+</html>

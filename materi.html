@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PJOK Kelas 1 - Materi & Kuis</title>
+    <style>
+        /* --- CSS: TAMPILAN AGAR BAGUS DI HP --- */
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif; /* Font ramah anak */
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Navigasi Sederhana */
+        nav {
+            background-color: #007bff; /* Warna Biru Cerah */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        nav h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        /* Container Utama */
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 15px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Bagian Input Nama */
+        .identitas-box {
+            background-color: #fff3cd;
+            border: 2px solid #ffeeba;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box; /* Agar padding tidak merusak lebar */
+        }
+
+        /* Bagian Materi */
+        .materi-box {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .materi-box img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Bagian Soal */
+        .soal-card {
+            background-color: #e9ecef;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #28a745;
+        }
+
+        .soal-card h3 {
+            margin-top: 0;
+            color: #28a745;
+        }
+
+        /* Pilihan Jawaban (Radio Button Besar) */
+        .pilihan {
+            display: block;
+            background: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+        }
+
+        .pilihan:hover {
+            background-color: #d4edda;
+        }
+
+        input[type="radio"] {
+            transform: scale(1.5); /* Memperbesar bulatan radio */
+            margin-right: 10px;
+        }
+
+        /* Tombol Kirim */
+        .btn-kirim {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-kirim:hover {
+            background-color: #218838;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h1>PJOK KELAS 1 SD</h1>
+        <p>Belajar Sehat & Gembira</p>
+    </nav>
+
+    <div class="container">
+        
+        <div class="identitas-box">
+            <h3>📝 Data Siswa</h3>
+            <label>Nama Lengkap:</label>
+            <input type="text" id="namaSiswa" placeholder="Tulis namamu disini...">
+            
+            <label style="margin-top: 10px; display:block;">Kelas:</label>
+            <select id="kelasSiswa">
+                <option value="1A">Kelas 1 A</option>
+                <option value="1B">Kelas 1 B</option>
+                <option value="1C">Kelas 1 C</option>
+            </select>
+        </div>
+
+        <hr>
+
+        <div class="materi-box">
+            <h2>🏃‍♂️ Gerak Dasar Berjalan</h2>
+            <p>Anak-anak, berjalan adalah gerak memindahkan tubuh.</p>
+            <p>Saat berjalan, pandangan harus lurus ke depan.</p>
+            <p>Tangan diayun dengan santai.</p>
+            </div>
+
+        <hr>
+
+        <div id="quiz-container">
+            <h2>❓ Jawablah Pertanyaan Ini</h2>
+
+            <div class="soal-card">
+                <p>1. Saat berjalan, pandangan mata harus mengarah ke...</p>
+                <label class="pilihan">
+                    <input type="radio" name="soal1" value="A"> A. Belakang
+                </label>
+                <label class="pilihan">
+                    <input type="radio" name="soal1" value="B"> B. Depan
+                </label>
+                <label class="pilihan">
+                    <input type="radio" name="soal1" value="C"> C. Atas
+                </label>
+            </div>
+
+            <div class="soal-card">
+                <p>2. Berjalan termasuk gerak...</p>
+                <label class="pilihan">
+                    <input type="radio" name="soal2" value="A"> A. Diam
+                </label>
+                <label class="pilihan">
+                    <input type="radio" name="soal2" value="B"> B. Berpindah tempat
+                </label>
+                <label class="pilihan">
+                    <input type="radio" name="soal2" value="C"> C. Tidur
+                </label>
+            </div>
+
+            <div class="soal-card">
+                <p>3. Badan saat berjalan harus...</p>
+                <label class="pilihan">
+                    <input type="radio" name="soal3" value="A"> A. Tegak
+                </label>
+                <label class="pilihan">
+                    <input type="radio" name="soal3" value="B"> B. Bungkuk
+                </label>
+                <label class="pilihan">
+                    <input type="radio" name="soal3" value="C"> C. Miring
+                </label>
+            </div>
+
+            <button class="btn-kirim" onclick="kirimJawaban()">✅ KIRIM JAWABAN</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Aplikasi PJOK by Pak Rendi</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
