@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN KELAS 1</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+    <style>
+        /* TEMA BIRU (KELAS 1) */
+        body { font-family: 'Segoe UI', sans-serif; background: #e3f2fd; margin: 0; padding: 20px; }
+        
+        /* LOGIN */
+        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1565c0; display: flex; justify-content: center; align-items: center; z-index: 999; }
+        .login-box { background: white; padding: 30px; border-radius: 10px; text-align: center; width: 300px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .login-box input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .btn-masuk { width: 100%; padding: 10px; background: #1565c0; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+
+        /* DASHBOARD */
+        #dashboard-area { display: none; max-width: 1200px; margin: 0 auto; }
+        .header { background: #1565c0; color: white; padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .btn-back { background: white; color: #1565c0; text-decoration: none; padding: 5px 10px; border-radius: 4px; font-weight: bold; font-size: 14px; margin-right: 10px; }
+        .btn-logout { background: #d32f2f; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+
+        /* PANEL KONTROL */
+        .panel { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-top: 4px solid #1565c0; }
+        .panel h3 { margin-top: 0; color: #333; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+
+        /* REMOTE BUTTONS */
+        .grid-remote { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 15px; }
+        .btn-remote { padding: 12px; border: none; border-radius: 5px; color: white; cursor: pointer; font-weight: bold; font-size: 12px; }
+        .bg-smt1 { background: #1e88e5; }
+        .bg-smt2 { background: #039be5; }
+        .bg-ujian { background: #fbc02d; color: black; }
+
+        /* SAKLAR ON/OFF */
+        .grid-saklar { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+        .card-saklar { background: #f5f5f5; padding: 10px; border-radius: 5px; text-align: center; border: 1px solid #ddd; }
+        .switch-box { display: flex; margin-top: 5px; border-radius: 4px; overflow: hidden; border: 1px solid #ccc; }
+        .btn-switch { flex: 1; padding: 5px; border: none; cursor: pointer; font-size: 11px; font-weight: bold; }
+        
+        .on-active { background: #4caf50; color: white; }
+        .off-active { background: #f44336; color: white; }
+        .inactive { background: #eceff1; color: #999; }
+
+        /* TABEL NILAI */
+        table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background: #1565c0; color: white; }
+        
+        #status-log { position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>ADMIN KELAS 1</h2>
+            <input type="password" id="passInput" placeholder="Password Guru..." onkeyup="if(event.key==='Enter') cekLogin()">
+            <button class="btn-masuk" onclick="cekLogin()">MASUK</button>
+            <p id="msg-error" style="color:red; display:none; font-size:12px; margin-top:5px;">Password Salah!</p>
+        </div>
+    </div>
+
+    <div id="dashboard-area">
+        <div class="header">
+            <h3>PANEL KONTROL KELAS 1</h3>
+            <div>
+                <a href="../../dashboard.html" class="btn-back">⬅ Menu Utama</a>
+                <button class="btn-logout" onclick="logout()">Keluar</button>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h3>🎮 REMOTE NAVIGASI</h3>
+            <small>Semester 1:</small>
+            <div class="grid-remote">
+                <button class="btn-remote bg-smt1" onclick="kirim('navigate','a')">A. Lokomotor</button>
+                <button class="btn-remote bg-smt1" onclick="kirim('navigate','b')">B. Nonlokomotor</button>
+                <button class="btn-remote bg-smt1" onclick="kirim('navigate','c')">C. Manipulatif</button>
+                <button class="btn-remote bg-smt1" onclick="kirim('navigate','d')">D. Senam Lantai</button>
+                <button class="btn-remote bg-ujian" onclick="kirim('navigate','sts')">HALAMAN STS</button>
+                <button class="btn-remote bg-ujian" onclick="kirim('scroll','kisi-sts')">👁️ KISI STS</button>
+                <button class="btn-remote bg-ujian" onclick="kirim('quiz','sts')">📝 SOAL STS</button>
+            </div>
+            <small>Semester 2:</small>
+            <div class="grid-remote">
+                <button class="btn-remote bg-smt2" onclick="kirim('navigate','e')">E. Gerak Irama</button>
+                <button class="btn-remote bg-smt2" onclick="kirim('navigate','f')">F. Air</button>
+                <button class="btn-remote bg-smt2" onclick="kirim('navigate','g')">G. Kebugaran</button>
+                <button class="btn-remote bg-smt2" onclick="kirim('navigate','h')">H. Kebersihan</button>
+                <button class="btn-remote bg-ujian" onclick="kirim('navigate','sas')">HALAMAN SAS</button>
+                <button class="btn-remote bg-ujian" onclick="kirim('scroll','kisi-sas')">👁️ KISI SAS</button>
+                <button class="btn-remote bg-ujian" onclick="kirim('quiz','sas')">📝 SOAL SAS</button>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h3>🔓 BUKA/TUTUP SOAL (FIREBASE)</h3>
+            <div class="grid-saklar" id="area-saklar">
+                </div>
+        </div>
+
+        <div class="panel">
+            <h3>📊 REKAP NILAI SISWA</h3>
+            <button onclick="loadNilai()" style="background:#2196f3; color:white; border:none; padding:5px 10px; cursor:pointer;">🔄 Refresh</button>
+            <button onclick="dlExcel()" style="background:#4caf50; color:white; border:none; padding:5px 10px; cursor:pointer;">📥 Download Excel</button>
+            <button onclick="resetNilai()" style="background:#f44336; color:white; border:none; padding:5px 10px; cursor:pointer; float:right;">🗑️ Hapus Semua</button>
+            
+            <div style="overflow-x:auto; margin-top:10px;">
+                <table id="tabel-nilai">
+                    <thead>
+                        <tr><th>Nama</th><th>Kelas</th><th>A</th><th>B</th><th>C</th><th>D</th><th>STS</th><th>E</th><th>F</th><th>G</th><th>H</th><th>SAS</th></tr>
+                    </thead>
+                    <tbody id="body-nilai">
+                        <tr><td colspan="12">Klik Refresh untuk muat data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="status-log">Perintah Terkirim!</div>
+
+    <script>
+        // 1. FIREBASE CONFIG
+        const firebaseConfig = {
+            apiKey: "AIzaSyD7FsbgyUF1jvDvcrb6wrWlEiQJUFZG3kE",
+            authDomain: "pjok-sekolah-bapak-rendi.firebaseapp.com",
+            projectId: "pjok-sekolah-bapak-rendi",
+            databaseURL: "https://pjok-sekolah-bapak-rendi-default-rtdb.asia-southeast1.firebasedatabase.app"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        const broadcast = new BroadcastChannel('pjok_kelas_1');
+
+        // 2. SISTEM LOGIN
+        function cekLogin() {
+            if(document.getElementById('passInput').value === 'PJOKRENDI123') {
+                sessionStorage.setItem('login_k1', 'true');
+                tampilDashboard();
+            } else {
+                document.getElementById('msg-error').style.display = 'block';
+            }
+        }
+        function logout() { sessionStorage.removeItem('login_k1'); location.reload(); }
+        
+        if(sessionStorage.getItem('login_k1') === 'true') tampilDashboard();
+
+        function tampilDashboard() {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard-area').style.display = 'block';
+            renderTombolSaklar(); // Render tombol duluan
+            syncSaklar(); // Baru sync statusnya
+            loadNilai();
+        }
+
+        // 3. REMOTE
+        function kirim(aksi, target) {
+            broadcast.postMessage({ action: aksi, target: target });
+            const log = document.getElementById('status-log');
+            log.style.display = 'block'; setTimeout(() => log.style.display = 'none', 1000);
+        }
+
+        // 4. SAKLAR (RENDER LANGSUNG)
+        function renderTombolSaklar() {
+            const list = ['a','b','c','d','sts','e','f','g','h','sas'];
+            let html = '';
+            list.forEach(k => {
+                html += `
+                <div class="card-saklar" id="card-${k}">
+                    <strong>${k.toUpperCase()}</strong>
+                    <div class="switch-box">
+                        <button class="btn-switch inactive" id="on-${k}" onclick="setSaklar('${k}', true)">ON</button>
+                        <button class="btn-switch off-active" id="off-${k}" onclick="setSaklar('${k}', false)">OFF</button>
+                    </div>
+                </div>`;
+            });
+            document.getElementById('area-saklar').innerHTML = html;
+        }
+
+        function syncSaklar() {
+            db.ref('kontrol_ujian_k1').on('value', (snap) => {
+                const data = snap.val() || {};
+                const list = ['a','b','c','d','sts','e','f','g','h','sas'];
+                list.forEach(k => {
+                    const isOn = data[k] === true;
+                    document.getElementById(`on-${k}`).className = `btn-switch ${isOn ? 'on-active' : 'inactive'}`;
+                    document.getElementById(`off-${k}`).className = `btn-switch ${!isOn ? 'off-active' : 'inactive'}`;
+                });
+            });
+        }
+
+        function setSaklar(kode, status) {
+            db.ref('kontrol_ujian_k1').update({ [kode]: status });
+        }
+
+        // 5. NILAI
+        function loadNilai() {
+            db.ref('rekap_nilai_k1').once('value', (snap) => {
+                const data = snap.val();
+                const tbody = document.getElementById('body-nilai');
+                if(!data) { tbody.innerHTML = '<tr><td colspan="12">Belum ada data.</td></tr>'; return; }
+
+                let siswa = {};
+                Object.values(data).forEach(d => {
+                    const key = d.nama + '_' + d.kelas;
+                    if(!siswa[key]) siswa[key] = {nama: d.nama, kelas: d.kelas, n: {}};
+                    siswa[key].n[d.ujian] = d.nilai;
+                });
+
+                let html = '';
+                Object.values(siswa).sort((a,b)=>a.kelas.localeCompare(b.kelas)).forEach(s => {
+                    const n = s.n;
+                    html += `<tr>
+                        <td style="text-align:left">${s.nama}</td><td>${s.kelas}</td>
+                        <td>${n.a||'-'}</td><td>${n.b||'-'}</td><td>${n.c||'-'}</td><td>${n.d||'-'}</td>
+                        <td style="background:#fff9c4; font-weight:bold;">${n.sts||'-'}</td>
+                        <td>${n.e||'-'}</td><td>${n.f||'-'}</td><td>${n.g||'-'}</td><td>${n.h||'-'}</td>
+                        <td style="background:#ffcdd2; font-weight:bold;">${n.sas||'-'}</td>
+                    </tr>`;
+                });
+                tbody.innerHTML = html;
+            });
+        }
+
+        function dlExcel() {
+            const tbl = document.getElementById('tabel-nilai');
+            const wb = XLSX.utils.table_to_book(tbl);
+            XLSX.writeFile(wb, 'Nilai_K1.xlsx');
+        }
+
+        function resetNilai() {
+            if(confirm("Yakin hapus SEMUA nilai Kelas 1?")) {
+                db.ref('rekap_nilai_k1').remove();
+                loadNilai();
+            }
+        }
+    </script>
+</body>
+</html>

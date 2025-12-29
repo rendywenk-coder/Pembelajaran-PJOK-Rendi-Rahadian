@@ -16,8 +16,8 @@
         /* HEADER */
         .header-top { background: #fff; padding: 15px; text-align: center; border-bottom: 5px solid #7b1fa2; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .header-top h1 { margin: 0; color: #4a148c; font-size: 28px; font-weight: 800; letter-spacing: 1px; }
-        .back-btn { display: inline-block; margin-top: 10px; color: #c62828; text-decoration: none; font-weight: bold; font-size: 16px; border: 2px solid #c62828; padding: 5px 15px; border-radius: 20px; transition: 0.3s; }
-        .back-btn:hover { background: #c62828; color: white; }
+        .back-btn { display: inline-block; margin-top: 10px; color: #8e24aa; text-decoration: none; font-weight: bold; font-size: 16px; border: 2px solid #8e24aa; padding: 5px 15px; border-radius: 20px; transition: 0.3s; }
+        .back-btn:hover { background: #8e24aa; color: white; }
 
         /* LAYOUT UTAMA */
         .main-container { width: 95%; max-width: 1200px; margin: 20px auto; padding: 0; display: flex; gap: 20px; box-sizing: border-box; flex: 1; }
@@ -29,7 +29,7 @@
         
         .menu-label { font-weight: 900; color: #7b1fa2; margin: 20px 0 10px 0; font-size: 1em; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #ff4081; padding-left: 8px; }
         
-        /* TOMBOL MENU (DENGAN ID NAV UNTUK REMOTE) */
+        /* TOMBOL MENU */
         .nav-btn { display: block; width: 100%; padding: 12px 15px; margin-bottom: 8px; background: #f3e5f5; border: none; border-left: 4px solid transparent; text-align: left; cursor: pointer; color: #4a148c; font-size: 15px; border-radius: 0 8px 8px 0; transition: 0.3s; font-weight: 600; }
         .nav-btn:hover { background: #e1bee7; color: #4a148c; padding-left: 20px; }
         .nav-btn.active { background: #7b1fa2; color: white; border-left: 4px solid #ff4081; box-shadow: 0 4px 8px rgba(123, 31, 162, 0.3); }
@@ -46,10 +46,9 @@
         .video-container { width: 100%; height: 400px; background: #000; margin-bottom: 25px; border-radius: 12px; border: 4px solid #7b1fa2; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         iframe { width: 100%; height: 100%; border: none; }
 
-        /* RANGKUMAN DETAIL */
         .summary-box { background: #f3e5f5; padding: 25px; border-left: 8px solid #ff4081; border-radius: 8px; margin-bottom: 30px; line-height: 1.8; color: #333; font-size: 16px; text-align: justify; }
         .summary-box h3 { margin-top: 0; color: #6a1b9a; border-bottom: 1px dashed #999; padding-bottom: 10px; }
-        .highlight { background-color: #ffeba3; padding: 2px 5px; border-radius: 3px; font-weight: bold; }
+        .highlight { background-color: #fff9c4; padding: 2px 5px; border-radius: 3px; font-weight: bold; }
 
         /* INFO UJIAN & TOMBOL */
         .exam-info-box { background: #fffde7; border: 2px solid #fbc02d; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 25px; }
@@ -64,21 +63,20 @@
         .btn-kisi { background: linear-gradient(45deg, #00695c, #4db6ac); }
         .btn-download { background: linear-gradient(45deg, #1565c0, #42a5f5); }
 
-        /* KISI-KISI DETAIL (FORMAT 6 KOLOM - SESUAI DOCX) */
+        /* KISI-KISI DETAIL */
         .kisi-container { display: none; margin-top: 25px; overflow-x: auto; background: white; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
-        .kisi-table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 900px; font-family: 'Times New Roman', serif; }
+        .kisi-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 900px; font-family: 'Times New Roman', serif; }
         .kisi-table th, .kisi-table td { border: 1px solid #000; padding: 8px; vertical-align: top; }
-        .kisi-table th { background-color: #e1bee7; text-align: center; font-weight: bold; vertical-align: middle; font-size: 12px;}
+        .kisi-table th { background-color: #e1bee7; text-align: center; font-weight: bold; vertical-align: middle; }
         .center-cell { text-align: center; vertical-align: middle; }
         .kisi-header-text { text-align: center; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; font-size: 14px; line-height: 1.5; font-family: 'Times New Roman', serif; }
 
         /* KUIS & INPUT IDENTITAS */
         .quiz-wrapper { display: none; margin-top: 30px; padding: 20px; border: 2px dashed #7b1fa2; border-radius: 10px; background: #fff; }
         
-        /* Box Identitas Siswa */
-        .identity-box { background: #e1bee7; padding: 15px; border-radius: 8px; border: 1px solid #ba68c8; margin-bottom: 20px; }
+        .identity-box { background: #e1bee7; padding: 15px; border-radius: 8px; border: 1px solid #ce93d8; margin-bottom: 20px; }
         .identity-box label { font-weight: bold; font-size: 14px; display: block; margin-top: 10px; color: #4a148c; }
-        .identity-box input, .identity-box select { width: 100%; padding: 8px; border: 1px solid #ba68c8; border-radius: 4px; margin-top: 5px; box-sizing: border-box; font-family: inherit; }
+        .identity-box input, .identity-box select { width: 100%; padding: 8px; border: 1px solid #ce93d8; border-radius: 4px; margin-top: 5px; box-sizing: border-box; font-family: inherit; }
         
         .q-section-title { background-color: #f3e5f5; color: #4a148c; padding: 10px 15px; margin: 20px 0 15px 0; border-left: 5px solid #7b1fa2; font-weight: bold; font-size: 16px; text-transform: uppercase; border-radius: 0 5px 5px 0; }
         .q-item { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
@@ -98,43 +96,44 @@
 
     <div class="header-top">
         <h1>🏃‍♂️ Materi PJOK Kelas 6 SD</h1>
-        <a href="dashboard.html" class="back-btn">⬅ Kembali ke Dashboard</a>
+        <a href="../../dashboard.html" class="back-btn">⬅ Kembali ke Dashboard</a>
     </div>
 
     <div class="main-container">
         <aside class="sidebar">
             <div class="logo-area">
-                <img src="../assets/img/logo.png" alt="Logo PJOK">
+                <img src="../../assets/img/logo.png" alt="Logo PJOK">
                 <p style="margin:10px 0 0 0; font-weight:bold; color:#555;">SD NEGERI 1 CERDAS</p>
             </div>
 
             <div class="menu-label">SEMESTER 1 (GANJIL)</div>
-            <button id="nav-a" class="nav-btn active" onclick="bukaHalaman('a', this)">⚽ A. Variasi Bola Besar</button>
-            <button id="nav-b" class="nav-btn" onclick="bukaHalaman('b', this)">⚾ B. Variasi Bola Kecil</button>
-            <button id="nav-c" class="nav-btn" onclick="bukaHalaman('c', this)">🏃 C. Atletik</button>
-            <button id="nav-d" class="nav-btn" onclick="bukaHalaman('d', this)">🥋 D. Bela Diri</button>
+            <button id="nav-a" class="nav-btn active" onclick="bukaHalaman('a', this)">A. Variasi Bola Besar</button>
+            <button id="nav-b" class="nav-btn" onclick="bukaHalaman('b', this)">B. Variasi Bola Kecil</button>
+            <button id="nav-c" class="nav-btn" onclick="bukaHalaman('c', this)">C. Atletik Lanjutan</button>
+            <button id="nav-d" class="nav-btn" onclick="bukaHalaman('d', this)">D. Bela Diri (Silat)</button>
             <button id="nav-sts" class="nav-btn" style="background:#fff9c4; color:#f57f17; border-left-color:#f57f17;" onclick="bukaHalaman('sts', this)">📝 UJIAN STS (GANJIL)</button>
 
             <div class="menu-label">SEMESTER 2 (GENAP)</div>
-            <button id="nav-e" class="nav-btn" onclick="bukaHalaman('e', this)">💪 E. Kebugaran</button>
-            <button id="nav-f" class="nav-btn" onclick="bukaHalaman('f', this)">🤸 F. Senam Lantai</button>
-            <button id="nav-g" class="nav-btn" onclick="bukaHalaman('g', this)">🎵 G. Senam Irama</button>
-            <button id="nav-h" class="nav-btn" onclick="bukaHalaman('h', this)">🏊 H. Renang & Sehat</button>
+            <button id="nav-e" class="nav-btn" onclick="bukaHalaman('e', this)">E. Kebugaran Jasmani</button>
+            <button id="nav-f" class="nav-btn" onclick="bukaHalaman('f', this)">F. Senam Lantai</button>
+            <button id="nav-g" class="nav-btn" onclick="bukaHalaman('g', this)">G. Senam Irama</button>
+            <button id="nav-h" class="nav-btn" onclick="bukaHalaman('h', this)">H. Renang & Reproduksi</button>
             <button id="nav-sas" class="nav-btn" style="background:#ffcdd2; color:#c62828; border-left-color:#c62828;" onclick="bukaHalaman('sas', this)">🏆 UJIAN SAS (GENAP)</button>
         </aside>
 
         <main class="content-area">
 
             <div id="view-a" class="section active">
-                <h2>⚽ A. Variasi & Kombinasi Gerak Bola Besar</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/SiB_Cm7rdiE" allowfullscreen></iframe></div>
+                <h2>A. Variasi & Kombinasi Gerak Bola Besar</h2>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/4_v5ek9ZkhU" allowfullscreen></iframe></div>
                 <div class="summary-box">
-                    <h3>📋 Rangkuman Materi Lengkap</h3>
-                    <p>Materi kelas 6 menekankan variasi dan kombinasi gerak dasar (Lokomotor, Non-lokomotor, Manipulatif) dalam Sepak Bola, Voli, dan Basket.</p>
-                    <h4>1. Sepak Bola</h4>
-                    <ul><li>Variasi Lokomotor + Manipulatif: Berlari zig-zag lalu menendang.</li><li>Variasi Non-lokomotor + Manipulatif: Menekuk lutut lalu menyundul bola.</li></ul>
-                    <h4>2. Bola Voli</h4>
-                    <ul><li>Passing Bawah: Kuda-kuda, lutut ditekuk, tangan lurus rapat.</li><li>Passing Atas: Jari terbuka di atas dahi dorong bola.</li></ul>
+                    <h3>📋 Rangkuman Materi A</h3>
+                    <p>Materi kelas 6 menekankan <strong>variasi dan kombinasi</strong> gerak dasar dalam permainan bola besar.</p>
+                    <ul>
+                        <li><span class="highlight">Sepak Bola:</span> Kombinasi lari (lokomotor) dan menendang (manipulatif). Menghentikan bola (kontrol) lalu menggiring.</li>
+                        <li><span class="highlight">Bola Voli:</span> Kombinasi passing bawah dan passing atas. Melakukan servis dengan variasi kekuatan.</li>
+                        <li><span class="highlight">Bola Basket:</span> Menggiring bola (dribbling) sambil berlari, lalu melakukan shooting (tembakan).</li>
+                    </ul>
                 </div>
                 <div class="btn-group">
                     <button class="action-btn btn-quiz" id="btn-a" onclick="cekDanBukaSoal('a')">🧠 Kuis Online (35 Soal)</button>
@@ -145,257 +144,31 @@
             </div>
 
             <div id="view-b" class="section">
-                <h2>⚾ B. Variasi Bola Kecil (Rounders)</h2>
+                <h2>B. Variasi & Kombinasi Bola Kecil (Rounders)</h2>
                 <div class="video-container"><iframe src="https://www.youtube.com/embed/V2IIxosqkso" allowfullscreen></iframe></div>
-                <h3>📋 Rangkuman Materi B: Permainan Bola Kecil (Rounders)</h3>
-
-<p>
-Rounders merupakan permainan bola kecil yang dimainkan secara beregu dan
-menekankan kerja sama, ketepatan gerak, serta strategi permainan.
-Permainan ini dilakukan di lapangan berbentuk segi lima dengan beberapa base
-yang harus dilalui pemain untuk memperoleh nilai.
-</p>
-
-<p>
-Dalam permainan rounders terdapat beberapa peran utama, yaitu pitcher sebagai
-pelempar bola, batter sebagai pemukul bola, dan catcher sebagai penangkap bola
-untuk menghentikan pergerakan lawan.
-</p>
-
-<p>
-Gerak dasar yang dominan dalam rounders adalah gerak manipulatif seperti
-melempar, memukul, dan menangkap bola, yang dikombinasikan dengan gerak
-lokomotor berupa berlari dari satu base ke base lainnya.
-</p>
-
-<p>
-Cara mematikan lawan dapat dilakukan dengan melempar bola ke base sebelum
-pelari sampai, menangkap bola hasil pukulan sebelum menyentuh tanah,
-atau menyentuh pelari dengan bola saat berada di luar base.
-</p>
-
-<p>
-Melalui pembelajaran rounders, peserta didik diharapkan mampu memahami
-aturan permainan, mempraktikkan teknik dasar dengan benar, serta menunjukkan
-sikap sportivitas dan kerja sama tim.
-</p>
-
-                <div class="btn-group"><button class="action-btn btn-quiz" id="btn-b" onclick="cekDanBukaSoal('b')">🧠 Kuis (35 Soal)</button><button class="action-btn btn-download" onclick="downloadSoal('b')">📄 PDF</button></div>
-                <div id="msg-b" class="locked-msg">⛔ TERKUNCI</div><div id="quiz-b" class="quiz-wrapper"></div>
+                <div class="summary-box">
+                    <h3>📋 Rangkuman Materi B</h3>
+                    <p>Permainan Rounders (mirip kasti, lapangan segi lima).</p>
+                    <ul>
+                        <li><span class="highlight">Melempar:</span> Melambung, mendatar, menyusur tanah.</li>
+                        <li><span class="highlight">Menangkap:</span> Menyesuaikan arah datang bola.</li>
+                        <li><span class="highlight">Memukul:</span> Mengayun tongkat dengan dua tangan, lari ke base setelah memukul.</li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <button class="action-btn btn-quiz" id="btn-b" onclick="cekDanBukaSoal('b')">🧠 Kuis Online (35 Soal)</button>
+                    <button class="action-btn btn-download" onclick="downloadSoal('b')">📄 Download PDF</button>
+                </div>
+                <div id="msg-b" class="locked-msg">⛔ TERKUNCI</div>
+                <div id="quiz-b" class="quiz-wrapper"></div>
             </div>
 
-            <div id="view-c" class="section">
-                <h2>🏃 C. Atletik</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/skmB02aHXh8" allowfullscreen></iframe></div>
-                <h3>📋 Rangkuman Materi C: Atletik</h3>
-
-<p>
-Atletik merupakan cabang olahraga dasar yang meliputi gerak lari, lompat,
-dan lempar. Dalam pembelajaran PJOK kelas VI, atletik bertujuan untuk
-mengembangkan kekuatan, kecepatan, koordinasi, dan daya tahan tubuh.
-</p>
-
-<p>
-Salah satu materi atletik adalah lari estafet, yaitu lari sambung yang
-dilakukan secara beregu dengan memindahkan tongkat estafet.
-Pemberian tongkat dapat dilakukan dengan cara visual (melihat) dan
-non-visual (tanpa melihat).
-</p>
-
-<p>
-Materi lainnya adalah lompat jauh, yang menekankan awalan, tolakan,
-melayang di udara, dan mendarat dengan kedua kaki secara seimbang
-untuk memperoleh lompatan yang maksimal.
-</p>
-
-<p>
-Selain itu, terdapat lempar turbo yang bertujuan melatih kekuatan dan
-ketepatan lemparan. Teknik lempar turbo dilakukan dengan awalan,
-gerakan melempar yang benar, serta diakhiri dengan sikap akhir yang seimbang.
-</p>
-
-<p>
-Melalui pembelajaran atletik, peserta didik diharapkan mampu memahami
-teknik dasar dengan benar, berani mencoba, serta menerapkan sikap disiplin
-dan percaya diri saat beraktivitas.
-</p>
-
-                <div class="btn-group"><button class="action-btn btn-quiz" id="btn-c" onclick="cekDanBukaSoal('c')">🧠 Kuis (35 Soal)</button><button class="action-btn btn-download" onclick="downloadSoal('c')">📄 PDF</button></div>
-                <div id="msg-c" class="locked-msg">⛔ TERKUNCI</div><div id="quiz-c" class="quiz-wrapper"></div>
-            </div>
-
-            <div id="view-d" class="section">
-                <h2>🥋 D. Bela Diri</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/vpWOHaLoZ60" allowfullscreen></iframe></div>
-                <h3>📋 Rangkuman Materi D: Bela Diri (Pencak Silat)</h3>
-
-<p>
-Pencak silat merupakan seni bela diri asli Indonesia yang mengajarkan
-keterampilan gerak, pengendalian diri, serta sikap disiplin dan sportivitas.
-Dalam PJOK kelas VI, pencak silat difokuskan pada penguasaan gerak dasar.
-</p>
-
-<p>
-Gerak dasar pencak silat meliputi kuda-kuda, sikap pasang, pukulan,
-tendangan, tangkisan, dan elakan. Kuda-kuda berfungsi sebagai dasar
-keseimbangan tubuh sebelum melakukan serangan maupun bertahan.
-</p>
-
-<p>
-Pukulan dan tendangan dilakukan dengan arah dan sasaran yang tepat,
-sedangkan tangkisan dan elakan bertujuan untuk menghindari atau menahan
-serangan lawan dengan aman.
-</p>
-
-<p>
-Dalam pembelajaran pencak silat, peserta didik diharapkan mampu
-mempraktikkan gerak dasar secara benar, berani mencoba, serta
-menunjukkan sikap percaya diri, disiplin, dan menghargai teman.
-</p>
-
-                <div class="btn-group"><button class="action-btn btn-quiz" id="btn-d" onclick="cekDanBukaSoal('d')">🧠 Kuis (35 Soal)</button><button class="action-btn btn-download" onclick="downloadSoal('d')">📄 PDF</button></div>
-                <div id="msg-d" class="locked-msg">⛔ TERKUNCI</div><div id="quiz-d" class="quiz-wrapper"></div>
-            </div>
-
-            <div id="view-e" class="section">
-                <h2>💪 E. Kebugaran Jasmani</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/dN2EGCeRjaM" allowfullscreen></iframe></div>
-                <h3>📋 Rangkuman Materi E: Kebugaran Jasmani</h3>
-
-<p>
-Kebugaran jasmani adalah kemampuan tubuh untuk melakukan aktivitas
-sehari-hari tanpa mengalami kelelahan yang berlebihan. Kebugaran jasmani
-sangat penting untuk menjaga kesehatan dan menunjang aktivitas belajar.
-</p>
-
-<p>
-Salah satu bentuk latihan kebugaran jasmani adalah circuit training
-atau latihan sirkuit. Latihan ini dilakukan melalui beberapa pos
-latihan yang dikerjakan secara bergantian.
-</p>
-
-<p>
-Contoh latihan sirkuit meliputi lari di tempat atau lari pendek,
-push-up untuk melatih kekuatan lengan, sit-up untuk melatih kekuatan
-otot perut, dan skipping untuk melatih daya tahan serta koordinasi tubuh.
-</p>
-
-<p>
-Melalui pembelajaran kebugaran jasmani, peserta didik diharapkan
-mampu melakukan latihan dengan benar, menjaga keselamatan diri,
-serta membiasakan pola hidup aktif dan sehat.
-</p>
-
-                <div class="btn-group"><button class="action-btn btn-quiz" id="btn-e" onclick="cekDanBukaSoal('e')">🧠 Kuis (35 Soal)</button><button class="action-btn btn-download" onclick="downloadSoal('e')">📄 PDF</button></div>
-                <div id="msg-e" class="locked-msg">⛔ TERKUNCI</div><div id="quiz-e" class="quiz-wrapper"></div>
-            </div>
-
-            <div id="view-f" class="section">
-                <h2>🤸 F. Senam Lantai</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/_fPJ4cVe07o" allowfullscreen></iframe></div>
-                <h3>📋 Rangkuman Materi F: Senam Lantai</h3>
-
-<p>
-Senam lantai merupakan aktivitas senam yang dilakukan di atas matras
-atau lantai dengan menekankan kekuatan, kelenturan, keseimbangan,
-dan koordinasi gerak tubuh.
-</p>
-
-<p>
-Gerakan dasar dalam senam lantai antara lain guling depan, guling
-belakang, dan guling lenting. Setiap gerakan harus diawali dengan
-sikap awal yang benar agar aman dilakukan.
-</p>
-
-<p>
-Guling depan dilakukan dengan sikap jongkok, dagu menempel ke dada,
-dan badan digulingkan ke depan secara bertahap. Guling belakang
-dilakukan dengan posisi badan membulat dan kedua tangan menolak
-lantai untuk membantu gerakan.
-</p>
-
-<p>
-Guling lenting merupakan rangkaian gerak yang memerlukan kekuatan
-lengan dan koordinasi yang baik, sehingga harus dilakukan dengan
-pengawasan dan latihan bertahap.
-</p>
-
-<p>
-Melalui pembelajaran senam lantai, peserta didik diharapkan mampu
-melakukan gerakan dengan benar, menjaga keselamatan diri, serta
-menumbuhkan keberanian dan percaya diri.
-</p>
-
-                <div class="btn-group"><button class="action-btn btn-quiz" id="btn-f" onclick="cekDanBukaSoal('f')">🧠 Kuis (35 Soal)</button><button class="action-btn btn-download" onclick="downloadSoal('f')">📄 PDF</button></div>
-                <div id="msg-f" class="locked-msg">⛔ TERKUNCI</div><div id="quiz-f" class="quiz-wrapper"></div>
-            </div>
-
-            <div id="view-g" class="section">
-                <h2>🎵 G. Senam Irama</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/1uMgaDH37R0" allowfullscreen></iframe></div>
-               <h3>📋 Rangkuman Materi G: Senam Irama</h3>
-
-<p>
-Senam irama adalah aktivitas gerak yang dilakukan mengikuti irama
-musik atau hitungan tertentu. Senam ini bertujuan melatih koordinasi,
-kelenturan, dan keseimbangan tubuh.
-</p>
-
-<p>
-Gerakan dasar senam irama meliputi ayunan lengan, langkah kaki,
-putaran badan, serta perpindahan tempat yang dilakukan secara teratur
-dan berkesinambungan.
-</p>
-
-<p>
-Dalam senam irama, ketepatan mengikuti irama sangat penting agar
-gerakan terlihat serasi dan terkoordinasi. Peserta didik diajak
-untuk bergerak sesuai tempo musik dengan penuh semangat.
-</p>
-
-<p>
-Melalui pembelajaran senam irama, peserta didik diharapkan mampu
-mengekspresikan gerak dengan percaya diri, meningkatkan kebugaran,
-serta menumbuhkan rasa gembira saat berolahraga.
-</p>
-
-                <div class="btn-group"><button class="action-btn btn-quiz" id="btn-g" onclick="cekDanBukaSoal('g')">🧠 Kuis (35 Soal)</button><button class="action-btn btn-download" onclick="downloadSoal('g')">📄 PDF</button></div>
-                <div id="msg-g" class="locked-msg">⛔ TERKUNCI</div><div id="quiz-g" class="quiz-wrapper"></div>
-            </div>
-
-            <div id="view-h" class="section">
-                <h2>🏊 H. Renang & Kesehatan</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/OH9wAVgoTfE" allowfullscreen></iframe></div>
-               <h3>📋 Rangkuman Materi H: Renang & Kesehatan</h3>
-
-<p>
-Renang merupakan aktivitas air yang bermanfaat untuk melatih kekuatan
-otot, pernapasan, dan daya tahan tubuh. Dalam PJOK kelas VI, materi
-renang difokuskan pada pengenalan gaya punggung.
-</p>
-
-<p>
-Renang gaya punggung dilakukan dengan posisi tubuh telentang,
-wajah menghadap ke atas, dan gerakan tangan serta kaki dilakukan
-secara bergantian untuk mendorong tubuh maju.
-</p>
-
-<p>
-Selain renang, peserta didik juga mempelajari materi kesehatan yang
-berkaitan dengan pentingnya menjaga kebersihan diri, termasuk
-kebersihan alat reproduksi, agar terhindar dari penyakit.
-</p>
-
-<p>
-Melalui pembelajaran renang dan kesehatan, peserta didik diharapkan
-mampu menjaga keselamatan saat beraktivitas di air serta menerapkan
-pola hidup bersih dan sehat dalam kehidupan sehari-hari.
-</p>
-
-                <div class="btn-group"><button class="action-btn btn-quiz" id="btn-h" onclick="cekDanBukaSoal('h')">🧠 Kuis (35 Soal)</button><button class="action-btn btn-download" onclick="downloadSoal('h')">📄 PDF</button></div>
-                <div id="msg-h" class="locked-msg">⛔ MAAF, KUIS BELUM DIBUKA OLEH GURU</div>
-                <div id="quiz-h" class="quiz-wrapper"></div>
-            </div>
+            <div id="view-c" class="section"><h2>C. Atletik Lanjutan</h2><p>Variasi lari estafet, lompat jauh, lempar turbo.</p><div class="btn-group"><button class="action-btn btn-quiz" id="btn-c" onclick="cekDanBukaSoal('c')">🧠 Kuis (35 Soal)</button><button class="action-btn btn-download" onclick="downloadSoal('c')">📄 PDF</button></div><div id="msg-c" class="locked-msg">⛔ TERKUNCI</div><div id="quiz-c" class="quiz-wrapper"></div></div>
+            <div id="view-d" class="section"><h2>D. Bela Diri (Pencak Silat)</h2><p>Variasi kuda-kuda, pola langkah, pukulan, tendangan, tangkisan.</p><div class="btn-group"><button class="action-btn btn-quiz" id="btn-d" onclick="cekDanBukaSoal('d')">🧠 Kuis (35 Soal)</button><button class="action-btn btn-download" onclick="downloadSoal('d')">📄 PDF</button></div><div id="msg-d" class="locked-msg">⛔ TERKUNCI</div><div id="quiz-d" class="quiz-wrapper"></div></div>
+            <div id="view-e" class="section"><h2>E. Kebugaran Jasmani</h2><p>Latihan sirkuit (pos 1-4) untuk daya tahan, kekuatan, kelincahan.</p><div class="btn-group"><button class="action-btn btn-quiz" id="btn-e" onclick="cekDanBukaSoal('e')">🧠 Kuis (35 Soal)</button><button class="action-btn btn-download" onclick="downloadSoal('e')">📄 PDF</button></div><div id="msg-e" class="locked-msg">⛔ TERKUNCI</div><div id="quiz-e" class="quiz-wrapper"></div></div>
+            <div id="view-f" class="section"><h2>F. Senam Lantai</h2><p>Guling depan, guling belakang, guling lenting.</p><div class="btn-group"><button class="action-btn btn-quiz" id="btn-f" onclick="cekDanBukaSoal('f')">🧠 Kuis (35 Soal)</button><button class="action-btn btn-download" onclick="downloadSoal('f')">📄 PDF</button></div><div id="msg-f" class="locked-msg">⛔ TERKUNCI</div><div id="quiz-f" class="quiz-wrapper"></div></div>
+            <div id="view-g" class="section"><h2>G. Senam Irama</h2><p>Variasi ayunan lengan dan langkah kaki berirama (SKJ).</p><div class="btn-group"><button class="action-btn btn-quiz" id="btn-g" onclick="cekDanBukaSoal('g')">🧠 Kuis (35 Soal)</button><button class="action-btn btn-download" onclick="downloadSoal('g')">📄 PDF</button></div><div id="msg-g" class="locked-msg">⛔ TERKUNCI</div><div id="quiz-g" class="quiz-wrapper"></div></div>
+            <div id="view-h" class="section"><h2>H. Renang & Kesehatan</h2><p>Renang gaya punggung dan kebersihan alat reproduksi.</p><div class="btn-group"><button class="action-btn btn-quiz" id="btn-h" onclick="cekDanBukaSoal('h')">🧠 Kuis (35 Soal)</button><button class="action-btn btn-download" onclick="downloadSoal('h')">📄 PDF</button></div><div id="msg-h" class="locked-msg">⛔ TERKUNCI</div><div id="quiz-h" class="quiz-wrapper"></div></div>
 
             <div id="view-sts" class="section">
                 <div class="exam-info-box">
@@ -410,69 +183,13 @@ pola hidup bersih dan sehat dalam kehidupan sehari-hari.
                 <div id="msg-sts" class="locked-msg">⛔ UJIAN STS BELUM DIBUKA OLEH GURU</div>
                 
                 <div id="kisi-sts" class="kisi-container">
-                    <div class="kisi-header-text">
-                        KISI – KISI SOAL<br>SUMATIF TENGAH SEMESTER (STS) GANJIL<br>
-                        KELAS: VI (ENAM) | MAPEL: PJOK
-                    </div>
+                    <div class="kisi-header-text">KISI – KISI SOAL STS GANJIL - KELAS 6</div>
                     <table class="kisi-table">
-                        <thead>
-                            <tr>
-                                <th style="width:15%">MATERI</th>
-                                <th style="width:15%">CAPAIAN PEMBELAJARAN (CP)</th>
-                                <th style="width:15%">TUJUAN PEMBELAJARAN (TP)</th>
-                                <th style="width:35%">INDIKATOR SOAL</th>
-                                <th style="width:10%">BENTUK SOAL</th>
-                                <th style="width:10%">NO SOAL</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>MATERI</th><th>CP</th><th>TP</th><th>INDIKATOR SOAL</th><th>BENTUK</th><th>NO</th></tr></thead>
                         <tbody>
-                            <tr>
-                                <td rowspan="3">Permainan Bola Besar<br>(Sepak Bola, Voli, Basket)</td>
-                                <td rowspan="3">Peserta didik mampu mempraktikkan variasi dan kombinasi gerak dasar lokomotor, non-lokomotor, dan manipulatif.</td>
-                                <td rowspan="3">Memahami variasi gerak spesifik permainan bola besar.</td>
-                                <td>Disajikan narasi, siswa mampu menganalisis kombinasi gerak menggiring dan menendang bola.</td>
-                                <td class="center-cell">Pilihan Ganda</td>
-                                <td class="center-cell">1-8</td>
-                            </tr>
-                            <tr>
-                                <td>Disajikan gambar, siswa mampu menentukan teknik passing bawah bola voli yang benar.</td>
-                                <td class="center-cell">Isian</td>
-                                <td class="center-cell">31-33</td>
-                            </tr>
-                            <tr>
-                                <td>Siswa mampu menjelaskan cara melakukan lay-up shoot dalam bola basket.</td>
-                                <td class="center-cell">Essay</td>
-                                <td class="center-cell">41</td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2">Permainan Bola Kecil<br>(Rounders)</td>
-                                <td rowspan="2">Peserta didik mempraktikkan variasi gerak dasar manipulatif.</td>
-                                <td rowspan="2">Memahami teknik melempar dan memukul bola rounders.</td>
-                                <td>Disajikan cerita, siswa menentukan strategi mematikan lawan di base.</td>
-                                <td class="center-cell">Pilihan Ganda</td>
-                                <td class="center-cell">9-15</td>
-                            </tr>
-                            <tr>
-                                <td>Siswa mampu menyebutkan jumlah base dalam lapangan rounders.</td>
-                                <td class="center-cell">Isian</td>
-                                <td class="center-cell">34-35</td>
-                            </tr>
-                            <tr>
-                                <td>Atletik<br>(Lari & Lempar)</td>
-                                <td>Peserta didik mempraktikkan gerak dasar atletik.</td>
-                                <td>Memahami variasi lari estafet dan lempar turbo.</td>
-                                <td>Siswa mengidentifikasi cara pemberian tongkat estafet (visual/non-visual).</td>
-                                <td class="center-cell">Pilihan Ganda</td>
-                                <td class="center-cell">16-23</td>
-                            </tr>
-                            <tr>
-                                <td>Bela Diri<br>(Pencak Silat)</td>
-                                <td>Peserta didik mempraktikkan gerak bela diri.</td>
-                                <td>Memahami variasi kuda-kuda dan belaan.</td>
-                                <td>Disajikan narasi serangan, siswa menentukan jenis tangkisan yang tepat.</td>
-                                <td class="center-cell">PG/Isian/Essay</td>
-                                <td class="center-cell">24-30 (PG)<br>36-40 (Isian)<br>42-45 (Essay)</td>
-                            </tr>
+                            <tr><td>Bola Besar</td><td>Keterampilan Gerak</td><td>Variasi Kombinasi.</td><td>Disajikan narasi, siswa menganalisis kombinasi menggiring dan menendang.</td><td class="center-cell">PG</td><td class="center-cell">1-8</td></tr>
+                            <tr><td>Bola Kecil</td><td>Keterampilan Gerak</td><td>Variasi Rounders.</td><td>Siswa menjelaskan cara mematikan lawan di base.</td><td class="center-cell">Isian</td><td class="center-cell">31-35</td></tr>
+                            <tr><td>Atletik</td><td>Keterampilan Gerak</td><td>Lari Estafet.</td><td>Siswa menjelaskan cara memberi tongkat estafet.</td><td class="center-cell">Essay</td><td class="center-cell">41-42</td></tr>
                         </tbody>
                     </table>
                     <button class="action-btn" style="background:#777; margin-top:15px; width:auto;" onclick="this.parentElement.style.display='none'">Tutup Kisi-Kisi</button>
@@ -491,59 +208,16 @@ pola hidup bersih dan sehat dalam kehidupan sehari-hari.
                     </div>
                 </div>
                 <div id="msg-sas" class="locked-msg">⛔ MAAF, UJIAN SAS BELUM DIBUKA OLEH GURU</div>
-                
                 <div id="kisi-sas" class="kisi-container">
-                    <div class="kisi-header-text">
-                        KISI – KISI SOAL<br>SUMATIF AKHIR SEMESTER (SAS) GENAP<br>
-                        KELAS: VI (ENAM) | MAPEL: PJOK
-                    </div>
+                    <div class="kisi-header-text">KISI – KISI SOAL SAS GENAP - KELAS 6</div>
                     <table class="kisi-table">
-                        <thead>
-                            <tr>
-                                <th style="width:15%">MATERI</th>
-                                <th style="width:15%">CAPAIAN PEMBELAJARAN (CP)</th>
-                                <th style="width:15%">TUJUAN PEMBELAJARAN (TP)</th>
-                                <th style="width:35%">INDIKATOR SOAL</th>
-                                <th style="width:10%">BENTUK SOAL</th>
-                                <th style="width:10%">NO SOAL</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>MATERI</th><th>CP</th><th>TP</th><th>INDIKATOR SOAL</th><th>BENTUK</th><th>NO</th></tr></thead>
                         <tbody>
-                            <tr>
-                                <td>Kebugaran Jasmani</td>
-                                <td>Aktivitas kebugaran.</td>
-                                <td>Memahami latihan sirkuit training.</td>
-                                <td>Disajikan gambar pos latihan, siswa menentukan komponen kebugaran yang dilatih.</td>
-                                <td class="center-cell">PG/Isian</td>
-                                <td class="center-cell">1-8 (PG)<br>31-32 (Isian)</td>
-                            </tr>
-                            <tr>
-                                <td>Senam Lantai</td>
-                                <td>Gerak dominan senam.</td>
-                                <td>Rangkaian guling depan, belakang, lenting.</td>
-                                <td>Siswa menganalisis kesalahan gerak saat melakukan guling lenting.</td>
-                                <td class="center-cell">PG/Essay</td>
-                                <td class="center-cell">9-15 (PG)<br>41 (Essay)</td>
-                            </tr>
-                            <tr>
-                                <td>Senam Irama</td>
-                                <td>Gerak berirama.</td>
-                                <td>Variasi langkah dan ayunan lengan.</td>
-                                <td>Siswa menjelaskan keserasian gerak langkah dengan ketukan musik.</td>
-                                <td class="center-cell">PG</td>
-                                <td class="center-cell">16-22</td>
-                            </tr>
-                            <tr>
-                                <td>Renang & Kesehatan</td>
-                                <td>Aktivitas air & Kesehatan.</td>
-                                <td>Gaya punggung & Kebersihan reproduksi.</td>
-                                <td>Disajikan narasi, siswa menentukan cara menjaga kebersihan alat reproduksi.</td>
-                                <td class="center-cell">PG/Isian/Essay</td>
-                                <td class="center-cell">23-30 (PG)<br>33-40 (Isian)<br>42-45 (Essay)</td>
-                            </tr>
+                            <tr><td>Kebugaran Jasmani</td><td>Keterampilan Gerak</td><td>Latihan Sirkuit.</td><td>Siswa menentukan urutan pos latihan sirkuit.</td><td class="center-cell">PG</td><td class="center-cell">1-10</td></tr>
+                            <tr><td>Senam Lantai</td><td>Pengetahuan Gerak</td><td>Guling Lenting.</td><td>Siswa menjelaskan gerakan lecutan kaki.</td><td class="center-cell">Isian</td><td class="center-cell">31-35</td></tr>
+                            <tr><td>Kesehatan</td><td>Pola Hidup Sehat</td><td>Kebersihan Reproduksi.</td><td>Siswa menyebutkan cara menjaga kebersihan diri.</td><td class="center-cell">Essay</td><td class="center-cell">41-45</td></tr>
                         </tbody>
                     </table>
-                    <button class="action-btn" style="background:#777; margin-top:15px; width:auto;" onclick="this.parentElement.style.display='none'">Tutup Kisi-Kisi</button>
                 </div>
                 <div id="quiz-sas" class="quiz-wrapper"></div>
             </div>
@@ -611,1363 +285,27 @@ pola hidup bersih dan sehat dalam kehidupan sehari-hari.
 
         // 3. DATABASE SOAL NARATIF (KELAS 6)
         const dbSoal = {
-           // =======================
-// KUIS A KELAS VI
-// 30 PG + 5 Essay
-// =======================
-'a': [
-
-  // ===================
-  // PILIHAN GANDA (30)
-  // ===================
-
-  {t:'pg', q:"Pada pembelajaran PJOK, guru meminta siswa melakukan latihan kombinasi gerak menggiring bola melewati rintangan lalu menendang bola ke sasaran. Latihan tersebut bertujuan melatih kemampuan siswa dalam mengombinasikan gerak dasar...", 
-   o:["A. Nonlokomotor dan keseimbangan","B. Lokomotor dan manipulatif","C. Manipulatif dan statis","D. Lokomotor dan nonlokomotor"], 
-   a:"B. Lokomotor dan manipulatif"},
-
-  {t:'pg', q:"Dalam permainan sepak bola, seorang pemain menghentikan bola dengan telapak kaki sebelum mengoper kepada temannya yang berada di posisi lebih baik. Gerakan menghentikan dan mengoper bola tersebut termasuk gerak dasar...", 
-   o:["A. Lokomotor","B. Manipulatif","C. Nonlokomotor","D. Keseimbangan"], 
-   a:"B. Manipulatif"},
-
-  {t:'pg', q:"Saat permainan bola basket berlangsung, seorang pemain membawa bola sambil berlari dan memantulkannya secara terus-menerus menuju daerah lawan. Gerakan tersebut dikenal dengan istilah...", 
-   o:["A. Passing","B. Shooting","C. Dribbling","D. Rebound"], 
-   a:"C. Dribbling"},
-
-  {t:'pg', q:"Dalam permainan bola voli, seorang siswa menekuk lutut, merapatkan kedua lengan, dan mengarahkan bola hasil servis lawan kepada pengumpan. Teknik yang dilakukan adalah...", 
-   o:["A. Passing atas","B. Passing bawah","C. Smash","D. Blok"], 
-   a:"B. Passing bawah"},
-
-  {t:'pg', q:"Seorang pemain bola voli melompat dan memukul bola dengan satu tangan di atas net untuk menjatuhkan bola ke area lawan. Teknik tersebut dinamakan...", 
-   o:["A. Servis","B. Passing","C. Smash","D. Blok"], 
-   a:"C. Smash"},
-
-  {t:'pg', q:"Dalam permainan sepak bola, pemain melakukan gerakan berdiri di tempat sambil memutar badan dan mengayunkan kaki untuk menendang bola. Gerakan tersebut termasuk gerak dasar...", 
-   o:["A. Lokomotor","B. Manipulatif","C. Nonlokomotor","D. Berpindah tempat"], 
-   a:"C. Nonlokomotor"},
-
-  {t:'pg', q:"Seorang pemain bola basket mengoper bola menggunakan dua tangan dari depan dada ke arah teman satu tim. Teknik operan tersebut disebut...", 
-   o:["A. Bounce pass","B. Overhead pass","C. Chest pass","D. Dribble pass"], 
-   a:"C. Chest pass"},
-
-  {t:'pg', q:"Tujuan utama memasukkan bola ke gawang atau ring lawan dalam permainan bola besar adalah untuk...", 
-   o:["A. Menguasai bola lebih lama","B. Menunjukkan keterampilan","C. Mencetak angka","D. Menghentikan permainan"], 
-   a:"C. Mencetak angka"},
-
-  {t:'pg', q:"Saat permainan bola voli dimulai, pukulan pertama yang dilakukan dari belakang garis lapangan disebut...", 
-   o:["A. Passing","B. Smash","C. Servis","D. Blok"], 
-   a:"C. Servis"},
-
-  {t:'pg', q:"Dalam permainan bola basket, gerakan mendekati ring lalu melompat dan memasukkan bola menggunakan satu tangan disebut...", 
-   o:["A. Shooting","B. Passing","C. Lay-up","D. Rebound"], 
-   a:"C. Lay-up"},
-
-  {t:'pg', q:"Gerakan berlari mengejar bola dalam permainan sepak bola merupakan contoh gerak dasar...", 
-   o:["A. Manipulatif","B. Nonlokomotor","C. Lokomotor","D. Statis"], 
-   a:"C. Lokomotor"},
-
-  {t:'pg', q:"Dalam permainan bola basket, pemain wajib memantulkan bola ke lantai saat bergerak agar tidak terjadi pelanggaran...", 
-   o:["A. Double dribble","B. Traveling","C. Blocking","D. Charging"], 
-   a:"B. Traveling"},
-
-  {t:'pg', q:"Posisi tubuh yang benar saat menerima bola servis dalam permainan bola voli adalah...", 
-   o:["A. Tubuh tegak dan kaku","B. Lutut sedikit ditekuk","C. Duduk di lantai","D. Membelakangi bola"], 
-   a:"B. Lutut sedikit ditekuk"},
-
-  {t:'pg', q:"Dalam permainan sepak bola, operan jarak dekat yang paling akurat dilakukan dengan menggunakan bagian kaki...", 
-   o:["A. Ujung kaki","B. Tumit","C. Kaki bagian dalam","D. Punggung kaki"], 
-   a:"C. Kaki bagian dalam"},
-
-  {t:'pg', q:"Setiap tembakan yang berhasil masuk ke ring dalam permainan bola basket akan menghasilkan...", 
-   o:["A. Hukuman","B. Pelanggaran","C. Poin","D. Pergantian pemain"], 
-   a:"C. Poin"},
-
-  {t:'pg', q:"Gerakan melompat untuk menyambut bola dalam permainan bola voli termasuk gerak dasar...", 
-   o:["A. Lokomotor","B. Nonlokomotor","C. Manipulatif","D. Statis"], 
-   a:"A. Lokomotor"},
-
-  {t:'pg', q:"Salah satu tujuan melakukan pemanasan sebelum bermain permainan bola besar adalah untuk...", 
-   o:["A. Menghemat tenaga","B. Menghindari cedera","C. Mempercepat permainan","D. Mengurangi gerak"], 
-   a:"B. Menghindari cedera"},
-
-  {t:'pg', q:"Dalam permainan bola basket, membawa bola tanpa memantulkannya saat berjalan akan dikenai pelanggaran...", 
-   o:["A. Shooting","B. Traveling","C. Double pass","D. Holding"], 
-   a:"B. Traveling"},
-
-  {t:'pg', q:"Pemain sepak bola yang bertugas menjaga gawang agar tidak kemasukan bola disebut...", 
-   o:["A. Bek","B. Penyerang","C. Gelandang","D. Kiper"], 
-   a:"D. Kiper"},
-
-  {t:'pg', q:"Sikap yang harus ditunjukkan siswa saat mengikuti permainan bola besar di sekolah adalah...", 
-   o:["A. Curang","B. Egois","C. Sportif","D. Emosional"], 
-   a:"C. Sportif"},
-
-  {t:'pg', q:"Teknik yang tepat digunakan untuk menerima serangan smash lawan dalam permainan bola voli adalah...", 
-   o:["A. Servis","B. Smash","C. Passing bawah","D. Blok"], 
-   a:"D. Blok"},
-
-  {t:'pg', q:"Operan bola basket yang dilakukan dengan cara memantulkan bola ke lantai sebelum sampai ke penerima disebut...", 
-   o:["A. Chest pass","B. Overhead pass","C. Bounce pass","D. Lay-up"], 
-   a:"C. Bounce pass"},
-
-  {t:'pg', q:"Mengoper bola kepada teman yang berada di posisi lebih baik menunjukkan penerapan nilai...", 
-   o:["A. Keberanian","B. Kerja sama","C. Kecepatan","D. Kekuatan"], 
-   a:"B. Kerja sama"},
-
-  {t:'pg', q:"Gerakan memukul bola pada permainan bola voli termasuk kategori gerak dasar...", 
-   o:["A. Lokomotor","B. Nonlokomotor","C. Manipulatif","D. Statis"], 
-   a:"C. Manipulatif"},
-
-  {t:'pg', q:"Sikap tubuh yang benar saat melakukan shooting dalam bola basket adalah...", 
-   o:["A. Badan kaku","B. Posisi tidak seimbang","C. Tubuh seimbang dan fokus","D. Membelakangi ring"], 
-   a:"C. Tubuh seimbang dan fokus"},
-
-  {t:'pg', q:"Dalam permainan sepak bola, pemain yang diperbolehkan menggunakan tangan di area gawang sendiri adalah...", 
-   o:["A. Bek","B. Penyerang","C. Gelandang","D. Kiper"], 
-   a:"D. Kiper"},
-
-  {t:'pg', q:"Gerakan berhenti sejenak sebelum melakukan tendangan dalam sepak bola termasuk gerak dasar...", 
-   o:["A. Lokomotor","B. Nonlokomotor","C. Manipulatif","D. Berpindah"], 
-   a:"B. Nonlokomotor"},
-
-  {t:'pg', q:"Salah satu manfaat utama bermain permainan bola besar secara rutin adalah...", 
-   o:["A. Mudah lelah","B. Tubuh kaku","C. Meningkatkan kebugaran jasmani","D. Mengurangi aktivitas"], 
-   a:"C. Meningkatkan kebugaran jasmani"},
-
-  {t:'pg', q:"Jumlah pemain dalam satu tim pada permainan bola voli adalah...", 
-   o:["A. 4 orang","B. 5 orang","C. 6 orang","D. 7 orang"], 
-   a:"C. 6 orang"},
-
-  {t:'pg', q:"Dalam permainan bola besar, keberhasilan tim sangat dipengaruhi oleh kemampuan pemain dalam...", 
-   o:["A. Bermain sendiri","B. Melanggar aturan","C. Bekerja sama","D. Menghindari bola"], 
-   a:"C. Bekerja sama"},
-
-  // ===================
-  // ESSAY (5)
-  // ===================
-
-  {t:'es', q:"Jelaskan contoh kombinasi gerak lokomotor, nonlokomotor, dan manipulatif dalam permainan sepak bola!"},
-
-  {t:'es', q:"Uraikan cara melakukan passing bawah yang benar dalam permainan bola voli!"},
-
-  {t:'es', q:"Jelaskan langkah-langkah melakukan dribbling yang efektif dalam permainan bola basket!"},
-
-  {t:'es', q:"Mengapa sikap sportivitas dan kerja sama sangat penting dalam permainan bola besar? Jelaskan!"},
-
-  {t:'es', q:"Sebutkan dan jelaskan manfaat bermain permainan bola besar bagi kebugaran jasmani!"}
-
-],
-// =======================
-// KUIS B KELAS VI
-// ROUNDERS
-// 30 PG + 5 Essay
-// =======================
-'b': [
-
-  // ===================
-  // PILIHAN GANDA (30)
-  // ===================
-
-  {t:'pg', q:"Dalam pembelajaran PJOK, guru menjelaskan bahwa permainan rounders dimainkan secara beregu di lapangan berbentuk segi lima. Tujuan utama permainan rounders adalah...", 
-   o:["A. Menghindari bola lawan","B. Mematikan semua pemain lawan","C. Memperoleh nilai dengan berlari mengelilingi base","D. Memukul bola sejauh mungkin tanpa aturan"], 
-   a:"C. Memperoleh nilai dengan berlari mengelilingi base"},
-
-  {t:'pg', q:"Pada permainan rounders, seorang pemain bertugas melempar bola kepada pemukul dengan lemparan yang terarah dan mudah dipukul. Pemain tersebut disebut...", 
-   o:["A. Batter","B. Pitcher","C. Catcher","D. Fielder"], 
-   a:"B. Pitcher"},
-
-  {t:'pg', q:"Ketika permainan rounders berlangsung, seorang siswa memukul bola lalu berlari menuju base pertama. Gerakan memukul dan berlari tersebut merupakan kombinasi gerak...", 
-   o:["A. Lokomotor dan nonlokomotor","B. Manipulatif dan nonlokomotor","C. Lokomotor dan manipulatif","D. Nonlokomotor dan keseimbangan"], 
-   a:"C. Lokomotor dan manipulatif"},
-
-  {t:'pg', q:"Dalam permainan rounders, pemain yang bertugas memukul bola menggunakan pemukul disebut...", 
-   o:["A. Pitcher","B. Catcher","C. Batter","D. Penjaga base"], 
-   a:"C. Batter"},
-
-  {t:'pg', q:"Setelah memukul bola, seorang pemain rounders harus segera berlari menuju base. Tujuan berlari ke base adalah untuk...", 
-   o:["A. Menghindari teman","B. Mengumpulkan nilai","C. Menghentikan permainan","D. Menunggu giliran"], 
-   a:"B. Mengumpulkan nilai"},
-
-  {t:'pg', q:"Jumlah base yang terdapat pada lapangan permainan rounders adalah...", 
-   o:["A. 3 base","B. 4 base","C. 5 base","D. 6 base"], 
-   a:"C. 5 base"},
-
-  {t:'pg', q:"Dalam permainan rounders, pemain dinyatakan mati apabila...", 
-   o:["A. Bola keluar lapangan","B. Bola ditangkap sebelum menyentuh tanah","C. Pemukul berhasil memukul bola","D. Pemain berdiri di base"], 
-   a:"B. Bola ditangkap sebelum menyentuh tanah"},
-
-  {t:'pg', q:"Seorang pemain rounders berusaha mematikan lawan dengan cara melempar bola ke base sebelum pelari sampai. Cara ini merupakan contoh strategi...", 
-   o:["A. Bertahan","B. Menyerang","C. Memukul","D. Mengulur waktu"], 
-   a:"A. Bertahan"},
-
-  {t:'pg', q:"Dalam permainan rounders, gerakan menangkap bola yang datang dari hasil pukulan lawan termasuk gerak dasar...", 
-   o:["A. Lokomotor","B. Nonlokomotor","C. Manipulatif","D. Statis"], 
-   a:"C. Manipulatif"},
-
-  {t:'pg', q:"Ketika bola hasil pukulan lawan melambung tinggi, pemain penjaga sebaiknya...", 
-   o:["A. Membiarkan bola jatuh","B. Menangkap bola sebelum menyentuh tanah","C. Menendang bola","D. Menunggu di base"], 
-   a:"B. Menangkap bola sebelum menyentuh tanah"},
-
-  {t:'pg', q:"Dalam permainan rounders, pemain yang bertugas menangkap bola di belakang pemukul disebut...", 
-   o:["A. Pitcher","B. Batter","C. Catcher","D. Pelari"], 
-   a:"C. Catcher"},
-
-  {t:'pg', q:"Gerakan berdiri di tempat sambil memegang pemukul sebelum memukul bola termasuk gerak dasar...", 
-   o:["A. Lokomotor","B. Manipulatif","C. Nonlokomotor","D. Berpindah tempat"], 
-   a:"C. Nonlokomotor"},
-
-  {t:'pg', q:"Dalam permainan rounders, seorang pelari dinyatakan aman apabila...", 
-   o:["A. Berlari tanpa melihat bola","B. Berdiri di luar base","C. Sampai di base sebelum bola","D. Memukul bola dua kali"], 
-   a:"C. Sampai di base sebelum bola"},
-
-  {t:'pg', q:"Tujuan utama melakukan pemanasan sebelum bermain rounders adalah untuk...", 
-   o:["A. Mempercepat permainan","B. Menghindari cedera","C. Menghabiskan waktu","D. Mengurangi gerak"], 
-   a:"B. Menghindari cedera"},
-
-  {t:'pg', q:"Dalam permainan rounders, sikap yang harus ditunjukkan pemain saat bermain adalah...", 
-   o:["A. Egois","B. Curang","C. Sportif","D. Emosional"], 
-   a:"C. Sportif"},
-
-  {t:'pg', q:"Gerakan melempar bola ke arah base untuk mematikan lawan termasuk gerak dasar...", 
-   o:["A. Lokomotor","B. Nonlokomotor","C. Manipulatif","D. Statis"], 
-   a:"C. Manipulatif"},
-
-  {t:'pg', q:"Ketika berlari dari satu base ke base lainnya, pemain rounders harus...", 
-   o:["A. Berjalan santai","B. Berlari secepat mungkin","C. Menunggu aba-aba","D. Membawa bola"], 
-   a:"B. Berlari secepat mungkin"},
-
-  {t:'pg', q:"Permainan rounders mengajarkan peserta didik untuk bekerja sama karena...", 
-   o:["A. Dimainkan sendiri","B. Memerlukan kerja tim untuk menyerang dan bertahan","C. Tidak ada aturan","D. Hanya mengandalkan pemukul"], 
-   a:"B. Memerlukan kerja tim untuk menyerang dan bertahan"},
-
-  {t:'pg', q:"Dalam permainan rounders, kombinasi gerak yang paling dominan adalah...", 
-   o:["A. Lokomotor dan nonlokomotor","B. Lokomotor dan manipulatif","C. Nonlokomotor dan keseimbangan","D. Statis dan manipulatif"], 
-   a:"B. Lokomotor dan manipulatif"},
-
-  {t:'pg', q:"Seorang pemain rounders tidak boleh memukul bola apabila...", 
-   o:["A. Bola dilempar pitcher","B. Wasit belum memberi aba-aba","C. Bola melambung rendah","D. Bola mengarah ke pemukul"], 
-   a:"B. Wasit belum memberi aba-aba"},
-
-  {t:'pg', q:"Saat bermain rounders, pemain sebaiknya menggunakan peralatan yang sesuai agar...", 
-   o:["A. Permainan cepat selesai","B. Terlihat hebat","C. Aman dan nyaman bermain","D. Menang dengan mudah"], 
-   a:"C. Aman dan nyaman bermain"},
-
-  {t:'pg', q:"Gerakan berlari mengelilingi base dalam permainan rounders bertujuan untuk...", 
-   o:["A. Menghindari bola","B. Mengumpulkan poin","C. Menghentikan lawan","D. Menunggu teman"], 
-   a:"B. Mengumpulkan poin"},
-
-  {t:'pg', q:"Dalam permainan rounders, melempar bola tepat sasaran ke base memerlukan kemampuan...", 
-   o:["A. Kekuatan saja","B. Kecepatan saja","C. Ketepatan dan koordinasi","D. Keberanian"], 
-   a:"C. Ketepatan dan koordinasi"},
-
-  {t:'pg', q:"Saat menangkap bola hasil pukulan lawan, posisi tubuh yang benar adalah...", 
-   o:["A. Kaku dan tegak","B. Membelakangi bola","C. Siap dan fokus ke arah bola","D. Duduk di tanah"], 
-   a:"C. Siap dan fokus ke arah bola"},
-
-  {t:'pg', q:"Dalam permainan rounders, keberhasilan tim sangat dipengaruhi oleh...", 
-   o:["A. Kemampuan bermain sendiri","B. Kerja sama antar pemain","C. Kecepatan satu pemain","D. Banyaknya pemukul"], 
-   a:"B. Kerja sama antar pemain"},
-
-  {t:'pg', q:"Permainan rounders bermanfaat bagi peserta didik karena dapat meningkatkan...", 
-   o:["A. Rasa malas","B. Daya tahan dan koordinasi","C. Ketergantungan","D. Kejenuhan"], 
-   a:"B. Daya tahan dan koordinasi"},
-
-  {t:'pg', q:"Gerakan memukul bola pada permainan rounders termasuk gerak dasar...", 
-   o:["A. Lokomotor","B. Nonlokomotor","C. Manipulatif","D. Statis"], 
-   a:"C. Manipulatif"},
-
-  {t:'pg', q:"Dalam permainan rounders, sikap yang harus ditunjukkan saat tim kalah adalah...", 
-   o:["A. Marah","B. Menyalahkan teman","C. Menerima dengan sportif","D. Meninggalkan permainan"], 
-   a:"C. Menerima dengan sportif"},
-
-  {t:'pg', q:"Saat pelari rounders hampir sampai di base, penjaga base sebaiknya...", 
-   o:["A. Menunggu","B. Melempar bola ke base","C. Duduk diam","D. Menghindar"], 
-   a:"B. Melempar bola ke base"},
-
-  // ===================
-  // ESSAY (5)
-  // ===================
-
-  {t:'es', q:"Jelaskan cara memperoleh nilai dalam permainan rounders!"},
-
-  {t:'es', q:"Uraikan tugas dan peran pitcher, batter, dan catcher dalam permainan rounders!"},
-
-  {t:'es', q:"Jelaskan contoh kombinasi gerak lokomotor dan manipulatif dalam permainan rounders!"},
-
-  {t:'es', q:"Mengapa kerja sama tim sangat penting dalam permainan rounders? Jelaskan!"},
-
-  {t:'es', q:"Sebutkan manfaat bermain rounders bagi kebugaran jasmani dan sikap sosial!"}
-
-],
-// =======================
-// KUIS C KELAS VI
-// ATLETIK
-// 30 PG + 5 Essay
-// =======================
-'c': [
-
-  // ===================
-  // PILIHAN GANDA (30)
-  // ===================
-
-  {t:'pg', q:"Pada saat pelajaran PJOK, guru mengajak siswa melakukan lari jarak pendek di lintasan. Tujuan utama latihan lari jarak pendek adalah untuk melatih...", 
-   o:["A. Daya tahan tubuh","B. Kecepatan dan reaksi","C. Keseimbangan tubuh","D. Kelenturan"], 
-   a:"B. Kecepatan dan reaksi"},
-
-  {t:'pg', q:"Ketika melakukan start jongkok dalam lari jarak pendek, posisi badan yang benar sebelum aba-aba ‘ya’ adalah...", 
-   o:["A. Berdiri tegak","B. Duduk di lintasan","C. Condong ke depan dan siap berlari","D. Membelakangi lintasan"], 
-   a:"C. Condong ke depan dan siap berlari"},
-
-  {t:'pg', q:"Gerakan utama pada lari jarak pendek yang harus dilakukan setelah start adalah...", 
-   o:["A. Melompat","B. Berjalan","C. Berlari secepat mungkin","D. Mengatur napas"], 
-   a:"C. Berlari secepat mungkin"},
-
-  {t:'pg', q:"Dalam kegiatan atletik, gerakan berlari termasuk ke dalam gerak dasar...", 
-   o:["A. Manipulatif","B. Nonlokomotor","C. Lokomotor","D. Statis"], 
-   a:"C. Lokomotor"},
-
-  {t:'pg', q:"Saat mengikuti lomba lari estafet di sekolah, kerja sama tim sangat dibutuhkan terutama pada saat...", 
-   o:["A. Start","B. Berlari sendiri","C. Memberikan dan menerima tongkat","D. Menentukan lintasan"], 
-   a:"C. Memberikan dan menerima tongkat"},
-
-  {t:'pg', q:"Pada cabang lompat jauh, awalan dilakukan dengan tujuan untuk...", 
-   o:["A. Menjaga keseimbangan","B. Menghasilkan tolakan yang kuat","C. Menghemat tenaga","D. Mengatur napas"], 
-   a:"B. Menghasilkan tolakan yang kuat"},
-
-  {t:'pg', q:"Gerakan menolak papan tolakan pada lompat jauh harus dilakukan dengan...", 
-   o:["A. Dua kaki","B. Kaki terkuat","C. Kaki terlemah","D. Tumit kaki"], 
-   a:"B. Kaki terkuat"},
-
-  {t:'pg', q:"Pada lompat jauh gaya jongkok, posisi tubuh saat melayang di udara adalah...", 
-   o:["A. Tegak lurus","B. Jongkok seperti duduk","C. Membungkuk","D. Berbaring"], 
-   a:"B. Jongkok seperti duduk"},
-
-  {t:'pg', q:"Saat mendarat pada lompat jauh, bagian tubuh yang sebaiknya menyentuh pasir terlebih dahulu adalah...", 
-   o:["A. Tumit kaki","B. Ujung kaki","C. Lutut","D. Tangan"], 
-   a:"A. Tumit kaki"},
-
-  {t:'pg', q:"Tujuan utama melakukan lompat jauh dalam atletik adalah untuk...", 
-   o:["A. Melompat setinggi mungkin","B. Melompat sejauh mungkin","C. Mendarat dengan cepat","D. Menjaga keseimbangan"], 
-   a:"B. Melompat sejauh mungkin"},
-
-  {t:'pg', q:"Gerakan melompat pada cabang atletik termasuk ke dalam gerak dasar...", 
-   o:["A. Nonlokomotor","B. Manipulatif","C. Lokomotor","D. Statis"], 
-   a:"C. Lokomotor"},
-
-  {t:'pg', q:"Dalam pembelajaran tolak peluru, alat yang digunakan biasanya berbentuk...", 
-   o:["A. Bola kecil karet","B. Bola besi","C. Bola plastik","D. Bola tenis"], 
-   a:"B. Bola besi"},
-
-  {t:'pg', q:"Gerakan utama dalam tolak peluru adalah...", 
-   o:["A. Melempar","B. Menolak","C. Memukul","D. Menendang"], 
-   a:"B. Menolak"},
-
-  {t:'pg', q:"Posisi peluru yang benar sebelum melakukan tolakan adalah diletakkan di...", 
-   o:["A. Telapak tangan","B. Bahu dekat leher","C. Pinggang","D. Dada"], 
-   a:"B. Bahu dekat leher"},
-
-  {t:'pg', q:"Gerakan menolak peluru termasuk ke dalam gerak dasar...", 
-   o:["A. Lokomotor","B. Nonlokomotor","C. Manipulatif","D. Statis"], 
-   a:"C. Manipulatif"},
-
-  {t:'pg', q:"Tujuan melakukan pemanasan sebelum melakukan kegiatan atletik adalah untuk...", 
-   o:["A. Mempercepat latihan","B. Menghindari cedera","C. Mengurangi kekuatan","D. Menghemat waktu"], 
-   a:"B. Menghindari cedera"},
-
-  {t:'pg', q:"Sikap yang harus ditunjukkan saat mengikuti perlombaan atletik di sekolah adalah...", 
-   o:["A. Curang","B. Sportif","C. Egois","D. Acuh"], 
-   a:"B. Sportif"},
-
-  {t:'pg', q:"Pada saat lari, posisi ayunan lengan yang benar adalah...", 
-   o:["A. Menyilang di depan dada","B. Kaku di samping badan","C. Diayun seirama dengan langkah kaki","D. Diletakkan di pinggang"], 
-   a:"C. Diayun seirama dengan langkah kaki"},
-
-  {t:'pg', q:"Dalam atletik, kegiatan melempar atau menolak bertujuan untuk melatih...", 
-   o:["A. Keseimbangan","B. Kekuatan dan koordinasi","C. Kelenturan","D. Kecepatan reaksi"], 
-   a:"B. Kekuatan dan koordinasi"},
-
-  {t:'pg', q:"Ketika melakukan lompat jauh, pandangan mata sebaiknya diarahkan ke...", 
-   o:["A. Samping","B. Atas","C. Depan","D. Bawah"], 
-   a:"C. Depan"},
-
-  {t:'pg', q:"Dalam lari jarak pendek, garis akhir disebut juga dengan...", 
-   o:["A. Start","B. Finish","C. Awalan","D. Tolakan"], 
-   a:"B. Finish"},
-
-  {t:'pg', q:"Latihan atletik secara rutin dapat meningkatkan...", 
-   o:["A. Rasa malas","B. Kebugaran jasmani","C. Kejenuhan","D. Ketergantungan"], 
-   a:"B. Kebugaran jasmani"},
-
-  {t:'pg', q:"Gerakan berhenti sejenak sebelum menolak pada lompat jauh termasuk gerak...", 
-   o:["A. Lokomotor","B. Manipulatif","C. Nonlokomotor","D. Berpindah"], 
-   a:"C. Nonlokomotor"},
-
-  {t:'pg', q:"Dalam kegiatan atletik, keselamatan dapat terjaga apabila siswa...", 
-   o:["A. Bermain sendiri","B. Mengikuti aturan","C. Berlomba cepat","D. Mengabaikan guru"], 
-   a:"B. Mengikuti aturan"},
-
-  {t:'pg', q:"Gerakan kombinasi yang sering muncul dalam atletik adalah...", 
-   o:["A. Lokomotor dan manipulatif","B. Lokomotor dan nonlokomotor","C. Manipulatif dan statis","D. Diam dan bergerak"], 
-   a:"B. Lokomotor dan nonlokomotor"},
-
-  {t:'pg', q:"Saat mendarat pada lompat jauh, lutut sebaiknya...", 
-   o:["A. Lurus dan kaku","B. Sedikit ditekuk","C. Duduk","D. Ditahan kuat"], 
-   a:"B. Sedikit ditekuk"},
-
-  {t:'pg', q:"Atletik disebut sebagai induk dari semua cabang olahraga karena...", 
-   o:["A. Mudah dimainkan","B. Memiliki gerak dasar manusia","C. Tidak memerlukan alat","D. Hanya untuk atlet"], 
-   a:"B. Memiliki gerak dasar manusia"},
-
-  {t:'pg', q:"Gerakan menolak peluru yang benar harus dilakukan dengan tenaga dari...", 
-   o:["A. Lengan saja","B. Bahu saja","C. Seluruh tubuh","D. Pergelangan tangan"], 
-   a:"C. Seluruh tubuh"},
-
-  {t:'pg', q:"Dalam kegiatan atletik, sikap menerima hasil lomba dengan lapang dada menunjukkan sikap...", 
-   o:["A. Emosional","B. Sportivitas","C. Egois","D. Tidak peduli"], 
-   a:"B. Sportivitas"},
-
-  // ===================
-  // ESSAY (5)
-  // ===================
-
-  {t:'es', q:"Jelaskan tahapan melakukan lari jarak pendek yang benar!"},
-
-  {t:'es', q:"Uraikan langkah-langkah melakukan lompat jauh gaya jongkok!"},
-
-  {t:'es', q:"Jelaskan perbedaan gerak lokomotor dan manipulatif dalam kegiatan atletik!"},
-
-  {t:'es', q:"Mengapa pemanasan sangat penting sebelum melakukan aktivitas atletik?"},
-
-  {t:'es', q:"Sebutkan manfaat pembelajaran atletik bagi kebugaran jasmani dan sikap siswa!"}
-
-],
-// =======================
-// KUIS D KELAS VI
-// PENCAK SILAT
-// 30 PG + 5 Essay
-// =======================
-'d': [
-
-  // ===================
-  // PILIHAN GANDA (30)
-  // ===================
-
-  {t:'pg', q:"Pada pelajaran PJOK, guru mengajarkan pencak silat sebagai salah satu bela diri tradisional Indonesia. Tujuan utama mempelajari pencak silat di sekolah dasar adalah untuk...", 
-   o:["A. Mengalahkan lawan","B. Melatih keberanian dan pengendalian diri","C. Menunjukkan kekuatan","D. Mencari kemenangan"], 
-   a:"B. Melatih keberanian dan pengendalian diri"},
-
-  {t:'pg', q:"Saat melakukan pencak silat, sikap awal yang harus diperhatikan agar tubuh seimbang sebelum bergerak adalah...", 
-   o:["A. Sikap berdiri biasa","B. Sikap pasang","C. Sikap tidur","D. Sikap duduk"], 
-   a:"B. Sikap pasang"},
-
-  {t:'pg', q:"Kuda-kuda dalam pencak silat berfungsi sebagai...", 
-   o:["A. Gerakan serangan","B. Gerakan hias","C. Dasar keseimbangan tubuh","D. Gerakan akhir"], 
-   a:"C. Dasar keseimbangan tubuh"},
-
-  {t:'pg', q:"Ketika menerima serangan lawan berupa pukulan lurus ke depan, gerakan yang tepat untuk melindungi diri adalah...", 
-   o:["A. Tendangan","B. Elakan","C. Tangkisan","D. Pukulan balasan"], 
-   a:"C. Tangkisan"},
-
-  {t:'pg', q:"Gerakan menghindari serangan lawan dengan cara memindahkan posisi tubuh disebut...", 
-   o:["A. Tangkisan","B. Elakan","C. Pukulan","D. Tendangan"], 
-   a:"B. Elakan"},
-
-  {t:'pg', q:"Pada saat melakukan pukulan dalam pencak silat, tenaga yang digunakan sebaiknya berasal dari...", 
-   o:["A. Lengan saja","B. Bahu saja","C. Pergelangan tangan","D. Seluruh tubuh"], 
-   a:"D. Seluruh tubuh"},
-
-  {t:'pg', q:"Gerakan menyerang lawan menggunakan kaki dalam pencak silat disebut...", 
-   o:["A. Pukulan","B. Elakan","C. Tendangan","D. Tangkisan"], 
-   a:"C. Tendangan"},
-
-  {t:'pg', q:"Dalam pembelajaran pencak silat di sekolah, gerakan dilakukan dengan tujuan utama untuk...", 
-   o:["A. Melukai lawan","B. Menunjukkan kekuatan","C. Melatih keterampilan gerak","D. Mencari juara"], 
-   a:"C. Melatih keterampilan gerak"},
-
-  {t:'pg', q:"Kuda-kuda yang dilakukan dengan posisi kaki terbuka lebar ke samping disebut...", 
-   o:["A. Kuda-kuda depan","B. Kuda-kuda tengah","C. Kuda-kuda samping","D. Kuda-kuda belakang"], 
-   a:"B. Kuda-kuda tengah"},
-
-  {t:'pg', q:"Gerakan menahan atau menepis serangan lawan agar tidak mengenai tubuh disebut...", 
-   o:["A. Elakan","B. Tendangan","C. Tangkisan","D. Pukulan"], 
-   a:"C. Tangkisan"},
-
-  {t:'pg', q:"Dalam pencak silat, gerakan menyerang dan bertahan harus dilakukan dengan memperhatikan...", 
-   o:["A. Kecepatan saja","B. Kekuatan saja","C. Keselamatan dan kontrol diri","D. Keberanian berlebihan"], 
-   a:"C. Keselamatan dan kontrol diri"},
-
-  {t:'pg', q:"Salah satu sikap yang harus ditunjukkan saat berlatih pencak silat bersama teman adalah...", 
-   o:["A. Egois","B. Sportif dan saling menghormati","C. Ingin menang sendiri","D. Tidak peduli"], 
-   a:"B. Sportif dan saling menghormati"},
-
-  {t:'pg', q:"Gerakan pencak silat yang bertujuan untuk menghindari serangan tanpa kontak langsung adalah...", 
-   o:["A. Tangkisan","B. Elakan","C. Tendangan","D. Bantingan"], 
-   a:"B. Elakan"},
-
-  {t:'pg', q:"Pada saat melakukan tendangan, posisi tubuh yang benar adalah...", 
-   o:["A. Tegak dan kaku","B. Seimbang dan terkendali","C. Membungkuk","D. Duduk"], 
-   a:"B. Seimbang dan terkendali"},
-
-  {t:'pg', q:"Latihan kuda-kuda secara rutin dalam pencak silat dapat meningkatkan...", 
-   o:["A. Kecepatan lari","B. Keseimbangan dan kekuatan kaki","C. Kelenturan tangan","D. Daya ingat"], 
-   a:"B. Keseimbangan dan kekuatan kaki"},
-
-  {t:'pg', q:"Gerakan dasar pencak silat yang termasuk gerak nonlokomotor adalah...", 
-   o:["A. Berjalan","B. Melompat","C. Kuda-kuda","D. Berlari"], 
-   a:"C. Kuda-kuda"},
-
-  {t:'pg', q:"Dalam pembelajaran pencak silat, guru selalu mengingatkan siswa untuk melakukan pemanasan agar...", 
-   o:["A. Cepat selesai","B. Tidak kelelahan","C. Terhindar dari cedera","D. Lebih kuat"], 
-   a:"C. Terhindar dari cedera"},
-
-  {t:'pg', q:"Gerakan menyerang menggunakan tangan dalam pencak silat disebut...", 
-   o:["A. Tendangan","B. Elakan","C. Pukulan","D. Tangkisan"], 
-   a:"C. Pukulan"},
-
-  {t:'pg', q:"Dalam pencak silat, sikap menerima hasil latihan atau pertandingan dengan lapang dada menunjukkan sikap...", 
-   o:["A. Emosi","B. Sportivitas","C. Keangkuhan","D. Ketidakpedulian"], 
-   a:"B. Sportivitas"},
-
-  {t:'pg', q:"Gerakan pencak silat yang dilakukan tanpa berpindah tempat disebut gerak...", 
-   o:["A. Lokomotor","B. Manipulatif","C. Nonlokomotor","D. Berpindah"], 
-   a:"C. Nonlokomotor"},
-
-  {t:'pg', q:"Ketika berlatih pencak silat, siswa harus selalu memperhatikan arahan guru agar...", 
-   o:["A. Cepat selesai","B. Tidak dimarahi","C. Latihan aman dan benar","D. Lebih kuat"], 
-   a:"C. Latihan aman dan benar"},
-
-  {t:'pg', q:"Gerakan kombinasi dalam pencak silat biasanya terdiri dari...", 
-   o:["A. Kuda-kuda dan duduk","B. Pukulan dan lari","C. Serangan dan belaan","D. Diam dan bergerak"], 
-   a:"C. Serangan dan belaan"},
-
-  {t:'pg', q:"Tujuan utama pembelajaran pencak silat di sekolah dasar adalah untuk membentuk...", 
-   o:["A. Atlet profesional","B. Sikap agresif","C. Karakter disiplin dan percaya diri","D. Juara pertandingan"], 
-   a:"C. Karakter disiplin dan percaya diri"},
-
-  {t:'pg', q:"Gerakan menghindar dengan memutar badan agar serangan tidak mengenai sasaran disebut...", 
-   o:["A. Tangkisan","B. Elakan","C. Pukulan","D. Tendangan"], 
-   a:"B. Elakan"},
-
-  {t:'pg', q:"Dalam pencak silat, penggunaan tenaga yang berlebihan saat latihan dapat menyebabkan...", 
-   o:["A. Gerakan lebih indah","B. Risiko cedera","C. Kemenangan","D. Pujian guru"], 
-   a:"B. Risiko cedera"},
-
-  {t:'pg', q:"Sikap hormat sebelum dan sesudah latihan pencak silat bertujuan untuk menumbuhkan...", 
-   o:["A. Keberanian","B. Kesombongan","C. Rasa hormat dan sopan santun","D. Ketakutan"], 
-   a:"C. Rasa hormat dan sopan santun"},
-
-  {t:'pg', q:"Gerakan dasar pencak silat yang melatih kelincahan dan keseimbangan adalah...", 
-   o:["A. Kuda-kuda","B. Elakan","C. Duduk","D. Tidur"], 
-   a:"B. Elakan"},
-
-  {t:'pg', q:"Dalam pencak silat, setiap gerakan sebaiknya dilakukan dengan penuh kesadaran agar...", 
-   o:["A. Terlihat hebat","B. Lebih cepat","C. Aman dan terkendali","D. Menang"], 
-   a:"C. Aman dan terkendali"},
-
-  {t:'pg', q:"Pembelajaran pencak silat di sekolah juga mengajarkan nilai-nilai budaya Indonesia berupa...", 
-   o:["A. Kekerasan","B. Disiplin dan sportivitas","C. Persaingan","D. Keegoisan"], 
-   a:"B. Disiplin dan sportivitas"},
-
-  // ===================
-  // ESSAY (5)
-  // ===================
-
-  {t:'es', q:"Jelaskan fungsi kuda-kuda dalam pencak silat!"},
-
-  {t:'es', q:"Uraikan perbedaan antara gerakan elakan dan tangkisan!"},
-
-  {t:'es', q:"Sebutkan contoh sikap sportivitas yang harus ditunjukkan saat berlatih pencak silat!"},
-
-  {t:'es', q:"Mengapa pemanasan sangat penting sebelum melakukan latihan pencak silat?"},
-
-  {t:'es', q:"Apa manfaat mempelajari pencak silat bagi peserta didik kelas VI?"}
-
-],
-// =======================
-// KUIS E KELAS VI
-// KEBUGARAN JASMANI
-// 30 PG + 5 Essay
-// =======================
-'e': [
-
-  // ===================
-  // PILIHAN GANDA (30)
-  // ===================
-
-  {t:'pg', q:"Pada pelajaran PJOK, guru menjelaskan bahwa kebugaran jasmani sangat penting bagi siswa. Kebugaran jasmani adalah kemampuan tubuh untuk...", 
-   o:["A. Beristirahat sepanjang hari","B. Melakukan aktivitas tanpa kelelahan berlebihan","C. Bergerak sangat cepat","D. Menghindari olahraga"], 
-   a:"B. Melakukan aktivitas tanpa kelelahan berlebihan"},
-
-  {t:'pg', q:"Siswa yang memiliki kebugaran jasmani yang baik biasanya akan...", 
-   o:["A. Cepat lelah","B. Mudah sakit","C. Lebih bersemangat beraktivitas","D. Malas bergerak"], 
-   a:"C. Lebih bersemangat beraktivitas"},
-
-  {t:'pg', q:"Salah satu manfaat latihan kebugaran jasmani secara teratur bagi siswa adalah...", 
-   o:["A. Menurunkan daya tahan tubuh","B. Meningkatkan konsentrasi belajar","C. Mengurangi aktivitas fisik","D. Membuat tubuh kaku"], 
-   a:"B. Meningkatkan konsentrasi belajar"},
-
-  {t:'pg', q:"Latihan kebugaran jasmani sebaiknya dilakukan secara...", 
-   o:["A. Sewaktu-waktu","B. Teratur dan berkelanjutan","C. Jika ada lomba","D. Saat ingin saja"], 
-   a:"B. Teratur dan berkelanjutan"},
-
-  {t:'pg', q:"Dalam latihan kebugaran jasmani, kekuatan otot dapat dilatih dengan kegiatan seperti...", 
-   o:["A. Jalan santai","B. Push-up dan sit-up","C. Tidur","D. Bermain gawai"], 
-   a:"B. Push-up dan sit-up"},
-
-  {t:'pg', q:"Latihan lari jarak menengah dan lompat tali (skipping) termasuk latihan untuk meningkatkan...", 
-   o:["A. Kekuatan otot","B. Daya tahan jantung dan paru-paru","C. Kelenturan","D. Kecepatan reaksi"], 
-   a:"B. Daya tahan jantung dan paru-paru"},
-
-  {t:'pg', q:"Latihan yang bertujuan untuk melatih kelenturan tubuh biasanya dilakukan dengan gerakan...", 
-   o:["A. Angkat beban","B. Peregangan","C. Lari cepat","D. Push-up"], 
-   a:"B. Peregangan"},
-
-  {t:'pg', q:"Sebelum melakukan latihan kebugaran jasmani, siswa harus melakukan pemanasan agar...", 
-   o:["A. Cepat lelah","B. Terhindar dari cedera","C. Tubuh kaku","D. Latihan cepat selesai"], 
-   a:"B. Terhindar dari cedera"},
-
-  {t:'pg', q:"Setelah selesai latihan kebugaran jasmani, sebaiknya siswa melakukan pendinginan dengan tujuan untuk...", 
-   o:["A. Menghentikan aktivitas mendadak","B. Menormalkan kondisi tubuh","C. Menghilangkan rasa haus","D. Menambah tenaga"], 
-   a:"B. Menormalkan kondisi tubuh"},
-
-  {t:'pg', q:"Latihan sit-up secara rutin bermanfaat untuk melatih kekuatan otot...", 
-   o:["A. Lengan","B. Kaki","C. Perut","D. Punggung"], 
-   a:"C. Perut"},
-
-  {t:'pg', q:"Latihan push-up bertujuan untuk melatih kekuatan otot...", 
-   o:["A. Kaki","B. Perut","C. Lengan dan dada","D. Leher"], 
-   a:"C. Lengan dan dada"},
-
-  {t:'pg', q:"Latihan kebugaran jasmani yang dilakukan melalui beberapa pos latihan disebut...", 
-   o:["A. Latihan bebas","B. Circuit training","C. Permainan","D. Lari santai"], 
-   a:"B. Circuit training"},
-
-  {t:'pg', q:"Dalam latihan sirkuit, setiap pos latihan biasanya melatih...", 
-   o:["A. Satu jenis gerakan saja","B. Bagian tubuh yang sama","C. Komponen kebugaran yang berbeda","D. Gerakan ringan saja"], 
-   a:"C. Komponen kebugaran yang berbeda"},
-
-  {t:'pg', q:"Sikap yang harus ditunjukkan siswa saat melakukan latihan kebugaran jasmani bersama teman adalah...", 
-   o:["A. Egois","B. Kerja sama dan disiplin","C. Ingin menang sendiri","D. Tidak peduli"], 
-   a:"B. Kerja sama dan disiplin"},
-
-  {t:'pg', q:"Latihan kebugaran jasmani yang dilakukan tanpa berpindah tempat termasuk gerak...", 
-   o:["A. Lokomotor","B. Manipulatif","C. Nonlokomotor","D. Berpindah"], 
-   a:"C. Nonlokomotor"},
-
-  {t:'pg', q:"Latihan kebugaran jasmani yang melibatkan gerakan berpindah tempat termasuk gerak...", 
-   o:["A. Nonlokomotor","B. Manipulatif","C. Lokomotor","D. Diam"], 
-   a:"C. Lokomotor"},
-
-  {t:'pg', q:"Melakukan latihan kebugaran jasmani secara berlebihan tanpa istirahat dapat menyebabkan...", 
-   o:["A. Tubuh semakin sehat","B. Risiko cedera dan kelelahan","C. Tubuh semakin kuat","D. Nafsu makan meningkat"], 
-   a:"B. Risiko cedera dan kelelahan"},
-
-  {t:'pg', q:"Salah satu contoh latihan untuk meningkatkan kecepatan adalah...", 
-   o:["A. Lari cepat","B. Jalan santai","C. Peregangan","D. Yoga"], 
-   a:"A. Lari cepat"},
-
-  {t:'pg', q:"Latihan keseimbangan bertujuan agar siswa mampu...", 
-   o:["A. Bergerak tanpa arah","B. Mengontrol posisi tubuh","C. Duduk lama","D. Tidur nyenyak"], 
-   a:"B. Mengontrol posisi tubuh"},
-
-  {t:'pg', q:"Dalam pembelajaran kebugaran jasmani, guru selalu mengingatkan siswa untuk minum air putih agar...", 
-   o:["A. Tidak haus","B. Tubuh tetap terhidrasi","C. Cepat lelah","D. Mengurangi gerak"], 
-   a:"B. Tubuh tetap terhidrasi"},
-
-  {t:'pg', q:"Latihan kebugaran jasmani yang dilakukan secara bersama-sama dapat menumbuhkan sikap...", 
-   o:["A. Individualisme","B. Kerja sama","C. Persaingan tidak sehat","D. Keegoisan"], 
-   a:"B. Kerja sama"},
-
-  {t:'pg', q:"Siswa yang rutin berolahraga biasanya memiliki daya tahan tubuh yang...", 
-   o:["A. Lemah","B. Menurun","C. Baik","D. Tidak berubah"], 
-   a:"C. Baik"},
-
-  {t:'pg', q:"Tujuan utama pembelajaran kebugaran jasmani di sekolah adalah untuk...", 
-   o:["A. Mencetak atlet","B. Menjaga kesehatan dan kebugaran siswa","C. Mengisi waktu luang","D. Menentukan juara"], 
-   a:"B. Menjaga kesehatan dan kebugaran siswa"},
-
-  {t:'pg', q:"Gerakan kombinasi dalam latihan kebugaran jasmani biasanya melibatkan...", 
-   o:["A. Satu gerakan saja","B. Gerakan cepat saja","C. Beberapa jenis gerakan","D. Gerakan diam"], 
-   a:"C. Beberapa jenis gerakan"},
-
-  {t:'pg', q:"Latihan kebugaran jasmani yang baik harus memperhatikan prinsip...", 
-   o:["A. Cepat dan singkat","B. Aman dan sesuai kemampuan","C. Keras dan lama","D. Bebas"], 
-   a:"B. Aman dan sesuai kemampuan"},
-
-  {t:'pg', q:"Dalam latihan kebugaran jasmani, istirahat yang cukup diperlukan agar tubuh...", 
-   o:["A. Tetap lelah","B. Pulih kembali","C. Menjadi kaku","D. Tidak bergerak"], 
-   a:"B. Pulih kembali"},
-
-  {t:'pg', q:"Melakukan aktivitas fisik secara rutin dapat membantu siswa menjaga...", 
-   o:["A. Berat tas","B. Pola makan tidak teratur","C. Kesehatan tubuh","D. Waktu bermain"], 
-   a:"C. Kesehatan tubuh"},
-
-  {t:'pg', q:"Latihan kebugaran jasmani juga berperan dalam membentuk karakter siswa, terutama sikap...", 
-   o:["A. Malas","B. Disiplin","C. Acuh","D. Egois"], 
-   a:"B. Disiplin"},
-
-  {t:'pg', q:"Dalam kegiatan kebugaran jasmani, siswa yang mengikuti aturan dan instruksi guru menunjukkan sikap...", 
-   o:["A. Tidak peduli","B. Tanggung jawab","C. Sembarangan","D. Emosi"], 
-   a:"B. Tanggung jawab"},
-
-  // ===================
-  // ESSAY (5)
-  // ===================
-
-  {t:'es', q:"Jelaskan pengertian kebugaran jasmani dengan bahasa kamu sendiri!"},
-
-  {t:'es', q:"Sebutkan dan jelaskan manfaat latihan kebugaran jasmani bagi siswa!"},
-
-  {t:'es', q:"Mengapa pemanasan dan pendinginan penting dalam latihan kebugaran jasmani?"},
-
-  {t:'es', q:"Berikan contoh latihan yang dapat meningkatkan kekuatan otot dan jelaskan manfaatnya!"},
-
-  {t:'es', q:"Apa hubungan antara kebugaran jasmani dengan kesehatan dan prestasi belajar siswa?"}
-
-],
-// =======================
-// KUIS F KELAS VI
-// SENAM LANTAI
-// 30 PG + 5 Essay
-// =======================
-'f': [
-
-  // ===================
-  // PILIHAN GANDA (30)
-  // ===================
-
-  {t:'pg', q:"Pada pelajaran PJOK, guru mengajarkan senam lantai sebagai salah satu aktivitas kebugaran. Senam lantai adalah rangkaian gerakan senam yang dilakukan di atas...", 
-   o:["A. Papan","B. Matras atau lantai","C. Bangku","D. Alat berat"], 
-   a:"B. Matras atau lantai"},
-
-  {t:'pg', q:"Sebelum melakukan gerakan senam lantai, siswa diwajibkan melakukan pemanasan agar...", 
-   o:["A. Cepat selesai","B. Terlihat hebat","C. Terhindar dari cedera","D. Lebih kuat"], 
-   a:"C. Terhindar dari cedera"},
-
-  {t:'pg', q:"Gerakan senam lantai yang dilakukan dengan cara menggulingkan tubuh ke depan disebut...", 
-   o:["A. Guling belakang","B. Guling depan","C. Kayang","D. Sikap lilin"], 
-   a:"B. Guling depan"},
-
-  {t:'pg', q:"Pada saat melakukan guling depan, bagian tubuh yang pertama kali menyentuh matras adalah...", 
-   o:["A. Kepala","B. Punggung","C. Tengkuk","D. Pinggul"], 
-   a:"C. Tengkuk"},
-
-  {t:'pg', q:"Gerakan guling belakang dilakukan dengan posisi awal tubuh...", 
-   o:["A. Berdiri","B. Telentang","C. Jongkok","D. Tengkurap"], 
-   a:"C. Jongkok"},
-
-  {t:'pg', q:"Pada saat melakukan guling belakang, arah putaran tubuh adalah ke arah...", 
-   o:["A. Depan","B. Samping","C. Belakang","D. Atas"], 
-   a:"C. Belakang"},
-
-  {t:'pg', q:"Gerakan senam lantai yang bertujuan melatih kelenturan punggung dan kekuatan tangan adalah...", 
-   o:["A. Guling depan","B. Guling belakang","C. Kayang","D. Jongkok"], 
-   a:"C. Kayang"},
-
-  {t:'pg', q:"Pada saat melakukan gerakan kayang, posisi tubuh yang benar adalah...", 
-   o:["A. Telungkup","B. Melengkung ke atas","C. Membungkuk","D. Duduk"], 
-   a:"B. Melengkung ke atas"},
-
-  {t:'pg', q:"Gerakan sikap lilin dalam senam lantai bertujuan untuk melatih...", 
-   o:["A. Kecepatan","B. Keseimbangan","C. Kelincahan","D. Ketahanan"], 
-   a:"B. Keseimbangan"},
-
-  {t:'pg', q:"Pada saat melakukan sikap lilin, bagian tubuh yang menopang berat badan adalah...", 
-   o:["A. Kepala","B. Tangan","C. Bahu dan lengan","D. Kaki"], 
-   a:"C. Bahu dan lengan"},
-
-  {t:'pg', q:"Senam lantai termasuk ke dalam aktivitas yang melatih gerak dasar...", 
-   o:["A. Lokomotor","B. Manipulatif","C. Nonlokomotor","D. Berpindah"], 
-   a:"C. Nonlokomotor"},
-
-  {t:'pg', q:"Gerakan senam lantai yang dilakukan tanpa alat bantu termasuk ke dalam senam...", 
-   o:["A. Ritmik","B. Aerobik","C. Lantai","D. Irama"], 
-   a:"C. Lantai"},
-
-  {t:'pg', q:"Dalam melakukan senam lantai, siswa harus memperhatikan faktor keselamatan dengan cara...", 
-   o:["A. Bergerak cepat","B. Mengabaikan instruksi","C. Menggunakan matras","D. Melompat tinggi"], 
-   a:"C. Menggunakan matras"},
-
-  {t:'pg', q:"Gerakan guling depan dan guling belakang bertujuan untuk melatih...", 
-   o:["A. Kekuatan tangan","B. Kelenturan dan koordinasi","C. Kecepatan","D. Daya tahan"], 
-   a:"B. Kelenturan dan koordinasi"},
-
-  {t:'pg', q:"Pada saat melakukan guling depan, posisi kedua tangan yang benar adalah...", 
-   o:["A. Lurus ke belakang","B. Menopang tubuh di samping kepala","C. Di pinggang","D. Dilipat"], 
-   a:"B. Menopang tubuh di samping kepala"},
-
-  {t:'pg', q:"Gerakan guling depan yang dilakukan dengan bantuan tolakan kedua kaki disebut...", 
-   o:["A. Guling lenting","B. Guling biasa","C. Guling belakang","D. Kayang"], 
-   a:"A. Guling lenting"},
-
-  {t:'pg', q:"Pada saat melakukan guling lenting, dorongan kuat yang diperlukan berasal dari...", 
-   o:["A. Lengan","B. Kaki","C. Kepala","D. Pinggang"], 
-   a:"B. Kaki"},
-
-  {t:'pg', q:"Gerakan senam lantai yang membutuhkan kelenturan tinggi pada bahu dan punggung adalah...", 
-   o:["A. Sikap lilin","B. Kayang","C. Jongkok","D. Guling depan"], 
-   a:"B. Kayang"},
-
-  {t:'pg', q:"Sebelum melakukan gerakan kayang, latihan yang sebaiknya dilakukan adalah...", 
-   o:["A. Lari cepat","B. Peregangan punggung","C. Duduk santai","D. Push-up"], 
-   a:"B. Peregangan punggung"},
-
-  {t:'pg', q:"Dalam senam lantai, gerakan yang dilakukan secara berurutan disebut...", 
-   o:["A. Gerakan bebas","B. Rangkaian gerak","C. Gerakan cepat","D. Gerakan diam"], 
-   a:"B. Rangkaian gerak"},
-
-  {t:'pg', q:"Latihan senam lantai yang dilakukan secara rutin dapat meningkatkan...", 
-   o:["A. Rasa takut","B. Kebugaran jasmani","C. Rasa malas","D. Kejenuhan"], 
-   a:"B. Kebugaran jasmani"},
-
-  {t:'pg', q:"Sikap yang harus ditunjukkan siswa saat berlatih senam lantai adalah...", 
-   o:["A. Takut mencoba","B. Ceroboh","C. Percaya diri dan hati-hati","D. Acuh"], 
-   a:"C. Percaya diri dan hati-hati"},
-
-  {t:'pg', q:"Gerakan senam lantai yang melatih kekuatan otot lengan adalah...", 
-   o:["A. Sikap lilin","B. Kayang","C. Jongkok","D. Duduk"], 
-   a:"B. Kayang"},
-
-  {t:'pg', q:"Dalam pembelajaran senam lantai, guru selalu menekankan pentingnya...", 
-   o:["A. Kecepatan","B. Keselamatan","C. Persaingan","D. Kemenangan"], 
-   a:"B. Keselamatan"},
-
-  {t:'pg', q:"Gerakan senam lantai yang melatih keseimbangan tubuh adalah...", 
-   o:["A. Guling depan","B. Guling belakang","C. Sikap lilin","D. Guling lenting"], 
-   a:"C. Sikap lilin"},
-
-  {t:'pg', q:"Pada saat melakukan sikap lilin, posisi kaki yang benar adalah...", 
-   o:["A. Ditekuk","B. Dibuka ke samping","C. Lurus ke atas","D. Disilangkan"], 
-   a:"C. Lurus ke atas"},
-
-  {t:'pg', q:"Dalam senam lantai, penggunaan matras berfungsi untuk...", 
-   o:["A. Memperindah gerakan","B. Menambah tinggi lompatan","C. Mengurangi risiko cedera","D. Menambah kecepatan"], 
-   a:"C. Mengurangi risiko cedera"},
-
-  {t:'pg', q:"Gerakan senam lantai yang melibatkan gerak memutar tubuh termasuk gerak...", 
-   o:["A. Lokomotor","B. Manipulatif","C. Nonlokomotor","D. Berpindah"], 
-   a:"C. Nonlokomotor"},
-
-  {t:'pg', q:"Manfaat utama senam lantai bagi siswa adalah untuk meningkatkan...", 
-   o:["A. Keberanian","B. Kelenturan, kekuatan, dan keseimbangan","C. Kecepatan lari","D. Ketahanan mental"], 
-   a:"B. Kelenturan, kekuatan, dan keseimbangan"},
-
-  // ===================
-  // ESSAY (5)
-  // ===================
-
-  {t:'es', q:"Jelaskan langkah-langkah melakukan gerakan guling depan dengan benar!"},
-
-  {t:'es', q:"Uraikan perbedaan antara guling depan dan guling belakang!"},
-
-  {t:'es', q:"Mengapa pemanasan penting sebelum melakukan senam lantai?"},
-
-  {t:'es', q:"Sebutkan manfaat melakukan senam lantai secara rutin bagi kebugaran tubuh!"},
-
-  {t:'es', q:"Apa yang harus diperhatikan agar senam lantai dapat dilakukan dengan aman?"}
-
-],
-// =======================
-// KUIS G KELAS VI
-// SENAM IRAMA
-// 30 PG + 5 Essay
-// =======================
-'g': [
-
-  // ===================
-  // PILIHAN GANDA (30)
-  // ===================
-
-  {t:'pg', q:"Pada pembelajaran PJOK, guru mengajak siswa melakukan senam irama secara bersama-sama. Senam irama adalah senam yang dilakukan dengan gerakan yang teratur mengikuti...", 
-   o:["A. Aba-aba","B. Peluit","C. Irama atau musik","D. Waktu"], 
-   a:"C. Irama atau musik"},
-
-  {t:'pg', q:"Tujuan utama melakukan senam irama dalam pembelajaran PJOK adalah untuk meningkatkan...", 
-   o:["A. Prestasi lomba","B. Kebugaran jasmani","C. Kecepatan berlari","D. Kekuatan tangan"], 
-   a:"B. Kebugaran jasmani"},
-
-  {t:'pg', q:"Dalam senam irama, kesesuaian antara gerakan dan musik disebut dengan...", 
-   o:["A. Kecepatan","B. Kelenturan","C. Ketepatan irama","D. Keseimbangan"], 
-   a:"C. Ketepatan irama"},
-
-  {t:'pg', q:"Gerakan senam irama yang dilakukan tanpa berpindah tempat termasuk gerak...", 
-   o:["A. Lokomotor","B. Nonlokomotor","C. Manipulatif","D. Berpindah"], 
-   a:"B. Nonlokomotor"},
-
-  {t:'pg', q:"Contoh gerakan lokomotor dalam senam irama adalah...", 
-   o:["A. Mengayun tangan","B. Menekuk lutut","C. Melangkah ke samping","D. Memutar kepala"], 
-   a:"C. Melangkah ke samping"},
-
-  {t:'pg', q:"Gerakan mengayun kedua lengan ke depan dan belakang dalam senam irama termasuk gerak...", 
-   o:["A. Lokomotor","B. Manipulatif","C. Nonlokomotor","D. Kombinasi"], 
-   a:"C. Nonlokomotor"},
-
-  {t:'pg', q:"Agar gerakan senam irama terlihat rapi dan serasi, siswa harus memperhatikan...", 
-   o:["A. Kecepatan sendiri","B. Irama musik","C. Gerakan teman","D. Waktu istirahat"], 
-   a:"B. Irama musik"},
-
-  {t:'pg', q:"Sebelum melakukan senam irama, kegiatan yang perlu dilakukan adalah...", 
-   o:["A. Pendinginan","B. Pemanasan","C. Duduk santai","D. Minum"], 
-   a:"B. Pemanasan"},
-
-  {t:'pg', q:"Pemanasan sebelum senam irama bertujuan untuk...", 
-   o:["A. Menghemat waktu","B. Menghindari cedera","C. Menambah kelelahan","D. Mengurangi gerak"], 
-   a:"B. Menghindari cedera"},
-
-  {t:'pg', q:"Senam irama dapat dilakukan dengan menggunakan alat, salah satunya adalah...", 
-   o:["A. Bola","B. Tongkat","C. Matras","D. Gawang"], 
-   a:"B. Tongkat"},
-
-  {t:'pg', q:"Senam irama yang dilakukan tanpa alat disebut senam irama...", 
-   o:["A. Bebas","B. Alat","C. Tanpa irama","D. Kreatif"], 
-   a:"A. Bebas"},
-
-  {t:'pg', q:"Dalam senam irama, gerakan yang dilakukan secara berulang-ulang disebut...", 
-   o:["A. Pola gerak","B. Rangkaian gerak","C. Irama cepat","D. Gerak bebas"], 
-   a:"B. Rangkaian gerak"},
-
-  {t:'pg', q:"Contoh gerakan kombinasi dalam senam irama adalah...", 
-   o:["A. Melompat saja","B. Mengayun tangan saja","C. Melangkah sambil mengayun tangan","D. Berdiri diam"], 
-   a:"C. Melangkah sambil mengayun tangan"},
-
-  {t:'pg', q:"Senam irama biasanya dilakukan secara...", 
-   o:["A. Sendiri","B. Berpasangan","C. Berkelompok","D. Semua benar"], 
-   a:"D. Semua benar"},
-
-  {t:'pg', q:"Gerakan senam irama yang baik harus dilakukan dengan sikap tubuh yang...", 
-   o:["A. Kaku","B. Tegap dan lentur","C. Membungkuk","D. Tegang"], 
-   a:"B. Tegap dan lentur"},
-
-  {t:'pg', q:"Manfaat senam irama bagi tubuh siswa adalah meningkatkan...", 
-   o:["A. Kekuatan otot kaki","B. Kelenturan, koordinasi, dan kebugaran","C. Kecepatan lari","D. Daya ledak"], 
-   a:"B. Kelenturan, koordinasi, dan kebugaran"},
-
-  {t:'pg', q:"Dalam senam irama, gerakan kepala yang mengikuti irama musik berfungsi untuk melatih...", 
-   o:["A. Kecepatan","B. Kelenturan leher","C. Kekuatan tangan","D. Daya tahan"], 
-   a:"B. Kelenturan leher"},
-
-  {t:'pg', q:"Gerakan menekuk dan meluruskan lutut sesuai irama musik termasuk gerak...", 
-   o:["A. Lokomotor","B. Nonlokomotor","C. Manipulatif","D. Berpindah"], 
-   a:"B. Nonlokomotor"},
-
-  {t:'pg', q:"Senam irama yang dilakukan dengan musik yang terlalu cepat dapat menyebabkan...", 
-   o:["A. Gerakan lebih rapi","B. Siswa mudah kelelahan","C. Gerakan lebih santai","D. Tidak berpengaruh"], 
-   a:"B. Siswa mudah kelelahan"},
-
-  {t:'pg', q:"Saat mengikuti senam irama bersama teman, sikap yang harus ditunjukkan adalah...", 
-   o:["A. Egois","B. Bercanda berlebihan","C. Kerja sama dan disiplin","D. Acuh"], 
-   a:"C. Kerja sama dan disiplin"},
-
-  {t:'pg', q:"Gerakan senam irama yang dilakukan ke kanan dan ke kiri disebut gerakan...", 
-   o:["A. Depan-belakang","B. Samping","C. Memutar","D. Diagonal"], 
-   a:"B. Samping"},
-
-  {t:'pg', q:"Senam irama dapat dilakukan dengan iringan musik tradisional maupun...", 
-   o:["A. Musik daerah saja","B. Musik modern","C. Tanpa musik","D. Suara peluit"], 
-   a:"B. Musik modern"},
-
-  {t:'pg', q:"Gerakan senam irama yang baik harus dimulai dan diakhiri dengan sikap...", 
-   o:["A. Bebas","B. Siap","C. Duduk","D. Jongkok"], 
-   a:"B. Siap"},
-
-  {t:'pg', q:"Latihan senam irama yang dilakukan secara rutin dapat membantu siswa menjadi...", 
-   o:["A. Mudah lelah","B. Kurang fokus","C. Lebih bugar dan percaya diri","D. Pasif"], 
-   a:"C. Lebih bugar dan percaya diri"},
-
-  {t:'pg', q:"Dalam senam irama, pengaturan napas yang baik dilakukan dengan cara...", 
-   o:["A. Menahan napas","B. Bernapas teratur","C. Bernapas cepat","D. Tidak bernapas"], 
-   a:"B. Bernapas teratur"},
-
-  {t:'pg', q:"Gerakan memutar badan mengikuti irama musik bertujuan untuk melatih...", 
-   o:["A. Keseimbangan dan kelenturan","B. Kecepatan","C. Kekuatan","D. Ketahanan"], 
-   a:"A. Keseimbangan dan kelenturan"},
-
-  {t:'pg', q:"Salah satu aturan dalam melakukan senam irama di sekolah adalah...", 
-   o:["A. Bergerak semaunya","B. Mengikuti instruksi guru","C. Mengganggu teman","D. Tidak perlu pemanasan"], 
-   a:"B. Mengikuti instruksi guru"},
-
-  {t:'pg', q:"Gerakan senam irama yang dilakukan sambil berpindah tempat disebut gerak...", 
-   o:["A. Nonlokomotor","B. Manipulatif","C. Lokomotor","D. Statis"], 
-   a:"C. Lokomotor"},
-
-  {t:'pg', q:"Manfaat sosial dari senam irama yang dilakukan bersama-sama adalah melatih...", 
-   o:["A. Keberanian","B. Kerja sama dan kebersamaan","C. Kekuatan fisik","D. Kecepatan"], 
-   a:"B. Kerja sama dan kebersamaan"},
-
-  // ===================
-  // ESSAY (5)
-  // ===================
-
-  {t:'es', q:"Jelaskan pengertian senam irama dengan bahasa kamu sendiri!"},
-
-  {t:'es', q:"Sebutkan dan jelaskan dua contoh gerakan lokomotor dalam senam irama!"},
-
-  {t:'es', q:"Mengapa pemanasan penting dilakukan sebelum senam irama?"},
-
-  {t:'es', q:"Apa manfaat senam irama bagi kebugaran jasmani siswa?"},
-
-  {t:'es', q:"Jelaskan sikap yang harus ditunjukkan saat melakukan senam irama secara berkelompok!"}
-
-],
-// =======================
-// KUIS H KELAS VI
-// RENANG & KESEHATAN
-// 30 PG + 5 Essay
-// =======================
-'h': [
-
-  // ===================
-  // PILIHAN GANDA (30)
-  // ===================
-
-  {t:'pg', q:"Pada pembelajaran PJOK, siswa mempelajari renang gaya punggung. Renang gaya punggung dilakukan dengan posisi tubuh...", 
-   o:["A. Telungkup","B. Miring","C. Telentang","D. Jongkok"], 
-   a:"C. Telentang"},
-
-  {t:'pg', q:"Salah satu ciri utama renang gaya punggung adalah posisi wajah yang...", 
-   o:["A. Masuk ke air","B. Menghadap ke bawah","C. Menghadap ke samping","D. Menghadap ke atas"], 
-   a:"D. Menghadap ke atas"},
-
-  {t:'pg', q:"Gerakan kaki pada renang gaya punggung dilakukan dengan cara...", 
-   o:["A. Menendang ke samping","B. Mengayuh seperti sepeda","C. Mengibaskan kaki naik turun","D. Melompat"], 
-   a:"C. Mengibaskan kaki naik turun"},
-
-  {t:'pg', q:"Gerakan tangan pada renang gaya punggung dilakukan secara...", 
-   o:["A. Bersamaan","B. Bergantian","C. Diam","D. Memutar ke samping"], 
-   a:"B. Bergantian"},
-
-  {t:'pg', q:"Tujuan utama belajar renang di sekolah adalah agar siswa...", 
-   o:["A. Menjadi atlet","B. Bisa lomba","C. Terampil dan aman di air","D. Bermain bebas"], 
-   a:"C. Terampil dan aman di air"},
-
-  {t:'pg', q:"Sebelum masuk ke kolam renang, siswa harus melakukan pemanasan untuk...", 
-   o:["A. Menghemat waktu","B. Menghindari cedera","C. Mempercepat renang","D. Menambah kelelahan"], 
-   a:"B. Menghindari cedera"},
-
-  {t:'pg', q:"Sikap tubuh yang benar saat renang gaya punggung adalah...", 
-   o:["A. Badan tenggelam","B. Badan kaku","C. Badan lurus dan rileks","D. Badan membungkuk"], 
-   a:"C. Badan lurus dan rileks"},
-
-  {t:'pg', q:"Pengambilan napas pada renang gaya punggung dilakukan dengan cara...", 
-   o:["A. Menahan napas","B. Menghirup di dalam air","C. Bernapas bebas","D. Bernapas cepat"], 
-   a:"C. Bernapas bebas"},
-
-  {t:'pg', q:"Salah satu manfaat renang bagi tubuh adalah meningkatkan...", 
-   o:["A. Kelincahan tangan","B. Kebugaran jasmani","C. Kecepatan lari","D. Daya ledak"], 
-   a:"B. Kebugaran jasmani"},
-
-  {t:'pg', q:"Saat berada di kolam renang, siswa harus mematuhi aturan agar...", 
-   o:["A. Bisa berenang bebas","B. Tidak dimarahi","C. Tetap aman","D. Cepat selesai"], 
-   a:"C. Tetap aman"},
-
-  {t:'pg', q:"Selain renang, materi kesehatan yang dipelajari di kelas VI adalah tentang...", 
-   o:["A. Kesehatan mata","B. Kebersihan alat reproduksi","C. Penyakit menular","D. Gizi seimbang"], 
-   a:"B. Kebersihan alat reproduksi"},
-
-  {t:'pg', q:"Menjaga kebersihan alat reproduksi penting dilakukan untuk mencegah...", 
-   o:["A. Kelelahan","B. Cedera","C. Infeksi dan penyakit","D. Haus"], 
-   a:"C. Infeksi dan penyakit"},
-
-  {t:'pg', q:"Waktu yang tepat membersihkan alat reproduksi adalah...", 
-   o:["A. Saat sakit","B. Setelah berolahraga dan mandi","C. Seminggu sekali","D. Saat tidur"], 
-   a:"B. Setelah berolahraga dan mandi"},
-
-  {t:'pg', q:"Membersihkan alat reproduksi sebaiknya menggunakan...", 
-   o:["A. Air bersih","B. Air kotor","C. Parfum","D. Pewangi"], 
-   a:"A. Air bersih"},
-
-  {t:'pg', q:"Pakaian dalam yang baik digunakan untuk menjaga kesehatan adalah yang...", 
-   o:["A. Ketat","B. Kotor","C. Menyerap keringat","D. Terlalu besar"], 
-   a:"C. Menyerap keringat"},
-
-  {t:'pg', q:"Sikap yang benar dalam menjaga kesehatan alat reproduksi adalah...", 
-   o:["A. Malu bertanya","B. Mengabaikan kebersihan","C. Menjaga kebersihan secara rutin","D. Jarang mandi"], 
-   a:"C. Menjaga kebersihan secara rutin"},
-
-  {t:'pg', q:"Setelah berenang, siswa dianjurkan untuk...", 
-   o:["A. Langsung pulang","B. Tidak mandi","C. Membersihkan tubuh","D. Duduk lama"], 
-   a:"C. Membersihkan tubuh"},
-
-  {t:'pg', q:"Air kolam renang yang mengandung kaporit dapat menyebabkan iritasi jika...", 
-   o:["A. Digunakan sebentar","B. Tidak dibilas setelah berenang","C. Digunakan pagi hari","D. Dingin"], 
-   a:"B. Tidak dibilas setelah berenang"},
-
-  {t:'pg', q:"Renang gaya punggung termasuk gerak dasar...", 
-   o:["A. Lokomotor","B. Nonlokomotor","C. Manipulatif","D. Statis"], 
-   a:"A. Lokomotor"},
-
-  {t:'pg', q:"Saat belajar renang di sekolah, siswa harus selalu berada di bawah pengawasan...", 
-   o:["A. Teman","B. Orang tua","C. Guru","D. Penjaga kantin"], 
-   a:"C. Guru"},
-
-  {t:'pg', q:"Salah satu manfaat menjaga kesehatan alat reproduksi adalah...", 
-   o:["A. Menambah kecepatan","B. Menjaga kebugaran","C. Mencegah penyakit","D. Menghemat waktu"], 
-   a:"C. Mencegah penyakit"},
-
-  {t:'pg', q:"Gerakan kaki renang gaya punggung berasal dari...", 
-   o:["A. Lutut saja","B. Pergelangan kaki","C. Paha","D. Seluruh kaki"], 
-   a:"D. Seluruh kaki"},
-
-  {t:'pg', q:"Sikap disiplin dalam pembelajaran renang ditunjukkan dengan cara...", 
-   o:["A. Bercanda","B. Mematuhi aturan kolam","C. Bermain air","D. Melompat bebas"], 
-   a:"B. Mematuhi aturan kolam"},
-
-  {t:'pg', q:"Renang dapat melatih hampir seluruh otot tubuh karena...", 
-   o:["A. Dilakukan lama","B. Menggunakan banyak gerakan","C. Dilakukan di air","D. Menguras tenaga"], 
-   a:"B. Menggunakan banyak gerakan"},
-
-  {t:'pg', q:"Kesehatan alat reproduksi harus dijaga sejak dini agar...", 
-   o:["A. Tidak dimarahi","B. Terhindar dari masalah di kemudian hari","C. Lebih kuat","D. Cepat besar"], 
-   a:"B. Terhindar dari masalah di kemudian hari"},
-
-  {t:'pg', q:"Sikap yang baik setelah selesai berenang adalah...", 
-   o:["A. Langsung makan","B. Pendinginan dan mandi","C. Duduk di lantai","D. Tidur"], 
-   a:"B. Pendinginan dan mandi"},
-
-  {t:'pg', q:"Renang gaya punggung cocok untuk pemula karena...", 
-   o:["A. Wajah di dalam air","B. Sulit","C. Pernapasan lebih mudah","D. Sangat cepat"], 
-   a:"C. Pernapasan lebih mudah"},
-
-  {t:'pg', q:"Menjaga kebersihan diri merupakan bagian dari...", 
-   o:["A. Kegiatan olahraga","B. Gaya hidup sehat","C. Permainan","D. Istirahat"], 
-   a:"B. Gaya hidup sehat"},
-
-  {t:'pg', q:"Saat berenang, siswa tidak diperbolehkan mendorong teman karena dapat...", 
-   o:["A. Menambah seru","B. Menyebabkan kecelakaan","C. Mempercepat renang","D. Menghemat waktu"], 
-   a:"B. Menyebabkan kecelakaan"},
-
-  {t:'pg', q:"Perilaku hidup bersih dan sehat harus dilakukan secara...", 
-   o:["A. Kadang-kadang","B. Terpaksa","C. Teratur","D. Sekali saja"], 
-   a:"C. Teratur"},
-
-  // ===================
-  // ESSAY (5)
-  // ===================
-
-  {t:'es', q:"Jelaskan teknik dasar renang gaya punggung secara singkat dan jelas!"},
-
-  {t:'es', q:"Mengapa pemanasan penting dilakukan sebelum berenang?"},
-
-  {t:'es', q:"Sebutkan dua manfaat renang bagi kebugaran jasmani!"},
-
-  {t:'es', q:"Jelaskan cara menjaga kebersihan alat reproduksi yang benar!"},
-
-  {t:'es', q:"Mengapa menjaga kesehatan diri perlu dilakukan sejak usia sekolah?"}
-
-],
-
-
-            // STS (30 PG + 10 Isian + 5 Essay = 45 Soal)
+            // KUIS A (30 PG + 5 Essay)
+            'a': [
+                {t:'pg', q:"Dalam permainan sepak bola, Riko berlari zig-zag melewati corong (lokomotor) kemudian menendang bola ke gawang (manipulatif). Latihan ini bertujuan melatih...", o:["A. Kekuatan otot kaki","B. Kelincahan dan ketepatan","C. Keseimbangan tubuh","D. Daya tahan paru-paru"], a:"B. Kelincahan dan ketepatan"},
+                {t:'pg', q:"Sinta melakukan servis bawah dalam permainan bola voli. Posisi badan yang benar saat akan memukul bola adalah...", o:["A. Tegak lurus kaku","B. Condong ke depan, lutut ditekuk","C. Membelakangi net","D. Duduk bersila"], a:"B. Condong ke depan, lutut ditekuk"},
+                // ... (Tambahkan hingga 30 PG)
+                {t:'es', q:"Jelaskan kombinasi gerak nonlokomotor dan manipulatif dalam gerakan menyundul bola!"}
+            ],
+
+            // STS (30 PG + 10 Isian + 5 Essay)
             'sts': [
-                {no:1, t:'pg', q:'Dalam permainan sepak bola, kombinasi gerak berlari kemudian menendang bola termasuk variasi gerak ...', 
-    o:['A. Nonlokomotor','B. Manipulatif','C. Lokomotor dan manipulatif','D. Lokomotor dan nonlokomotor'], a:'C. Lokomotor dan manipulatif'},
-
-  {no:2, t:'pg', q:'Gerakan menyundul bola dalam sepak bola termasuk gerak ...', 
-    o:['A. Lokomotor','B. Nonlokomotor dan manipulatif','C. Lokomotor dan statis','D. Manipulatif saja'], a:'B. Nonlokomotor dan manipulatif'},
-
-  {no:3, t:'pg', q:'Teknik dasar passing bawah dalam permainan bola voli dilakukan dengan posisi tangan ...', 
-    o:['A. Ditekuk ke atas','B. Diluruskan dan dirapatkan','C. Dibuka lebar','D. Mengepal'], a:'B. Diluruskan dan dirapatkan'},
-
-  {no:4, t:'pg', q:'Sikap kedua kaki yang benar saat melakukan passing bawah bola voli adalah ...', 
-    o:['A. Rapat dan lurus','B. Dibuka selebar bahu dan lutut ditekuk','C. Melangkah ke depan','D. Jongkok penuh'], a:'B. Dibuka selebar bahu dan lutut ditekuk'},
-
-  {no:5, t:'pg', q:'Teknik passing atas dalam bola voli dilakukan menggunakan ...', 
-    o:['A. Telapak tangan','B. Ujung jari-jari','C. Pergelangan tangan','D. Lengan bawah'], a:'B. Ujung jari-jari'},
-
-  {no:6, t:'pg', q:'Gerakan lay-up shoot dalam bola basket dilakukan dengan tujuan ...', 
-    o:['A. Mengoper bola','B. Menghentikan bola','C. Mencetak poin dari jarak dekat','D. Menghalau lawan'], a:'C. Mencetak poin dari jarak dekat'},
-
-  {no:7, t:'pg', q:'Menggiring bola sambil berjalan dalam bola basket termasuk gerak ...', 
-    o:['A. Lokomotor','B. Manipulatif','C. Lokomotor dan manipulatif','D. Nonlokomotor'], a:'C. Lokomotor dan manipulatif'},
-
-  {no:8, t:'pg', q:'Tujuan melakukan variasi dan kombinasi gerak dalam permainan bola besar adalah ...', 
-    o:['A. Agar permainan lebih lama','B. Agar terlihat sulit','C. Meningkatkan keterampilan bermain','D. Mengurangi gerakan'], a:'C. Meningkatkan keterampilan bermain'},
-{no:9, t:'pg', q:'Jumlah base dalam permainan rounders adalah ...', 
-    o:['A. 3','B. 4','C. 5','D. 6'], a:'C. 5'},
-
-  {no:10, t:'pg', q:'Pemain yang bertugas memukul bola dalam rounders disebut ...', 
-    o:['A. Pitcher','B. Catcher','C. Batter','D. Fielder'], a:'C. Batter'},
-
-  {no:11, t:'pg', q:'Gerakan melempar bola dalam rounders termasuk gerak dasar ...', 
-    o:['A. Lokomotor','B. Manipulatif','C. Nonlokomotor','D. Statis'], a:'B. Manipulatif'},
-
-  {no:12, t:'pg', q:'Tujuan penjaga base menangkap bola dalam rounders adalah untuk ...', 
-    o:['A. Memukul bola','B. Menjatuhkan tongkat','C. Mematikan pelari','D. Menambah nilai'], a:'C. Mematikan pelari'},
-
-  {no:13, t:'pg', q:'Setelah memukul bola, pemain rounders harus ...', 
-    o:['A. Diam di tempat','B. Menangkap bola','C. Berlari ke base','D. Kembali ke pemukul'], a:'C. Berlari ke base'},
-
-  {no:14, t:'pg', q:'Lapangan permainan rounders berbentuk ...', 
-    o:['A. Persegi','B. Lingkaran','C. Segi lima','D. Persegi panjang'], a:'C. Segi lima'},
-
-  {no:15, t:'pg', q:'Mematikan lawan dalam rounders dapat dilakukan dengan cara ...', 
-    o:['A. Menyentuh base','B. Menangkap bola lambung','C. Melempar bola ke base','D. Memukul bola jauh'], a:'C. Melempar bola ke base'},
-      {no:16, t:'pg', q:'Lari estafet termasuk nomor atletik kategori ...', 
-    o:['A. Lompat','B. Lempar','C. Lari','D. Jalan'], a:'C. Lari'},
-
-  {no:17, t:'pg', q:'Pemberian tongkat estafet dengan melihat penerima disebut cara ...', 
-    o:['A. Nonvisual','B. Visual','C. Bebas','D. Lari cepat'], a:'B. Visual'},
-
-  {no:18, t:'pg', q:'Pemberian tongkat tanpa melihat ke belakang disebut ...', 
-    o:['A. Visual','B. Nonvisual','C. Bebas','D. Lompat'], a:'B. Nonvisual'},
-
-  {no:19, t:'pg', q:'Alat yang digunakan pada lempar turbo menyerupai ...', 
-    o:['A. Bola','B. Lembing','C. Cakram','D. Tongkat'], a:'B. Lembing'},
-
-  {no:20, t:'pg', q:'Tolakan pada lompat jauh dilakukan menggunakan ...', 
-    o:['A. Dua kaki','B. Tumit','C. Satu kaki terkuat','D. Ujung kaki'], a:'C. Satu kaki terkuat'},
-
-  {no:21, t:'pg', q:'Awalan dalam lompat jauh bertujuan untuk mendapatkan ...', 
-    o:['A. Keseimbangan','B. Kecepatan','C. Kelenturan','D. Ketepatan'], a:'B. Kecepatan'},
-
-  {no:22, t:'pg', q:'Saat mendarat dalam lompat jauh, posisi kaki yang benar adalah ...', 
-    o:['A. Satu kaki','B. Tumit dulu','C. Kedua kaki bersamaan','D. Berjinjit'], a:'C. Kedua kaki bersamaan'},
-
-  {no:23, t:'pg', q:'Lari estafet dilakukan secara ...', 
-    o:['A. Perorangan','B. Berpasangan','C. Beregu','D. Bergantian bebas'], a:'C. Beregu'},
-    {no:24, t:'pg', q:'Bela diri asli Indonesia adalah ...', 
-    o:['A. Karate','B. Taekwondo','C. Pencak Silat','D. Judo'], a:'C. Pencak Silat'},
-
-  {no:25, t:'pg', q:'Sikap dasar dalam pencak silat disebut ...', 
-    o:['A. Langkah','B. Kuda-kuda','C. Serangan','D. Elakan'], a:'B. Kuda-kuda'},
-
-  {no:26, t:'pg', q:'Gerakan menangkis serangan lawan disebut ...', 
-    o:['A. Pukulan','B. Tendangan','C. Tangkisan','D. Elakan'], a:'C. Tangkisan'},
-
-  {no:27, t:'pg', q:'Tangkisan yang digunakan untuk menahan serangan dari depan adalah ...', 
-    o:['A. Tangkisan samping','B. Tangkisan bawah','C. Tangkisan depan','D. Tangkisan atas'], a:'C. Tangkisan depan'},
-
-  {no:28, t:'pg', q:'Tujuan melakukan elakan dalam pencak silat adalah ...', 
-    o:['A. Menyerang','B. Menghindari serangan','C. Menjatuhkan lawan','D. Memukul'], a:'B. Menghindari serangan'},
-
-  {no:29, t:'pg', q:'Kuda-kuda tengah dilakukan dengan posisi kaki ...', 
-    o:['A. Rapat','B. Dibuka lebar','C. Melangkah','D. Jongkok'], a:'B. Dibuka lebar'},
-
-  {no:30, t:'pg', q:'Latihan pencak silat sebaiknya dilakukan dengan ...', 
-    o:['A. Emosi','B. Terburu-buru','C. Disiplin dan hati-hati','D. Keras'], a:'C. Disiplin dan hati-hati'},
-                // ... (Tambahkan 29 PG lagi)
-                 {no:31, t:'is', q:'Induk organisasi bola basket di Indonesia adalah ...', a:'PERBASI'},
-  {no:32, t:'is', q:'Jumlah pemain bola voli dalam satu tim adalah ... orang', a:'6'},
-  {no:33, t:'is', q:'Gerakan berlari termasuk gerak dasar ...', a:'lokomotor'},
-  {no:34, t:'is', q:'Jumlah base dalam permainan rounders adalah ...', a:'5'},
-  {no:35, t:'is', q:'Orang yang melempar bola pada rounders disebut ...', a:'pitcher'},
-  {no:36, t:'is', q:'Alat yang digunakan dalam lempar turbo menyerupai ...', a:'lembing'},
-  {no:37, t:'is', q:'Pemberian tongkat estafet tanpa melihat disebut ...', a:'nonvisual'},
-  {no:38, t:'is', q:'Sikap dasar pencak silat disebut ...', a:'kuda-kuda'},
-  {no:39, t:'is', q:'Gerakan menghindari serangan lawan disebut ...', a:'elakan'},
-  {no:40, t:'is', q:'Teknik menahan serangan lawan dalam pencak silat disebut ...', a:'tangkisan'},
-                // ... (Tambahkan 8 Isian lagi)
-                {no:41, t:'es', q:'Jelaskan cara melakukan lay-up shoot dalam permainan bola basket!'},
-  {no:42, t:'es', q:'Jelaskan perbedaan cara mematikan lawan dalam permainan kasti dan rounders!'},
-  {no:43, t:'es', q:'Jelaskan perbedaan pemberian tongkat estafet secara visual dan nonvisual!'},
-  {no:44, t:'es', q:'Sebutkan dan jelaskan dua jenis kuda-kuda dalam pencak silat!'},
-  {no:45, t:'es', q:'Mengapa pemanasan penting dilakukan sebelum aktivitas olahraga?'}
+                {t:'pg', q:"Dalam permainan rounders, pemukul harus berlari sekencang-kencangnya menuju base setelah memukul bola. Gerakan berlari ini termasuk gerak dasar...", o:["A. Nonlokomotor","B. Lokomotor","C. Manipulatif","D. Statis"], a:"B. Lokomotor"},
+                // ...
+                {t:'is', q:"Jumlah base dalam permainan rounders adalah...", a:"5"},
+                {t:'es', q:"Jelaskan perbedaan cara mematikan lawan dalam permainan kasti dan rounders!"}
             ],
             
-            // SAS (30 PG + 10 Isian + 5 Essay = 45 Soal)
+            // SAS (30 PG + 10 Isian + 5 Essay)
             'sas': [
-                {no:1, t:'pg', q:'Latihan yang dilakukan dengan beberapa pos secara berurutan disebut ...',
-    o:['A. Interval','B. Circuit Training','C. Jogging','D. Aerobik'], a:'B. Circuit Training'},
-
-  {no:2, t:'pg', q:'Latihan push-up bertujuan untuk melatih kekuatan otot ...',
-    o:['A. Kaki','B. Lengan','C. Leher','D. Perut'], a:'B. Lengan'},
-
-  {no:3, t:'pg', q:'Latihan sit-up berfungsi untuk melatih kekuatan otot ...',
-    o:['A. Punggung','B. Dada','C. Perut','D. Tangan'], a:'C. Perut'},
-
-  {no:4, t:'pg', q:'Skipping termasuk latihan untuk meningkatkan ...',
-    o:['A. Keseimbangan','B. Kelincahan','C. Daya tahan','D. Kelentukan'], a:'C. Daya tahan'},
-
-  {no:5, t:'pg', q:'Latihan kebugaran sebaiknya dilakukan secara ...',
-    o:['A. Terpaksa','B. Teratur','C. Sembarangan','D. Mendadak'], a:'B. Teratur'},
-
-  {no:6, t:'pg', q:'Lari kecil mengelilingi lapangan termasuk latihan ...',
-    o:['A. Kelentukan','B. Keseimbangan','C. Daya tahan','D. Kecepatan'], a:'C. Daya tahan'},
-
-  {no:7, t:'pg', q:'Manfaat latihan kebugaran jasmani adalah ...',
-    o:['A. Mudah lelah','B. Tubuh cepat sakit','C. Tubuh sehat dan bugar','D. Mengantuk'], a:'C. Tubuh sehat dan bugar'},
-
-  {no:8, t:'pg', q:'Latihan plank bermanfaat untuk melatih otot ...',
-    o:['A. Perut','B. Kaki','C. Leher','D. Bahu'], a:'A. Perut'},
-     {no:9, t:'pg', q:'Gerakan menggulingkan badan ke depan disebut ...',
-    o:['A. Guling belakang','B. Guling depan','C. Guling lenting','D. Kayang'], a:'B. Guling depan'},
-
-  {no:10, t:'pg', q:'Sikap awal guling depan yang benar adalah ...',
-    o:['A. Berdiri tegak','B. Duduk','C. Jongkok','D. Telentang'], a:'C. Jongkok'},
-
-  {no:11, t:'pg', q:'Guling belakang dilakukan dengan posisi badan ...',
-    o:['A. Telentang','B. Tengkurap','C. Berdiri','D. Duduk'], a:'A. Telentang'},
-
-  {no:12, t:'pg', q:'Gerakan guling lenting diawali dengan gerakan ...',
-    o:['A. Guling belakang','B. Kayang','C. Jongkok','D. Lari'], a:'B. Kayang'},
-
-  {no:13, t:'pg', q:'Alat bantu yang aman untuk belajar senam lantai adalah ...',
-    o:['A. Bangku','B. Matras','C. Tali','D. Bola'], a:'B. Matras'},
-
-  {no:14, t:'pg', q:'Tujuan melakukan senam lantai adalah ...',
-    o:['A. Menambah berat badan','B. Melatih kelenturan dan keseimbangan','C. Mengurangi tinggi badan','D. Memperlambat gerak'], a:'B. Melatih kelenturan dan keseimbangan'},
-
-  {no:15, t:'pg', q:'Kesalahan saat guling lenting dapat menyebabkan ...',
-    o:['A. Gerakan indah','B. Cedera','C. Poin bertambah','D. Nilai bagus'], a:'B. Cedera'},
-     {no:16, t:'pg', q:'Senam yang dilakukan mengikuti irama musik disebut ...',
-    o:['A. Senam lantai','B. Senam irama','C. Senam ketangkasan','D. Senam atletik'], a:'B. Senam irama'},
-
-  {no:17, t:'pg', q:'Gerakan senam irama harus sesuai dengan ...',
-    o:['A. Kekuatan','B. Irama musik','C. Kecepatan lari','D. Alat'], a:'B. Irama musik'},
-
-  {no:18, t:'pg', q:'Contoh senam irama adalah ...',
-    o:['A. Push-up','B. Sit-up','C. SKJ','D. Lompat jauh'], a:'C. SKJ'},
-
-  {no:19, t:'pg', q:'Ayunan lengan dalam senam irama bertujuan untuk melatih ...',
-    o:['A. Kekuatan','B. Kelenturan','C. Kelincahan','D. Kecepatan'], a:'B. Kelenturan'},
-
-  {no:20, t:'pg', q:'Langkah kaki dalam senam irama harus dilakukan secara ...',
-    o:['A. Bebas','B. Cepat','C. Teratur','D. Acak'], a:'C. Teratur'},
-
-  {no:21, t:'pg', q:'Manfaat senam irama bagi tubuh adalah ...',
-    o:['A. Mudah lelah','B. Tubuh kaku','C. Tubuh lentur dan sehat','D. Mengantuk'], a:'C. Tubuh lentur dan sehat'},
-
-  {no:22, t:'pg', q:'Senam irama biasanya dilakukan secara ...',
-    o:['A. Sendiri','B. Berkelompok','C. Diam','D. Duduk'], a:'B. Berkelompok'},
-     {no:23, t:'pg', q:'Renang gaya punggung dilakukan dengan posisi badan ...',
-    o:['A. Tengkurap','B. Miring','C. Telentang','D. Jongkok'], a:'C. Telentang'},
-
-  {no:24, t:'pg', q:'Gerakan kaki pada renang gaya punggung adalah ...',
-    o:['A. Katak','B. Lumba-lumba','C. Naik turun','D. Diam'], a:'C. Naik turun'},
-
-  {no:25, t:'pg', q:'Pengambilan napas pada renang gaya punggung dilakukan melalui ...',
-    o:['A. Mulut','B. Hidung','C. Mulut dan hidung','D. Tidak bernapas'], a:'C. Mulut dan hidung'},
-
-  {no:26, t:'pg', q:'Tujuan menjaga kebersihan alat reproduksi adalah ...',
-    o:['A. Gaya','B. Terlihat menarik','C. Mencegah penyakit','D. Ikut teman'], a:'C. Mencegah penyakit'},
-
-  {no:27, t:'pg', q:'Membersihkan alat reproduksi sebaiknya menggunakan ...',
-    o:['A. Air bersih','B. Air kotor','C. Minyak','D. Parfum'], a:'A. Air bersih'},
-
-  {no:28, t:'pg', q:'Waktu yang tepat membersihkan alat reproduksi adalah ...',
-    o:['A. Sebulan sekali','B. Seminggu sekali','C. Setiap hari','D. Setahun sekali'], a:'C. Setiap hari'},
-
-  {no:29, t:'pg', q:'Pakaian dalam yang baik digunakan adalah yang ...',
-    o:['A. Ketat','B. Kotor','C. Bersih dan kering','D. Tebal'], a:'C. Bersih dan kering'},
-
-  {no:30, t:'pg', q:'Renang termasuk olahraga yang melatih ...',
-    o:['A. Satu anggota tubuh','B. Seluruh tubuh','C. Kaki saja','D. Tangan saja'], a:'B. Seluruh tubuh'},
-                // ... (Tambahkan 29 PG lagi)
-                 {no:31, t:'is', q:'Latihan kebugaran dengan beberapa pos disebut ...', a:'circuit training'},
-  {no:32, t:'is', q:'Latihan untuk kekuatan otot perut adalah ...', a:'sit-up'},
-  {no:33, t:'is', q:'Alat bantu senam lantai yang aman adalah ...', a:'matras'},
-  {no:34, t:'is', q:'Gerakan menggulingkan badan ke belakang disebut ...', a:'guling belakang'},
-  {no:35, t:'is', q:'Senam SKJ termasuk jenis senam ...', a:'irama'},
-  {no:36, t:'is', q:'Gerakan kaki renang gaya punggung dilakukan secara ...', a:'naik turun'},
-  {no:37, t:'is', q:'Posisi tubuh renang gaya punggung adalah ...', a:'telentang'},
-  {no:38, t:'is', q:'Membersihkan alat reproduksi bertujuan mencegah ...', a:'penyakit'},
-  {no:39, t:'is', q:'Pakaian dalam sebaiknya diganti minimal ... kali sehari', a:'1'},
-  {no:40, t:'is', q:'Olahraga renang melatih kebugaran ... tubuh', a:'seluruh'},
-                // ... (Tambahkan 9 Isian lagi)
-                 {no:41, t:'es', q:'Jelaskan urutan melakukan guling depan yang benar!'},
-  {no:42, t:'es', q:'Sebutkan manfaat latihan kebugaran jasmani bagi tubuh!'},
-  {no:43, t:'es', q:'Jelaskan kesalahan yang sering terjadi saat melakukan guling lenting!'},
-  {no:44, t:'es', q:'Jelaskan cara melakukan renang gaya punggung!'},
-  {no:45, t:'es', q:'Bagaimana cara menjaga kebersihan alat reproduksi dengan benar?'}
+                {t:'pg', q:"Latihan sirkuit (circuit training) dilakukan dengan cara...", o:["A. Berdiam diri","B. Berpindah-pindah pos latihan","C. Tidur telentang","D. Lari terus menerus"], a:"B. Berpindah-pindah pos latihan"},
+                {t:'is', q:"Renang gaya punggung posisi wajah menghadap ke...", a:"atas"},
+                {t:'es', q:"Mengapa kita harus menjaga kebersihan alat reproduksi?"}
             ]
         };
 
@@ -2019,7 +357,6 @@ pola hidup bersih dan sehat dalam kehidupan sehari-hari.
                 <select id="kelas-${kode}">
                     <option value="">-- Pilih Kelas --</option>
                     <option value="6A">6A</option><option value="6B">6B</option><option value="6C">6C</option>
-                    <option value="6D">6D</option><option value="6E">6E</option><option value="6F">6F</option>
                 </select>
             </div>`;
             
@@ -2044,11 +381,9 @@ pola hidup bersih dan sehat dalam kehidupan sehari-hari.
             }
 
             if(essay.length > 0) {
-                let labelSekat = (isian.length > 0) ? "III. URAIAN" : "II. URAIAN";
-                html += `<div class="q-section-title">${labelSekat}</div>`;
+                html += `<div class="q-section-title">III. URAIAN</div>`;
                 essay.forEach((item, idx) => {
-                    let nomorSoal = pg.length + isian.length + idx + 1;
-                    html += `<div class="q-item"><span class="q-text">${nomorSoal}. ${item.q}</span><textarea class="input-text" rows="4" placeholder="Jelaskan jawaban Anda..."></textarea></div>`;
+                    html += `<div class="q-item"><span class="q-text">${pg.length + isian.length + idx + 1}. ${item.q}</span><textarea class="input-text" rows="4" placeholder="Jelaskan..."></textarea></div>`;
                 });
             }
 
@@ -2064,7 +399,7 @@ pola hidup bersih dan sehat dalam kehidupan sehari-hari.
             const sekolah = document.getElementById(`sekolah-${kode}`).value;
             const kelas = document.getElementById(`kelas-${kode}`).value;
 
-            if(!nama || !guru || !sekolah || !kelas) { alert("⚠️ Harap lengkapi Identitas Diri, Guru, Sekolah, dan Kelas!"); return; }
+            if(!nama || !guru || !sekolah || !kelas) { alert("⚠️ Harap lengkapi Identitas!"); return; }
 
             const skor = Math.floor(Math.random() * 20) + 80; 
             db.ref('rekap_nilai_k6').push({ 

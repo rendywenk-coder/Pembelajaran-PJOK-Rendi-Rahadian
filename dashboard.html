@@ -3,136 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - PJOK</title>
+    <title>Dashboard Siswa - PJOK</title>
     
-    <link rel="stylesheet" href="assets/css/style.css?v=14"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <style>
-        /* LAYOUT FIX DASHBOARD */
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #a4e4d5, #c7e9b0); /* Background segar */
-        }
-        
-        .dashboard-wrapper {
-            flex: 1; /* Mengisi ruang agar footer turun */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-bottom: 40px;
-        }
-
-        .dashboard-info {
-            text-align: center;
-            margin-top: 30px;
-            margin-bottom: 30px;
-        }
-
-        /* Kartu Kelas (Tombol) */
-        .class-card {
-            display: block; 
-            text-decoration: none; 
-            color: #333; 
-            background: rgba(255,255,255,0.8); 
-            padding: 20px; 
-            border-radius: 15px; 
-            text-align: center; 
-            border: 2px solid white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s, background 0.2s, border-color 0.2s;
-        }
-
-        .class-card:hover {
-            transform: translateY(-5px);
-            background: #ffffff;
-            border-color: #FF9800;
-            box-shadow: 0 8px 12px rgba(0,0,0,0.2);
-        }
-
-        .class-card h3 { margin-top: 0; color: #004d40; font-size: 1.4em; }
-        .class-card p { font-size: 0.9em; color: #555; }
-
-        .footer {
-            text-align: center !important;
-            padding: 20px;
-            background: rgba(255,255,255,0.5);
-            color: #004d40;
-            font-weight: bold;
-            margin-top: auto; 
-            width: 100%;
-            box-sizing: border-box;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/dashboard.css">
 </head>
 <body>
 
-    <div class="dashboard-wrapper">
-        
-        <div class="dashboard-info"> 
-            <img src="assets/img/logo.png" alt="Logo" style="
-                width: 120px; height: 120px; 
-                border-radius: 50%; border: 4px solid #FF9800; 
-                object-fit: cover; margin-bottom: 10px; background: white;"> 
-            
-            <h1 style="margin: 5px 0; color: #004d40;">PJOK SDN Rawabuntu 03</h1>
-            <p id="greeting" style="font-size: 1.1em; color: #333;">Halo, Siswa! Selamat Belajar.</p>
-            
-            <button onclick="logout()" style="
-                margin-top: 10px; padding: 8px 20px; 
-                background: #f44336; color: white; border: none; 
-                border-radius: 5px; cursor: pointer; font-weight: bold;">Keluar (Logout)</button>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-running logo-icon"></i>
+            <h2>PJOK Digital</h2>
         </div>
         
-        <div style="width: 100%; max-width: 1000px; padding: 0 20px; box-sizing: border-box;">
-            
-            <h2 style="text-align: center; border-bottom: 3px solid #FF9800; width: fit-content; margin: 0 auto 25px auto; color: #004d40; padding-bottom: 5px;">
-                Pilih Kelas Anda
-            </h2>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-                
-                <a href="materi-baru.html" class="class-card">
-                    <h3>Kelas 1</h3>
-                    <p>Gerak Dasar Lokomotor, Non-Lokomotor, dan Manipulatif.</p>
-                </a>
+        <ul class="menu-list">
+            <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="#"><i class="fas fa-book-open"></i> Materi Kelas</a></li>
+            <li><a href="#"><i class="fas fa-chart-bar"></i> Nilai PJOK</a></li>
+            <li><a href="#"><i class="fas fa-question-circle"></i> Quiz & Ujian</a></li>
+            <li><a href="#"><i class="fas fa-calendar-check"></i> Presensi</a></li>
+            <li class="menu-spacer"></li>
+            <li><a href="#"><i class="fas fa-user-cog"></i> Pengaturan Akun</a></li>
+            <li><a href="index.html" class="menu-logout"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
+        </ul>
+    </aside>
 
-                <a href="materi-kelas-2.html" class="class-card">
-                    <h3>Kelas 2</h3>
-                    <p>Variasi Gerak Dasar, Keseimbangan, dan Kelenturan.</p>
-                </a>
-                
-                <a href="materi-kelas-3.html" class="class-card">
-                    <h3>Kelas 3</h3>
-                    <p>Kombinasi Gerak, Senam Irama, dan Dasar Kebugaran.</p>
-                </a>
-
-                <a href="materi-kelas-4.html" class="class-card">
-                    <h3>Kelas 4</h3>
-                    <p>Permainan Bola Kecil (Kasti), Atletik, Beladiri, dan Kebugaran.</p>
-                </a>
-
-                <a href="materi-kelas-5.html" class="class-card">
-                    <h3>Kelas 5</h3>
-                    <p>Bola Besar, Kasti, Atletik, Senam, dan Kesehatan.</p>
-                </a>
-
-                <a href="materi-kelas-6.html" class="class-card">
-                    <h3>Kelas 6</h3>
-                    <p>Variasi & Kombinasi Lanjutan, Senam, Renang, dan Kesehatan.</p>
-                </a>
-
+    <main class="main-content">
+        <header class="top-bar">
+            <div>
+                <h1>Materi Kelas PJOK</h1>
+                <p>Pilih kelas untuk mengakses materi pembelajaran, video, dan latihan soal.</p>
             </div>
-        </div> 
-    </div>
+            <div class="user-info">
+                <span>Halo, Siswa!</span>
+                <img src="https://ui-avatars.com/api/?name=Siswa&background=random" alt="Avatar">
+            </div>
+        </header>
 
-    <footer class="footer">
-        &copy; 2025 Copyright Rendi Rahadian, S.Pd.
-    </footer>
+        <div class="grid-kelas">
+            
+            <div class="card-kelas purple">
+                <div class="card-header">
+                    <i class="fas fa-child"></i>
+                    <h3>Kelas 1</h3>
+                    <span>Pembelajaran Dasar</span>
+                </div>
+                <div class="card-stats">
+                    <div><small>Materi</small><strong>8 Bab</strong></div>
+                    <div><small>Video</small><strong>8 Video</strong></div>
+                    <div><small>Quiz</small><strong>STS & SAS</strong></div>
+                </div>
+                <p class="card-desc">Gerak dasar, lari, lompat, lempar, keseimbangan, dan kebersihan diri.</p>
+                <a href="pages/kelas/materi-kelas-1.html" class="btn-card">Buka Kelas 1</a>
+            </div>
 
-    <script src="assets/js/script.js?v=14"></script>
+            <div class="card-kelas pink">
+                <div class="card-header">
+                    <i class="fas fa-running"></i>
+                    <h3>Kelas 2</h3>
+                    <span>Pengembangan Gerak</span>
+                </div>
+                <div class="card-stats">
+                    <div><small>Materi</small><strong>8 Bab</strong></div>
+                    <div><small>Video</small><strong>8 Video</strong></div>
+                    <div><small>Quiz</small><strong>STS & SAS</strong></div>
+                </div>
+                <p class="card-desc">Gerak kombinasi, senam dasar, permainan tradisional, dan kesehatan.</p>
+                <a href="pages/kelas/materi-kelas-2.html" class="btn-card">Buka Kelas 2</a>
+            </div>
+
+            <div class="card-kelas blue">
+                <div class="card-header">
+                    <i class="fas fa-basketball-ball"></i>
+                    <h3>Kelas 3</h3>
+                    <span>Olahraga Dasar</span>
+                </div>
+                <div class="card-stats">
+                    <div><small>Materi</small><strong>8 Bab</strong></div>
+                    <div><small>Video</small><strong>8 Video</strong></div>
+                    <div><small>Quiz</small><strong>STS & SAS</strong></div>
+                </div>
+                <p class="card-desc">Bola besar, bola kecil, atletik dasar, dan permainan beregu.</p>
+                <a href="pages/kelas/materi-kelas-3.html" class="btn-card">Buka Kelas 3</a>
+            </div>
+
+            <div class="card-kelas green">
+                <div class="card-header">
+                    <i class="fas fa-futbol"></i>
+                    <h3>Kelas 4</h3>
+                    <span>Teknik Dasar</span>
+                </div>
+                <div class="card-stats">
+                    <div><small>Materi</small><strong>8 Bab</strong></div>
+                    <div><small>Video</small><strong>8 Video</strong></div>
+                    <div><small>Quiz</small><strong>STS & SAS</strong></div>
+                </div>
+                <p class="card-desc">Sepak bola, bola voli, bulu tangkis, dan senam lantai.</p>
+                <a href="pages/kelas/materi-kelas-4.html" class="btn-card">Buka Kelas 4</a>
+            </div>
+
+            <div class="card-kelas orange">
+                <div class="card-header">
+                    <i class="fas fa-swimmer"></i>
+                    <h3>Kelas 5</h3>
+                    <span>Olahraga Lanjutan</span>
+                </div>
+                <div class="card-stats">
+                    <div><small>Materi</small><strong>8 Bab</strong></div>
+                    <div><small>Video</small><strong>8 Video</strong></div>
+                    <div><small>Quiz</small><strong>STS & SAS</strong></div>
+                </div>
+                <p class="card-desc">Renang, senam irama, pencak silat, dan kebugaran jasmani.</p>
+                <a href="pages/kelas/materi-kelas-5.html" class="btn-card">Buka Kelas 5</a>
+            </div>
+
+            <div class="card-kelas teal">
+                <div class="card-header">
+                    <i class="fas fa-medal"></i>
+                    <h3>Kelas 6</h3>
+                    <span>Persiapan Ujian</span>
+                </div>
+                <div class="card-stats">
+                    <div><small>Materi</small><strong>8 Bab</strong></div>
+                    <div><small>Video</small><strong>8 Video</strong></div>
+                    <div><small>Quiz</small><strong>STS & SAS</strong></div>
+                </div>
+                <p class="card-desc">Review semua materi, persiapan ujian, dan aplikasi olahraga.</p>
+                <a href="pages/kelas/materi-kelas-6.html" class="btn-card">Buka Kelas 6</a>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="assets/js/firebase-config.js"></script>
+    <script src="assets/js/auth.js"></script>
 </body>
 </html>
