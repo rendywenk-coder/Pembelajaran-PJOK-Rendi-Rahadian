@@ -3,89 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | PJOK Digital</title>
+    <title>Dashboard | PJOK Digital Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        body { background: #f0f4f8; display: flex; }
+        body { background: #fdf2f5; display: flex; min-height: 100vh; }
         
+        /* SIDEBAR PONDASI UTAMA */
         .sidebar {
-            width: 280px; background: #1a1a2e; height: 100vh;
-            position: fixed; padding: 30px 20px; color: white;
+            width: 260px; background: white; height: 100vh;
+            position: fixed; padding: 30px 15px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+            z-index: 100;
         }
 
-        /* LOGO MEMBULAT OREN DI SIDEBAR */
-        .brand-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 40px;
+        /* LOGO MEMBULAT OREN */
+        .brand-header {
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 40px; padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
         }
         .logo-circle {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 3px solid #ff9800;
-            padding: 3px;
-            background: white;
-            box-shadow: 0 0 15px rgba(255, 152, 0, 0.5);
-            margin-bottom: 10px;
+            width: 55px; height: 55px;
+            border-radius: 50%; border: 3px solid #ff9800;
+            padding: 3px; background: white;
+            box-shadow: 0 0 10px rgba(255, 152, 0, 0.3);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
         }
-        .logo-circle img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 50%;
-        }
+        .logo-circle img { width: 90%; height: auto; border-radius: 50%; }
 
-        .main { margin-left: 280px; padding: 40px; width: 100%; }
+        /* AREA KONTEN UTAMA */
+        .main { margin-left: 260px; padding: 40px; width: calc(100% - 260px); }
+        
         .banner {
-            background: linear-gradient(135deg, #ff9800, #f57c00);
-            padding: 40px; border-radius: 20px; color: white;
-            margin-bottom: 30px; box-shadow: 0 10px 25px rgba(245,124,0,0.3);
+            background: #d81b60; padding: 40px; border-radius: 25px;
+            color: white; margin-bottom: 40px;
+            box-shadow: 0 10px 20px rgba(216, 27, 96, 0.2);
         }
 
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card {
-            background: white; padding: 30px; border-radius: 20px;
-            text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        /* GRID UNTUK PILIHAN KELAS */
+        .card-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 25px; 
+            padding-bottom: 50px;
         }
-        .btn-buka {
-            display: inline-block; margin-top: 20px; padding: 10px 25px;
-            background: #1a1a2e; color: white; text-decoration: none; border-radius: 50px;
+
+        .card {
+            background: white; padding: 35px; border-radius: 25px;
+            text-align: center; border-bottom: 5px solid #ff9800;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            transition: 0.3s;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .card h3 { color: #1a1a2e; font-size: 22px; margin-bottom: 15px; }
+        
+        .btn-link {
+            display: inline-block; margin-top: 15px; padding: 12px 35px;
+            background: #d81b60; color: white; text-decoration: none; 
+            border-radius: 50px; font-weight: 700; transition: 0.3s;
+        }
+        .btn-link:hover { background: #ad1457; transform: scale(1.05); }
+
+        /* Responsif untuk HP */
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; width: 100%; padding: 20px; }
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="brand-section">
+    <aside class="sidebar">
+        <div class="brand-header">
             <div class="logo-circle">
                 <img src="./assets/img/logo.png" alt="Logo">
             </div>
-            <h3 style="color: #ff9800;">PJOK PRO</h3>
+            <span style="font-weight: 800; color: #d81b60; font-size: 18px;">PJOK PRO</span>
         </div>
         <nav>
-            <p style="padding: 12px; background: rgba(255,152,0,0.2); color: #ff9800; border-radius: 10px; font-weight: bold;">🏠 Dashboard</p>
-            <a href="index.html" style="display: block; margin-top: 40px; color: #ff4b2b; text-decoration: none;">🚪 Keluar</a>
+            <p style="padding: 15px; color: #d81b60; font-weight: bold; background: #fce4ec; border-radius: 12px;">🏠 Dashboard</p>
+            <a href="index.html" style="display: block; margin-top: 60px; color: #666; text-decoration: none; padding-left: 15px; font-weight: 600;">🚪 Keluar</a>
         </nav>
-    </div>
+    </aside>
 
-    <div class="main">
+    <main class="main">
         <div class="banner">
-            <h1>Selamat Datang, Guru Hebat!</h1>
-            <p>Pilih kelas untuk memulai materi pembelajaran hari ini.</p>
+            <h1 style="font-size: 30px; margin-bottom: 10px;">Selamat Datang!</h1>
+            <p style="opacity: 0.9;">Pilih kelas di bawah ini untuk melihat materi pembelajaran.</p>
         </div>
 
         <div class="card-grid">
             <div class="card">
-                <h2>KELAS 1</h2>
-                <a href="./pages/kelas/materi-kelas-1.html" class="btn-buka">Buka Materi</a>
+                <div style="font-size: 50px; margin-bottom: 10px;">🏃‍♂️</div>
+                <h3>KELAS 1</h3>
+                <a href="./pages/kelas/materi-kelas-1.html" class="btn-link">Buka Materi</a>
             </div>
+
             <div class="card">
-                <h2>KELAS 2</h2>
-                <a href="./pages/kelas/materi-kelas-2.html" class="btn-buka">Buka Materi</a>
+                <div style="font-size: 50px; margin-bottom: 10px;">🏐</div>
+                <h3>KELAS 2</h3>
+                <a href="./pages/kelas/materi-kelas-2.html" class="btn-link">Buka Materi</a>
+            </div>
+
+            <div class="card">
+                <div style="font-size: 50px; margin-bottom: 10px;">🎾</div>
+                <h3>KELAS 3</h3>
+                <a href="./pages/kelas/materi-kelas-3.html" class="btn-link">Buka Materi</a>
+            </div>
+
+            <div class="card">
+                <div style="font-size: 50px; margin-bottom: 10px;">⚽</div>
+                <h3>KELAS 4</h3>
+                <a href="./pages/kelas/materi-kelas-4.html" class="btn-link">Buka Materi</a>
+            </div>
+
+            <div class="card">
+                <div style="font-size: 50px; margin-bottom: 10px;">🏀</div>
+                <h3>KELAS 5</h3>
+                <a href="./pages/kelas/materi-kelas-5.html" class="btn-link">Buka Materi</a>
+            </div>
+
+            <div class="card">
+                <div style="font-size: 50px; margin-bottom: 10px;">🏸</div>
+                <h3>KELAS 6</h3>
+                <a href="./pages/kelas/materi-kelas-6.html" class="btn-link">Buka Materi</a>
             </div>
         </div>
-    </div>
+    </main>
 </body>
 </html>
