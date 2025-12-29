@@ -23,24 +23,25 @@
             max-width: 380px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
-        /* PERBAIKAN LOGO: Memastikan kontainer memiliki ukuran dan gambar tampil */
-        .logo-container {
-            width: 110px;
-            height: 110px;
+        /* LOGO MEMBULAT GARIS OREN */
+        .logo-box {
+            width: 120px;
+            height: 120px;
             margin: 0 auto 25px;
             border-radius: 50%;
-            border: 4px solid #ff9800;
+            border: 4px solid #ff9800; /* Garis Oranye */
             background: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden; /* Memastikan gambar tetap di dalam bulatan */
+            overflow: hidden;
             box-shadow: 0 0 15px rgba(255, 152, 0, 0.4);
         }
-        .logo-container img {
-            width: 80%; /* Atur ukuran gambar di dalam bulatan */
-            height: auto;
-            display: block; /* Memastikan gambar tidak tersembunyi */
+        .logo-box img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            border-radius: 50%;
         }
         h2 { color: #880e4f; margin-bottom: 25px; font-weight: 800; }
         input {
@@ -55,12 +56,12 @@
 </head>
 <body>
     <div class="login-card">
-        <div class="logo-container">
-            <img src="./assets/img/logo.png" alt="Logo PJOK">
+        <div class="logo-box">
+            <img src="./assets/img/logo.png" onerror="this.src='./assets/img/logo'" alt="Logo">
         </div>
         <h2>PJOK DIGITAL</h2>
         <form id="loginForm">
-            <input type="email" placeholder="Email" required>
+            <input type="email" placeholder="Email Sekolah" required>
             <input type="password" placeholder="Password" required>
             <button type="submit">MASUK</button>
         </form>

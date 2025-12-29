@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        body { background: #fdf2f5; display: flex; min-height: 100vh; }
+        body { background: #fdf2f5; display: flex; min-height: 100vh; overflow-x: hidden; }
         
         /* SIDEBAR PONDASI UTAMA */
         .sidebar {
@@ -17,7 +17,7 @@
             z-index: 100;
         }
 
-        /* LOGO MEMBULAT OREN */
+        /* LOGO MEMBULAT OREN DI SIDEBAR */
         .brand-header {
             display: flex; align-items: center; gap: 10px;
             margin-bottom: 40px; padding-bottom: 20px;
@@ -31,18 +31,19 @@
             display: flex; align-items: center; justify-content: center;
             overflow: hidden;
         }
-        .logo-circle img { width: 90%; height: auto; border-radius: 50%; }
+        .logo-circle img { width: 95%; height: auto; border-radius: 50%; }
 
         /* AREA KONTEN UTAMA */
         .main { margin-left: 260px; padding: 40px; width: calc(100% - 260px); }
         
+        /* BANNER MERAH/PINK */
         .banner {
             background: #d81b60; padding: 40px; border-radius: 25px;
             color: white; margin-bottom: 40px;
             box-shadow: 0 10px 20px rgba(216, 27, 96, 0.2);
         }
 
-        /* GRID UNTUK PILIHAN KELAS */
+        /* GRID PILIHAN KELAS */
         .card-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
@@ -52,21 +53,29 @@
 
         .card {
             background: white; padding: 35px; border-radius: 25px;
-            text-align: center; border-bottom: 5px solid #ff9800;
+            text-align: center; border-bottom: 6px solid #ff9800; /* Pondasi Garis Oren */
             box-shadow: 0 8px 20px rgba(0,0,0,0.04);
             transition: 0.3s;
         }
         .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-        .card h3 { color: #1a1a2e; font-size: 22px; margin-bottom: 15px; }
+
+        /* IKON OLAHRAGA PER KELAS */
+        .icon-box {
+            font-size: 60px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card h3 { color: #1a1a2e; font-size: 24px; margin-bottom: 20px; font-weight: 800; }
         
+        /* TOMBOL MERAH/PINK */
         .btn-link {
-            display: inline-block; margin-top: 15px; padding: 12px 35px;
+            display: inline-block; padding: 12px 35px;
             background: #d81b60; color: white; text-decoration: none; 
             border-radius: 50px; font-weight: 700; transition: 0.3s;
         }
         .btn-link:hover { background: #ad1457; transform: scale(1.05); }
 
-        /* Responsif untuk HP */
         @media (max-width: 768px) {
             .sidebar { display: none; }
             .main { margin-left: 0; width: 100%; padding: 20px; }
@@ -77,7 +86,7 @@
     <aside class="sidebar">
         <div class="brand-header">
             <div class="logo-circle">
-                <img src="./assets/img/logo.png" alt="Logo">
+                <img src="./assets/img/logo.png" onerror="this.src='./assets/img/logo'" alt="Logo">
             </div>
             <span style="font-weight: 800; color: #d81b60; font-size: 18px;">PJOK PRO</span>
         </div>
@@ -90,44 +99,44 @@
     <main class="main">
         <div class="banner">
             <h1 style="font-size: 30px; margin-bottom: 10px;">Selamat Datang!</h1>
-            <p style="opacity: 0.9;">Pilih kelas di bawah ini untuk melihat materi pembelajaran.</p>
+            <p>Silakan pilih kelas untuk memulai materi PJOK hari ini.</p>
         </div>
 
         <div class="card-grid">
             <div class="card">
-                <div style="font-size: 50px; margin-bottom: 10px;">🏃‍♂️</div>
+                <span class="icon-box">🏃‍♂️</span>
                 <h3>KELAS 1</h3>
-                <a href="./pages/kelas/materi-kelas-1.html" class="btn-link">Buka Materi</a>
+                <a href="./pages/kelas/materi-kelas-1.html" class="btn-link">Pilih Kelas</a>
             </div>
 
             <div class="card">
-                <div style="font-size: 50px; margin-bottom: 10px;">🏐</div>
+                <span class="icon-box">🏐</span>
                 <h3>KELAS 2</h3>
-                <a href="./pages/kelas/materi-kelas-2.html" class="btn-link">Buka Materi</a>
+                <a href="./pages/kelas/materi-kelas-2.html" class="btn-link">Pilih Kelas</a>
             </div>
 
             <div class="card">
-                <div style="font-size: 50px; margin-bottom: 10px;">🎾</div>
+                <span class="icon-box">🎾</span>
                 <h3>KELAS 3</h3>
-                <a href="./pages/kelas/materi-kelas-3.html" class="btn-link">Buka Materi</a>
+                <a href="./pages/kelas/materi-kelas-3.html" class="btn-link">Pilih Kelas</a>
             </div>
 
             <div class="card">
-                <div style="font-size: 50px; margin-bottom: 10px;">⚽</div>
+                <span class="icon-box">⚽</span>
                 <h3>KELAS 4</h3>
-                <a href="./pages/kelas/materi-kelas-4.html" class="btn-link">Buka Materi</a>
+                <a href="./pages/kelas/materi-kelas-4.html" class="btn-link">Pilih Kelas</a>
             </div>
 
             <div class="card">
-                <div style="font-size: 50px; margin-bottom: 10px;">🏀</div>
+                <span class="icon-box">🏀</span>
                 <h3>KELAS 5</h3>
-                <a href="./pages/kelas/materi-kelas-5.html" class="btn-link">Buka Materi</a>
+                <a href="./pages/kelas/materi-kelas-5.html" class="btn-link">Pilih Kelas</a>
             </div>
 
             <div class="card">
-                <div style="font-size: 50px; margin-bottom: 10px;">🏸</div>
+                <span class="icon-box">🏸</span>
                 <h3>KELAS 6</h3>
-                <a href="./pages/kelas/materi-kelas-6.html" class="btn-link">Buka Materi</a>
+                <a href="./pages/kelas/materi-kelas-6.html" class="btn-link">Pilih Kelas</a>
             </div>
         </div>
     </main>
