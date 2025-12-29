@@ -3,193 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Materi PJOK Kelas 2 - Lengkap Bab A-H</title>
-    
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
+    <title>Materi PJOK Kelas 2</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/kelas.css">
     <style>
-        /* TEMA PINK KHUSUS KELAS 2 */
-        body { font-family: 'Comic Sans MS', 'Segoe UI', sans-serif; background-color: #fce4ec; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
-        
-        /* HEADER - PERBAIKAN NAVIGASI */
-        .header-top { background: #fff; padding: 15px; text-align: center; border-bottom: 5px solid #d81b60; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .header-top h1 { margin: 0; color: #880e4f; font-size: 28px; font-weight: 800; }
-        .back-btn { display: inline-block; margin-top: 10px; color: #c62828; text-decoration: none; font-weight: bold; border: 2px solid #c62828; padding: 8px 20px; border-radius: 20px; transition: 0.3s; }
-        .back-btn:hover { background: #c62828; color: white; }
-
-        /* LAYOUT UTAMA */
-        .main-container { width: 95%; max-width: 1200px; margin: 20px auto; display: flex; gap: 20px; flex: 1; }
-        
-        /* SIDEBAR MENU (Sesuai Gambar User) */
-        .sidebar { width: 300px; flex-shrink: 0; background: #fff; padding: 20px; border-radius: 15px; border: 2px solid #f8bbd0; height: fit-content; position: sticky; top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .menu-label { font-weight: 900; color: #c62828; margin: 15px 0 10px 0; font-size: 14px; text-transform: uppercase; border-left: 4px solid #c62828; padding-left: 10px; }
-        
-        .nav-btn { display: block; width: 100%; padding: 12px 15px; margin-bottom: 8px; background: #fff3e0; border: 1px solid #ffe0b2; text-align: left; cursor: pointer; color: #e65100; font-size: 15px; border-radius: 10px; transition: 0.3s; font-weight: bold; }
-        .nav-btn:hover { background: #ffe0b2; transform: translateX(5px); }
-        .nav-btn.active { background: #ff9800 !important; color: white !important; border: 1px solid #f57c00; box-shadow: 0 4px 8px rgba(255,152,0,0.3); }
-
-        /* TOMBOL KHUSUS STS/SAS */
-        .btn-sts { background: #fff9c4 !important; color: #f57f17 !important; border: 1px solid #fbc02d !important; }
-        .btn-sas { background: #ffcdd2 !important; color: #c62828 !important; border: 1px solid #ef9a9a !important; }
-
-        /* AREA KONTEN */
-        .content-area { flex-grow: 1; background: #fff; padding: 30px; border-radius: 15px; border: 2px solid #f8bbd0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); min-height: 600px; }
-        .section { display: none; animation: fadeIn 0.5s ease; }
-        .section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        h2 { border-bottom: 3px solid #d81b60; color: #880e4f; padding-bottom: 10px; margin-top: 0; }
-        .video-container { width: 100%; height: 400px; background: #000; margin: 20px 0; border-radius: 12px; overflow: hidden; border: 4px solid #d81b60; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        
-        /* RANGKUMAN & PANDUAN */
-        .summary-box { background: #fce4ec; padding: 25px; border-left: 6px solid #d81b60; border-radius: 8px; margin-bottom: 20px; line-height: 1.8; color: #333; }
-        .summary-box h3 { margin-top: 0; color: #880e4f; }
-        .teacher-note { background: #e8f5e9; padding: 20px; border-radius: 10px; border: 1px solid #4caf50; margin-top: 20px; }
-        .teacher-note h4 { color: #2e7d32; margin-top: 0; text-transform: uppercase; font-size: 14px; }
-
-        .btn-group { display: flex; gap: 15px; margin-top: 25px; }
-        .action-btn { flex: 1; padding: 15px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; color: white; transition: 0.2s; font-size: 16px; }
-        .action-btn:hover { opacity: 0.9; transform: translateY(-2px); }
-        .btn-quiz { background: linear-gradient(to bottom, #ff9800, #f57c00); }
-        .btn-pdf { background: linear-gradient(to bottom, #2196f3, #1976d2); }
-
-        @media (max-width: 768px) { .main-container { flex-direction: column; } .sidebar { width: 100%; position: static; } .video-container { height: 250px; } }
+        body { font-family: 'Comic Sans MS', sans-serif; background: #fce4ec; margin: 0; }
+        .header-top { background: white; padding: 15px; text-align: center; border-bottom: 5px solid #d81b60; position: relative; }
+        .back-btn { position: absolute; left: 20px; top: 25px; text-decoration: none; color: #d81b60; font-weight: bold; }
+        .container { display: flex; max-width: 1200px; margin: 20px auto; gap: 20px; padding: 0 15px; }
+        .sidebar-materi { width: 280px; background: white; padding: 20px; border-radius: 15px; height: fit-content; }
+        .content { flex: 1; background: white; padding: 30px; border-radius: 15px; min-height: 500px; }
+        .nav-link { display: block; padding: 12px; margin-bottom: 5px; background: #fce4ec; border-radius: 8px; text-decoration: none; color: #880e4f; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <div class="header-top">
-        <h1>🏃‍♂️ Materi PJOK Kelas 2</h1>
-        <a href="../../dashboard.html" class="back-btn">⬅ Kembali ke Dashboard</a>
+        <a href="../../dashboard.html" class="back-btn">⬅ KEMBALI</a>
+        <img src="../../assets/img/logo.png" alt="Logo" width="50">
+        <h2 style="margin: 5px 0; color: #880e4f;">MATERI PJOK KELAS 2</h2>
     </div>
 
-    <div class="main-container">
-        <aside class="sidebar" id="sidebarMenu">
-            <div class="menu-label">SEMESTER 1 (GANJIL)</div>
-            <button class="nav-btn active" onclick="showPage('a', this)">A. Variasi Gerak Lokomotor</button>
-            <button class="nav-btn" onclick="showPage('b', this)">B. Variasi Gerak Non-Lokomotor</button>
-            <button class="nav-btn" onclick="showPage('c', this)">C. Gerak Manipulatif</button>
-            <button class="nav-btn" onclick="showPage('d', this)">D. Kebugaran Jasmani</button>
-            <button class="nav-btn btn-sts" onclick="showPage('sts', this)">📝 UJIAN STS (GANJIL)</button>
+    <div class="container">
+        <div class="sidebar-materi">
+            <h4 style="color: #c62828;">SEMESTER 1</h4>
+            <a href="#" class="nav-link">A. Gerak Lokomotor</a>
+            <a href="#" class="nav-link">B. Gerak Non-Lokomotor</a>
+            <a href="#" class="nav-link">C. Gerak Manipulatif</a>
+            <a href="#" class="nav-link" style="background: #fff9c4; color: #f57f17;">📝 UJIAN STS</a>
+        </div>
 
-            <div class="menu-label">SEMESTER 2 (GENAP)</div>
-            <button class="nav-btn" onclick="showPage('e', this)">E. Senam Lantai</button>
-            <button class="nav-btn" onclick="showPage('f', this)">F. Gerak Berirama</button>
-            <button class="nav-btn" onclick="showPage('g', this)">G. Aktivitas Air</button>
-            <button class="nav-btn" onclick="showPage('h', this)">H. Kebersihan Lingkungan</button>
-            <button class="nav-btn btn-sas" onclick="showPage('sas', this)">🏆 UJIAN SAS (GENAP)</button>
-        </aside>
-
-        <main class="content-area">
-            
-            <div id="page-a" class="section active">
-                <h2>A. Variasi Gerak Lokomotor</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/ySGsCm2PVbw" width="100%" height="100%" frameborder="0" allowfullscreen></iframe></div>
-                <div class="summary-box">
-                    <h3>📝 Rangkuman Materi</h3>
-                    <p>Gerak lokomotor adalah gerak berpindah tempat. Di kelas 2, siswa belajar variasi yang lebih menantang:</p>
-                    <ul>
-                        <li><b>Lari Zig-zag:</b> Berlari berbelok-belok melatih kelincahan.</li>
-                        <li><b>Lompat Rintangan:</b> Melompati benda rendah secara berurutan.</li>
-                    </ul>
-                </div>
-                <div class="teacher-note"><h4>👨‍🏫 Panduan Guru</h4><p>Gunakan cone atau botol plastik sebagai rintangan lari zig-zag.</p></div>
-                <div class="btn-group"><button class="action-btn btn-quiz" onclick="bukaKuis('a')">🧠 Mulai Kuis Bab A</button><button class="action-btn btn-pdf">📥 Download PDF</button></div>
+        <div class="content">
+            <h2>Variasi Gerak Dasar Lokomotor</h2>
+            <div style="background: #000; height: 350px; border-radius: 12px; display: flex; justify-content: center; align-items: center; color: white;">
+                <p>Video Pembelajaran Kelas 2</p>
             </div>
-
-            <div id="page-b" class="section">
-                <h2>B. Variasi Gerak Non-Lokomotor</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/1j-A42wX6dQ" width="100%" height="100%" frameborder="0" allowfullscreen></iframe></div>
-                <div class="summary-box"><h3>📝 Rangkuman Materi</h3><p>Gerak di tempat untuk kelenturan tubuh seperti meliuk dan peregangan statis.</p></div>
-                <div class="btn-group"><button class="action-btn btn-quiz" onclick="bukaKuis('b')">🧠 Mulai Kuis Bab B</button><button class="action-btn btn-pdf">📥 Download PDF</button></div>
+            <div style="margin-top: 20px; line-height: 1.6;">
+                <h3>📋 Rangkuman</h3>
+                <p>Gerak lokomotor adalah gerakan berpindah tempat. Contohnya: Lari zig-zag, lompat rintangan, dan jalan cepat.</p>
             </div>
-
-            <div id="page-c" class="section">
-                <h2>C. Gerak Manipulatif</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/2_YI6rGfC5k" width="100%" height="100%" frameborder="0" allowfullscreen></iframe></div>
-                <div class="summary-box">
-                    <h3>📝 Rangkuman Materi</h3>
-                    <p>Menggunakan benda (bola). Siswa belajar melempar sasaran dan menangkap bola melambung dengan koordinasi yang baik.</p>
-                </div>
-                <div class="btn-group"><button class="action-btn btn-quiz" onclick="bukaKuis('c')">🧠 Mulai Kuis Bab C</button><button class="action-btn btn-pdf">📥 Download PDF</button></div>
-            </div>
-
-            <div id="page-d" class="section">
-                <h2>D. Kebugaran Jasmani</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/V6N-h5XzR9s" width="100%" height="100%" frameborder="0" allowfullscreen></iframe></div>
-                <div class="summary-box"><h3>📝 Rangkuman Materi</h3><p>Latihan kekuatan otot lengan (push-up tembok) dan keseimbangan (sikap pesawat terbang).</p></div>
-                <div class="btn-group"><button class="action-btn btn-quiz" onclick="bukaKuis('d')">🧠 Mulai Kuis Bab D</button><button class="action-btn btn-pdf">📥 Download PDF</button></div>
-            </div>
-
-            <div id="page-e" class="section">
-                <h2>E. Senam Lantai</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/6eH7O_eF63k" width="100%" height="100%" frameborder="0" allowfullscreen></iframe></div>
-                <div class="summary-box"><h3>📝 Rangkuman Materi</h3><p>Gerakan dasar guling depan (roll depan) dan guling samping dengan tumpuan tangan yang benar.</p></div>
-                <div class="btn-group"><button class="action-btn btn-quiz" onclick="bukaKuis('e')">🧠 Mulai Kuis Bab E</button><button class="action-btn btn-pdf">📥 Download PDF</button></div>
-            </div>
-
-            <div id="page-f" class="section">
-                <h2>F. Gerak Berirama</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/3vC81z6Lp-8" width="100%" height="100%" frameborder="0" allowfullscreen></iframe></div>
-                <div class="summary-box"><h3>📝 Rangkuman Materi</h3><p>Gerak langkah kaki dan ayunan lengan mengikuti irama musik atau hitungan 1-8.</p></div>
-                <div class="btn-group"><button class="action-btn btn-quiz" onclick="bukaKuis('f')">🧠 Mulai Kuis Bab F</button><button class="action-btn btn-pdf">📥 Download PDF</button></div>
-            </div>
-
-            <div id="page-g" class="section">
-                <h2>G. Aktivitas Air</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/5U7UvDksDsw" width="100%" height="100%" frameborder="0" allowfullscreen></iframe></div>
-                <div class="summary-box"><h3>📝 Rangkuman Materi</h3><p>Pengenalan air, cara bernapas di air, dan menjaga keselamatan diri di kolam dangkal.</p></div>
-                <div class="btn-group"><button class="action-btn btn-quiz" onclick="bukaKuis('g')">🧠 Mulai Kuis Bab G</button><button class="action-btn btn-pdf">📥 Download PDF</button></div>
-            </div>
-
-            <div id="page-h" class="section">
-                <h2>H. Kebersihan Lingkungan</h2>
-                <div class="video-container"><iframe src="https://www.youtube.com/embed/O-LNoV9iGz4" width="100%" height="100%" frameborder="0" allowfullscreen></iframe></div>
-                <div class="summary-box"><h3>📝 Rangkuman Materi</h3><p>Menjaga kebersihan sekolah dan rumah untuk menghindari kuman penyakit dan menjaga kesehatan tubuh.</p></div>
-                <div class="btn-group"><button class="action-btn btn-quiz" onclick="bukaKuis('h')">🧠 Mulai Kuis Bab H</button><button class="action-btn btn-pdf">📥 Download PDF</button></div>
-            </div>
-
-            <div id="page-sts" class="section">
-                <div style="text-align:center; padding:50px;">
-                    <h2 style="color:#f57f17;">📝 Sumatif Tengah Semester (STS)</h2>
-                    <p>Ujian Tengah Semester 1 mencakup Bab A hingga D.</p>
-                    <div style="background:#fff9c4; padding:20px; border-radius:10px; border:2px dashed #fbc02d; margin-top:20px;">
-                        <p><b>Status:</b> Belum Diaktifkan oleh Guru</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="page-sas" class="section">
-                <div style="text-align:center; padding:50px;">
-                    <h2 style="color:#c62828;">🏆 Sumatif Akhir Semester (SAS)</h2>
-                    <p>Ujian Akhir Semester 2 mencakup seluruh materi.</p>
-                    <div style="background:#ffcdd2; padding:20px; border-radius:10px; border:2px dashed #ef9a9a; margin-top:20px;">
-                        <p><b>Status:</b> Terkunci</p>
-                    </div>
-                </div>
-            </div>
-
-        </main>
+        </div>
     </div>
 
-    <script>
-        // Fungsi ganti halaman materi
-        function showPage(pageId, btn) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById('page-' + pageId).classList.add('active');
-            
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        // Fungsi Kuis - Mengarahkan ke file quiz.html di Root
-        function bukaKuis(bab) {
-            // Path "../../" karena keluar dari folder kelas dan folder pages
-            window.location.href = "../../quiz.html?kelas=2&bab=" + bab;
-        }
-    </script>
 </body>
 </html>

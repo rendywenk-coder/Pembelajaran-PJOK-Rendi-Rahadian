@@ -3,139 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SDN Rawabuntu 03 - PJOK Digital</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css"> 
-    
+    <title>Login Eksklusif | PJOK Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        /* TAMBAHAN CSS AGAR SCROLL HALUS & RAPI */
-        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         
-        /* Jarak agar judul tidak tertutup navbar saat di-klik */
-        section { scroll-margin-top: 80px; padding: 60px 20px; }
-
-        /* HERO SECTION (Atas) */
-        .landing-page { background-color: #f8f9fa; }
-        .hero { text-align: center; padding: 80px 20px 40px; }
-        
-        /* SECTION KELAS (Preview) */
-        .kelas-section { background-color: white; text-align: center; }
-        .grid-preview { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .card-mini { 
-            background: #f1f8e9; padding: 20px; border-radius: 10px; width: 120px; 
-            text-align: center; border: 1px solid #c5e1a5; transition: 0.3s; text-decoration: none;
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
         }
-        .card-mini:hover { transform: translateY(-5px); background: #dcedc8; }
-        .card-mini i { font-size: 30px; color: #558b2f; margin-bottom: 10px; }
-        .card-mini span { display: block; font-weight: bold; color: #33691e; }
 
-        /* SECTION TENTANG (Footer) */
-        .tentang-section { background-color: #004d40; color: white; text-align: center; padding: 60px 20px; }
-        .tentang-content { max-width: 800px; margin: 0 auto; }
-        .footer-links { margin-top: 30px; }
-        .footer-links a { color: #80cbc4; margin: 0 10px; font-size: 20px; }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-        /* GAYA FOTO PROFIL (BARU) */
-        .profile-photo {
-            width: 120px;          /* Lebar foto */
-            height: 120px;         /* Tinggi sama agar jadi lingkaran sempurna */
-            border-radius: 50%;    /* Membuat jadi bulat */
-            object-fit: cover;     /* Agar foto tidak gepeng jika file aslinya tidak persegi */
-            border: 4px solid #80cbc4; /* Bingkai warna terang agar kontras */
-            margin-bottom: 20px;   /* Jarak ke judul */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Efek bayangan */
+        .login-glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 50px 40px;
+            border-radius: 30px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+            color: white;
+        }
+
+        .logo-login {
+            width: 110px;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h2 { font-size: 28px; font-weight: 800; letter-spacing: 2px; margin-bottom: 5px; }
+        p { font-size: 14px; opacity: 0.8; margin-bottom: 30px; }
+
+        .input-group { position: relative; margin-bottom: 25px; }
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            color: white;
+            outline: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+        input::placeholder { color: rgba(255,255,255,0.6); }
+        input:focus { background: rgba(255,255,255,0.25); border-color: #fff; }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border-radius: 50px;
+            border: none;
+            background: #fff;
+            color: #e73c7e;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.4s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: #e73c7e;
+            color: white;
+            box-shadow: 0 15px 25px rgba(231, 60, 126, 0.4);
         }
     </style>
 </head>
-<body class="landing-page">
+<body>
 
-    <nav class="navbar">
-        <div class="nav-brand">
-            <img src="assets/img/logo.png" alt="Logo Sekolah" class="nav-logo">
-            <div class="nav-text">
-                <h3>SDN Rawabuntu 03</h3>
-                <p>Pembelajaran PJOK Digital</p>
-            </div>
-        </div>
-        <div class="nav-menu">
-            <a href="#beranda"><i class="fas fa-home"></i> Beranda</a>
-            <a href="#fitur"><i class="fas fa-star"></i> Fitur</a>
-            <a href="#kelas"><i class="fas fa-graduation-cap"></i> Kelas</a>
-            <a href="#tentang"><i class="fas fa-info-circle"></i> Tentang</a>
-            <a href="login.html" class="btn-masuk"><i class="fas fa-sign-in-alt"></i> Masuk</a>
-        </nav>
-
-    <section id="beranda" class="hero">
-        <div class="hero-logo-container">
-            <img src="assets/img/logo.png" alt="Logo Besar" class="hero-logo">
-        </div>
-        <h1>Selamat Datang di PJOK Digital</h1>
-        <p class="hero-desc">
-            Platform pembelajaran interaktif Pendidikan Jasmani, Olahraga, dan Kesehatan 
-            untuk siswa SDN Rawabuntu 03. Belajar dengan cara yang menyenangkan dan modern!
-        </p>
-        <a href="login.html" class="btn-masuk" style="font-size: 18px; padding: 15px 30px;">MULAI BELAJAR</a>
-    </section>
-
-    <section id="fitur">
-        <div style="text-align:center; margin-bottom:40px;">
-            <h2 style="color:#00695c;">Kenapa Belajar di Sini?</h2>
-            <p style="color:#666;">Fitur lengkap untuk mendukung kegiatan olahraga siswa.</p>
-        </div>
-
-        <div class="feature-cards">
-            <div class="card-feature">
-                <div class="icon-circle"><i class="fas fa-laptop-house"></i></div>
-                <h3>Akses Dimana Saja</h3>
-                <p>Materi bisa dibuka dari HP, Tablet, atau Laptop di rumah maupun sekolah.</p>
-            </div>
-            <div class="card-feature">
-                <div class="icon-circle"><i class="fas fa-gamepad"></i></div>
-                <h3>Kuis Interaktif</h3>
-                <p>Mengerjakan soal latihan seperti bermain game yang seru.</p>
-            </div>
-            <div class="card-feature">
-                <div class="icon-circle"><i class="fas fa-video"></i></div>
-                <h3>Video Pembelajaran</h3>
-                <p>Contoh gerakan olahraga tersedia dalam bentuk video yang jelas.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="kelas" class="kelas-section">
-        <h2 style="color:#33691e;">Tersedia Untuk Semua Kelas</h2>
-        <p style="color:#558b2f;">Materi lengkap dari Kelas 1 sampai Kelas 6 SD.</p>
+    <div class="login-glass">
+        <img src="./assets/img/logo.png" alt="Logo" class="logo-login">
+        <h2>PJOK DIGITAL</h2>
+        <p>Smart Learning Solution</p>
         
-        <div class="grid-preview">
-            <a href="login.html" class="card-mini"><i class="fas fa-child"></i><span>Kelas 1</span></a>
-            <a href="login.html" class="card-mini"><i class="fas fa-running"></i><span>Kelas 2</span></a>
-            <a href="login.html" class="card-mini"><i class="fas fa-basketball-ball"></i><span>Kelas 3</span></a>
-            <a href="login.html" class="card-mini"><i class="fas fa-futbol"></i><span>Kelas 4</span></a>
-            <a href="login.html" class="card-mini"><i class="fas fa-swimmer"></i><span>Kelas 5</span></a>
-            <a href="login.html" class="card-mini"><i class="fas fa-medal"></i><span>Kelas 6</span></a>
-        </div>
-        <p style="margin-top:20px; font-size:14px; color:#777;">*Silakan login untuk membuka materi.</p>
-    </section>
-
-    <section id="tentang" class="tentang-section">
-        <div class="tentang-content">
-            <img src="assets/img/foto-profil.jpg" alt="Foto Bapak Rendi" class="profile-photo">
-
-            <h3>Tentang Aplikasi PJOK</h3>
-            <p>
-                Aplikasi ini dikembangkan khusus untuk SDN Rawabuntu 03 oleh <strong>Rendi Rahadia, S.Pd.</strong> 
-                guna memfasilitasi pembelajaran jarak jauh dan digitalisasi materi olahraga. 
-                Dibuat dengan antarmuka yang ramah anak agar mudah digunakan.
-            </p>
-            <div class="footer-links">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="email" placeholder="Email Sekolah" required>
             </div>
-            <hr style="margin: 30px 0; border-color: #00695c;">
-            <p style="font-size: 12px; color: #80cbc4;">&copy; 2025 SDN Rawabuntu 03. All Rights Reserved.</p>
-        </div>
-    </section>
+            <div class="input-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <button type="submit">MASUK</button>
+        </form>
+    </div>
 
+    <script>
+        document.getElementById('loginForm').onsubmit = function(e) {
+            e.preventDefault();
+            window.location.href = "dashboard.html";
+        };
+    </script>
 </body>
 </html>

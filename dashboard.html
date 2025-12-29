@@ -3,142 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Siswa - PJOK</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <title>Dashboard Premium | PJOK Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { background: #f0f4f8; display: flex; min-height: 100vh; }
+
+        /* SIDEBAR MEWAH */
+        .sidebar {
+            width: 280px;
+            background: #1a1a2e;
+            color: white;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .brand-box { display: flex; align-items: center; gap: 12px; margin-bottom: 50px; }
+        .brand-box img { width: 45px; }
+        .brand-box h2 { font-size: 20px; color: #00d2ff; }
+
+        .menu-list { list-style: none; }
+        .menu-item {
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+        }
+        .menu-item:hover, .menu-item.active {
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            color: white;
+            transform: translateX(10px);
+        }
+
+        /* MAIN CONTENT */
+        .main { margin-left: 280px; width: 100%; padding: 40px; }
+        
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .user-info { display: flex; align-items: center; gap: 15px; }
+        .avatar { width: 50px; height: 50px; background: #3a7bd5; border-radius: 50%; border: 3px solid white; }
+
+        .banner {
+            background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+            padding: 40px;
+            border-radius: 30px;
+            color: white;
+            box-shadow: 0 15px 35px rgba(58, 123, 213, 0.3);
+            margin-bottom: 40px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .kelas-card {
+            background: white;
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .kelas-card:hover { transform: translateY(-15px); }
+        .kelas-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 8px;
+            background: #3a7bd5;
+        }
+
+        .icon-box {
+            font-size: 60px;
+            margin-bottom: 20px;
+            background: #f0f4f8;
+            width: 100px; height: 100px;
+            line-height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .btn-link {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 35px;
+            background: #1a1a2e;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-link:hover { background: #3a7bd5; box-shadow: 0 10px 20px rgba(58,123,213,0.3); }
+
+        @media (max-width: 992px) { .sidebar { display: none; } .main { margin-left: 0; } }
+    </style>
 </head>
 <body>
 
     <aside class="sidebar">
-        <div class="sidebar-header">
-            <i class="fas fa-running logo-icon"></i>
-            <h2>PJOK Digital</h2>
+        <div class="brand-box">
+            <img src="./assets/img/logo.png" alt="Logo">
+            <h2>PJOK PRO</h2>
         </div>
-        
-        <ul class="menu-list">
-            <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="#"><i class="fas fa-book-open"></i> Materi Kelas</a></li>
-            <li><a href="#"><i class="fas fa-chart-bar"></i> Nilai PJOK</a></li>
-            <li><a href="#"><i class="fas fa-question-circle"></i> Quiz & Ujian</a></li>
-            <li><a href="#"><i class="fas fa-calendar-check"></i> Presensi</a></li>
-            <li class="menu-spacer"></li>
-            <li><a href="#"><i class="fas fa-user-cog"></i> Pengaturan Akun</a></li>
-            <li><a href="index.html" class="menu-logout"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
-        </ul>
+        <nav>
+            <a href="#" class="menu-item active">🏠 Dashboard</a>
+            <a href="#" class="menu-item">📖 Materi</a>
+            <a href="#" class="menu-item">📈 Progres</a>
+            <a href="#" class="menu-item">⚙️ Pengaturan</a>
+            <a href="index.html" class="menu-item" style="margin-top: auto; color: #ff4b2b;">🚪 Keluar</a>
+        </nav>
     </aside>
 
-    <main class="main-content">
-        <header class="top-bar">
-            <div>
-                <h1>Materi Kelas PJOK</h1>
-                <p>Pilih kelas untuk mengakses materi pembelajaran, video, dan latihan soal.</p>
-            </div>
+    <main class="main">
+        <div class="top-bar">
+            <h2>Dashboard Utama</h2>
             <div class="user-info">
-                <span>Halo, Siswa!</span>
-                <img src="https://ui-avatars.com/api/?name=Siswa&background=random" alt="Avatar">
+                <div style="text-align: right;">
+                    <p style="font-weight: 800; font-size: 14px;">Selamat Datang,</p>
+                    <p style="font-size: 12px; color: #666;">Bapak/Ibu Guru</p>
+                </div>
+                <div class="avatar"></div>
             </div>
-        </header>
+        </div>
 
-        <div class="grid-kelas">
-            
-            <div class="card-kelas purple">
-                <div class="card-header">
-                    <i class="fas fa-child"></i>
-                    <h3>Kelas 1</h3>
-                    <span>Pembelajaran Dasar</span>
-                </div>
-                <div class="card-stats">
-                    <div><small>Materi</small><strong>8 Bab</strong></div>
-                    <div><small>Video</small><strong>8 Video</strong></div>
-                    <div><small>Quiz</small><strong>STS & SAS</strong></div>
-                </div>
-                <p class="card-desc">Gerak dasar, lari, lompat, lempar, keseimbangan, dan kebersihan diri.</p>
-                <a href="pages/kelas/materi-kelas-1.html" class="btn-card">Buka Kelas 1</a>
-            </div>
+        <div class="banner">
+            <h1 style="font-size: 32px;">Siap Mengajar Hari Ini?</h1>
+            <p style="opacity: 0.9;">Pilih kelas untuk mulai memberikan materi pembelajaran PJOK yang interaktif.</p>
+        </div>
 
-            <div class="card-kelas pink">
-                <div class="card-header">
-                    <i class="fas fa-running"></i>
-                    <h3>Kelas 2</h3>
-                    <span>Pengembangan Gerak</span>
-                </div>
-                <div class="card-stats">
-                    <div><small>Materi</small><strong>8 Bab</strong></div>
-                    <div><small>Video</small><strong>8 Video</strong></div>
-                    <div><small>Quiz</small><strong>STS & SAS</strong></div>
-                </div>
-                <p class="card-desc">Gerak kombinasi, senam dasar, permainan tradisional, dan kesehatan.</p>
-                <a href="pages/kelas/materi-kelas-2.html" class="btn-card">Buka Kelas 2</a>
+        <div class="card-grid">
+            <div class="kelas-card">
+                <div class="icon-box">🏃‍♂️</div>
+                <h2 style="color: #1a1a2e;">KELAS 1</h2>
+                <p style="color: #666; margin-top: 10px;">Fokus pada pengenalan gerak dasar dan koordinasi tubuh siswa.</p>
+                <a href="./pages/kelas/materi-kelas-1.html" class="btn-link">Pilih Kelas</a>
             </div>
 
-            <div class="card-kelas blue">
-                <div class="card-header">
-                    <i class="fas fa-basketball-ball"></i>
-                    <h3>Kelas 3</h3>
-                    <span>Olahraga Dasar</span>
-                </div>
-                <div class="card-stats">
-                    <div><small>Materi</small><strong>8 Bab</strong></div>
-                    <div><small>Video</small><strong>8 Video</strong></div>
-                    <div><small>Quiz</small><strong>STS & SAS</strong></div>
-                </div>
-                <p class="card-desc">Bola besar, bola kecil, atletik dasar, dan permainan beregu.</p>
-                <a href="pages/kelas/materi-kelas-3.html" class="btn-card">Buka Kelas 3</a>
+            <div class="kelas-card">
+                <div class="icon-box" style="background: #fff0f0;">🏐</div>
+                <h2 style="color: #1a1a2e;">KELAS 2</h2>
+                <p style="color: #666; margin-top: 10px;">Pengembangan variasi gerak dan aktivitas permainan bola kecil.</p>
+                <a href="./pages/kelas/materi-kelas-2.html" class="btn-link" style="background: #3a7bd5;">Pilih Kelas</a>
             </div>
-
-            <div class="card-kelas green">
-                <div class="card-header">
-                    <i class="fas fa-futbol"></i>
-                    <h3>Kelas 4</h3>
-                    <span>Teknik Dasar</span>
-                </div>
-                <div class="card-stats">
-                    <div><small>Materi</small><strong>8 Bab</strong></div>
-                    <div><small>Video</small><strong>8 Video</strong></div>
-                    <div><small>Quiz</small><strong>STS & SAS</strong></div>
-                </div>
-                <p class="card-desc">Sepak bola, bola voli, bulu tangkis, dan senam lantai.</p>
-                <a href="pages/kelas/materi-kelas-4.html" class="btn-card">Buka Kelas 4</a>
-            </div>
-
-            <div class="card-kelas orange">
-                <div class="card-header">
-                    <i class="fas fa-swimmer"></i>
-                    <h3>Kelas 5</h3>
-                    <span>Olahraga Lanjutan</span>
-                </div>
-                <div class="card-stats">
-                    <div><small>Materi</small><strong>8 Bab</strong></div>
-                    <div><small>Video</small><strong>8 Video</strong></div>
-                    <div><small>Quiz</small><strong>STS & SAS</strong></div>
-                </div>
-                <p class="card-desc">Renang, senam irama, pencak silat, dan kebugaran jasmani.</p>
-                <a href="pages/kelas/materi-kelas-5.html" class="btn-card">Buka Kelas 5</a>
-            </div>
-
-            <div class="card-kelas teal">
-                <div class="card-header">
-                    <i class="fas fa-medal"></i>
-                    <h3>Kelas 6</h3>
-                    <span>Persiapan Ujian</span>
-                </div>
-                <div class="card-stats">
-                    <div><small>Materi</small><strong>8 Bab</strong></div>
-                    <div><small>Video</small><strong>8 Video</strong></div>
-                    <div><small>Quiz</small><strong>STS & SAS</strong></div>
-                </div>
-                <p class="card-desc">Review semua materi, persiapan ujian, dan aplikasi olahraga.</p>
-                <a href="pages/kelas/materi-kelas-6.html" class="btn-card">Buka Kelas 6</a>
-            </div>
-
         </div>
     </main>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    <script src="assets/js/firebase-config.js"></script>
-    <script src="assets/js/auth.js"></script>
 </body>
 </html>
